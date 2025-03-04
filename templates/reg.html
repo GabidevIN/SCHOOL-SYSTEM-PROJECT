@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css')}}"> <!-- css file -->
+</head>
+
+<body>
+
+<header>    
+    <a href ="/home" class= "logo" data-target="home">TRAVELERS</a>
+    <nav>
+        <ul>
+            <a href="/home" class="nav-link" data-target="home">Return</a>
+        </ul>
+    </nav>    
+</header>  
+
+<div class="container">
+    <form method="POST" action="------"> <!-- dito yung database eugene-->
+        <h3 class="center">Register</h3>
+        
+    <div class="form-group"> <!-- EMAIL-->
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
+    </div>
+
+    <div class="form-group"> <!-- NAME -->
+        <label for="firstName">Username</label>
+       <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" />
+    </div>
+
+    <div class="form-group"> <!-- Password-->
+        <label for="password1">Password</label>
+        <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password"/>
+    </div>
+        <button type="submit" class="btn btn-primary" >Submit</button>
+
+        <a href="/login" class="alr">Already Have a account?</a>
+
+    </form>
+</div>
+
+</body>
+</html>
