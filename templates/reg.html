@@ -9,24 +9,25 @@
 
 <div class="container">
 
-        <h3 class="center">Register</h3>
-        
-    <div class="form-group"> <!-- EMAIL-->
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
-    </div>
+    <form method="POST" action="{{ url_for('register') }}">
+        <h3 class= "center">REGISTER</h3>
 
-    <div class="form-group"> <!-- NAME -->
-        <label for="firstName">Username</label>
-       <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" />
-    </div>
+        <div class= "form-group">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
 
-    <div class="form-group"> <!-- Password-->
-        <label for="password1">Password</label>
-        <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password"/>
-    </div>
-        <button type="submit" class="btn btn-primary" >Submit</button>
+        <div class= "form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
 
+        <div class= "form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
         <a href="/login" class="alr">Already Have a account?</a>
 
     </form>
