@@ -3,14 +3,14 @@ body {
     display: flex; 
     justify-content: center;
     align-items: center; 
-    height: 100vh; 
+    height: 95vh; 
     background-color: #f4f4f4;
 }
 
 .container {
     position: relative; 
-    width: 65rem; 
-    height: 40rem; 
+    width: 62.5rem; 
+    height: 37.5rem; 
     margin-bottom: 5rem;
     background: transparent; 
     text-align: center; 
@@ -19,15 +19,15 @@ body {
 
 .background {
     position: relative; 
-    margin: 20px 12.5px 12.5px 20px;
+    margin: 17.5px 12.5px 12.5px 17.5px;
     width: 70rem; 
-    height: 37.5rem; 
+    height: 35.5rem; 
     background: white; 
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    border-radius: 10px; 
     text-align: center; 
     overflow: hidden;
     z-index: 1;
+    border-radius: 25px 25px 0 0; 
 }
 
 #toggle { display: none; }
@@ -95,8 +95,9 @@ input {
 button {
     width: 50%; 
     padding: 10px; 
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: blue;
+    margin: 5px auto;
     border: none; 
     border-radius: 5px; 
     cursor: pointer;
