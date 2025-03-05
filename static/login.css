@@ -13,7 +13,7 @@ body {
     left: 0;
     width: 100vw; 
     height: 100vh; 
-    background: lightblue; 
+    background: lightcyan; 
 }
 
 .container {
@@ -35,8 +35,8 @@ body {
     margin: 17.5px 12.5px 12.5px 17.5px;
     width: 70rem; 
     height: 35.5rem; 
-    background: white; 
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background: whitesmoke; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
     text-align: center; 
     overflow: hidden;
     z-index: 1;
@@ -58,19 +58,19 @@ body {
     position: absolute; 
     width: 50%; 
     height: 100%; 
-    background-color: #007bff;
+    background: rgb(39, 99, 119); 
     top: 0;
     transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
     border-radius: 25px 0 25px 0; 
     z-index: 3;
-
+    box-shadow: 30px 0 30px 0 rgba(0,0,0,0.2);
 }
 
 .register {
     position: absolute; 
     width: 50%; 
     height: 100%; 
-    background-color: #007bff;
+    background: rgb(39, 99, 119); 
     top: 0;
     transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
     border-radius: 0 25px 0 25px; 
@@ -99,8 +99,8 @@ input {
     width: 50%;
     display: block;
     margin: 5px auto;
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 15px;
+    border: 3px solid darkblue;
     border-radius: 5px;
 }
 
@@ -121,11 +121,14 @@ button {
     margin: 5px auto;
     color: white; 
     text-align: center;
+    font-family: Georgia, serif;
+
 }
 
 .TITLE {
     font-weight: 700;
     text-align: center;
+    margin-bottom: 3.75rem;
     font-size: 2.5rem;
     color: white; 
     font-family: Georgia, serif;
