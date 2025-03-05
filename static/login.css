@@ -7,8 +7,20 @@ body {
     background-color: #f4f4f4;
 }
 
+.background1 {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background: lightblue; 
+}
+
 .container {
-    position: relative; 
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 62.5rem; 
     height: 37.5rem; 
     margin-bottom: 5rem;
@@ -16,6 +28,7 @@ body {
     text-align: center; 
     overflow: hidden;
 }
+
 
 .background {
     position: relative; 
