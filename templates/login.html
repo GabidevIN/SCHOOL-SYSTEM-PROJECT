@@ -22,9 +22,36 @@
     </div>
     
         <button type="submit" class="btn btn-primary">Login</button>
-    <a href="/register" class="alr">No account?</a>
+    <a href="/login" class="alr">No account?</a>
     </form>
 </div>
+
+<div class="register">
+    <form method="POST" action="{{ url_for('register') }}">
+        <h3 class= "center">REGISTER</h3>
+
+        <div class= "form-register">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class= "form-register">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class= "form-register">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+        
+        <a href="/login" class="alr">Already Have a account?</a>
+
+    </form>
+</div>
+
 
 </body>
 </html>

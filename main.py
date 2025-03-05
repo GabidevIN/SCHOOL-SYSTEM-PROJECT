@@ -10,9 +10,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Qwerty123'  # Update this line with the correct password
+app.config['MYSQL_PASSWORD'] = '131418'
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -50,7 +50,7 @@ def login():
     
     return render_template('login.html')
     
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         print(request.form)  # Debugging statement
@@ -90,7 +90,15 @@ def register():
             flash('An error occurred. Please try again.', 'danger')
             return redirect(url_for('register'))
     
-    return render_template('reg.html')
+    return render_template('home.html')
+
+# SUCCESSFUL LOGIN (PENDING IF/ELSE)
+@app.route('/home')
+def main():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    username = session.get('username', 'Guest')
+    return render_template('main.html', username=username)
 
 
 if __name__ == '__main__':
