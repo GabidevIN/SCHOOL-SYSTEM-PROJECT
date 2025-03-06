@@ -1,29 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css')}}">
+
 </head>
 
 <body>
+<div class="background1">
+
 
 <div class="container">
-    <form method="POST" action="{{ url_for('login') }}"> <!-- dito yung database eugene-->
-        <h3 class="center">Login</h3>
+    <input type="checkbox" id="toggle"> 
+        
+    <div class="forms">
 
-    <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
-    </div>
+        <!-- Login Form -->
+        <div class="login">
+            <form method="POST" action="{{ url_for('login') }}">
+                <h3 class="TITLE">LOGIN</h3>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"/>
+                <div class="form-group">
+                    <label for="email-log" class = "email-cs">Email Address</label>
+                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
+                </div>
+
+                 <div class="form-group">
+                    <label for="password-log" class = "password-cs">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+                
+
+                <!-- Toggle to Register -->
+                <label for="toggle" class ="switch" >No account?</label>
+
+            </form>
+            <button class="location">Available location</button>
+
+        </div>
+            <div class="background"></div>
+            
+
+        <!-- Register Form -->
+        <div class="register">
+            <form method="POST" action="{{ url_for('register') }}">
+                <h3 class="TITLE">ENROLL</h3>
+
+                <div class="form-register">
+                    <label for="username-reg" class = "username-reg-cs">Username</label>
+                    <input type="text" id="username" name="username" required  placeholder="Enter Username">
+                </div>
+
+                <div class="form-register">
+                    <label for="email-reg" class ="email-reg-cs">Email</label>
+                    <input type="email" id="email" name="email" required  placeholder="Enter Email">
+                </div>
+
+                <div class="form-register">
+                    <label for="password-reg" class ="password-reg-cs">Password</label>
+                    <input type="password" id="password" name="password" required  placeholder="Enter Password">
+                </div>
+            
+                <button type="submit" class="btn btn-primary-reg">Enroll</button>
+
+                    <!-- Toggle back to Login -->
+                <label for="toggle" class = "switch">Already have an account?</label>
+            </form>
+            <button class="career">Available Career</button>
+
+        </div>
     </div>
-    
-        <button type="submit" class="btn btn-primary">Login</button>
-    <a href="/register" class="alr">No account?</a>
-    </form>
+</div>
+
+
+
+
 </div>
 
 </body>

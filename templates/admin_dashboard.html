@@ -1,0 +1,41 @@
+<!-- filepath: c:\Users\Eugene\OneDrive\Documents\2nd year\SCHOOL-SYSTEM-PROJECT\SCHOOL-SYSTEM-PROJECT\templates\admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h3>Admin Dashboard</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in registration_requests %}
+      <tr>
+        <td>{{ request.username }}</td>
+        <td>{{ request.email }}</td>
+        <td>
+          <form action="{{ url_for('approve_registration', request_id=request.id) }}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-success">Approve</button>
+        </form>
+        <form action="{{ url_for('decline_registration', request_id=request.id) }}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Decline</button>
+        </form>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <form action="{{ url_for('logout') }}" method="post">
+    <button type="submit">Logout</button>
+  </form>
+</body>
+</html>

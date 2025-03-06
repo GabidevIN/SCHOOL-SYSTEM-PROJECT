@@ -1,0 +1,217 @@
+body {
+    font-family: Arial, sans-serif; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    height: 95vh; 
+    background-color: #f4f4f4;
+}
+
+.background1 {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background: #afdde5; 
+}
+
+.container {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 62.5rem; 
+    height: 37.5rem; 
+    background: transparent; 
+    text-align: center; 
+    overflow: visible;    
+}
+
+/* MISSION VISSION BACKGROUND */
+.background {
+    position: relative; 
+    margin: 17.5px 12.5px 12.5px 17.5px;
+    width: 70rem; 
+    height: 35.5rem; 
+    background: #003135; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    text-align: center; 
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 25px; 
+    transition: transform 1s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+.background:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+}
+
+#toggle { display: none; }
+
+.forms {
+    position: relative; 
+    width: 100%; 
+    height: 100%; 
+    display: flex;
+    z-index: 2;
+
+}
+
+.login{
+    position: absolute; 
+    width: 50%; 
+    height: 100%; 
+    background: rgb(39, 99, 119); 
+    top: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.5s ease-in-out;
+    border-radius: 25px 0 25px 0; 
+    z-index: 3;
+    box-shadow: 30px 0 30px 0 rgba(0,0,0,0.2);
+    pointer-events: auto;
+}
+
+.register {
+    position: absolute; 
+    width: 50%; 
+    height: 100%; 
+    background: rgb(39, 99, 119); 
+    top: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.5s ease-in-out;
+    border-radius: 0 25px 0 25px; 
+    z-index: 3;
+    pointer-events: none;
+}
+
+
+
+.login { left: 0; transform: translateX(0); opacity: 1; }
+.register { right: 0; transform: translateX(40%); opacity: 0; }
+
+#toggle:checked ~ .forms .login {
+    transform: translateX(-40%); 
+    opacity: 0;
+    pointer-events: none;
+
+}
+
+#toggle:checked ~ .forms .register {
+    transform: translateX(0); 
+    opacity: 1;
+    pointer-events: auto;
+
+}
+
+.form-group, .form-register {
+    margin-bottom: 10px; 
+    text-align: left;
+}
+
+input {
+    width: 50%;
+    display: block;
+    margin: 5px auto;
+    padding: 15px;
+    border: 3px solid rgb(60, 104, 118);
+    background-color: rgb(37, 80, 94);
+    border-radius: 5px;
+    font-size: large;
+    color: white;
+    caret-color: white;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+
+
+button {
+    width: 57%; 
+    padding: 12px; 
+    background-color: rgb(37, 80, 94); 
+    color: white;
+    margin: 5px auto;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+
+}
+
+button:hover {
+    background-color: rgb(30, 70, 85); 
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.username-reg-cs,.email-cs, .password-reg-cs, .email-reg-cs, .password-cs{
+    display: block; 
+    margin: 5px auto;
+    color: white; 
+    text-align: center;
+    font-family: Georgia, serif;
+
+}
+
+.TITLE {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3.75rem;
+    font-size: 2.5rem;
+    color: white; 
+    font-family: Georgia, serif;
+}
+
+.switch{
+    display: block; 
+    margin: 5px auto;
+    color: white;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.location {
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 13.5rem;
+    background: rgb(39, 99, 119); 
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    border: none; 
+    border-radius:0 15px 0 15px; 
+    cursor: pointer;
+    display: inline-block;
+    z-index: 5;
+    transition: transform 0.4s ease-in-out 0.4s, ease-in-out 0.4s, background 0.3s ease-in-out;
+}
+
+.career {
+    width: 100%; 
+    font-weight: 700;
+    padding: 15px; 
+    margin-top: 7.8rem;
+    background: rgb(39, 99, 119); 
+    text-align: center;
+    color: white;
+    border: none; 
+    border-radius: 15px 0 15px 0; 
+    cursor: pointer;
+    display: inline-block;
+    z-index: 5;
+    transition: transform 0.4s ease-in-out 0.4s, ease-in-out 0.4s, background 0.3s ease-in-out;
+}
+
+/* BUTTON COLOR // HOVER FOR BUTTON */
+.career:hover, .location:hover {
+    background: rgb(30, 85, 105);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
