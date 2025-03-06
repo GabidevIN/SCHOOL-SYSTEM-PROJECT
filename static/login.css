@@ -25,7 +25,7 @@ body {
     height: 37.5rem; 
     background: transparent; 
     text-align: center; 
-    overflow: hidden;
+    overflow: visible;    
 }
 
 
@@ -139,4 +139,34 @@ button {
     color: white;
     text-decoration: underline;
     text-align: center;
+}
+
+.location {
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 14rem;
+    background: rgb(39, 99, 119); 
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    border: none; 
+    border-radius:0 15px 0 15px; 
+    cursor: pointer;
+    display: inline-block;
+    z-index: 5;
+}
+
+.career {
+    width: 100%; 
+    font-weight: 700;
+    padding: 15px; 
+    margin-top: 8.5rem;
+    background: rgb(39, 99, 119); 
+    text-align: center;
+    color: white;
+    border: none; 
+    border-radius: 15px 0 15px 0; 
+    cursor: pointer;
+    display: inline-block;
+    z-index: 5;
 }
