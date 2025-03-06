@@ -50,7 +50,7 @@ def login():
     
     return render_template('login.html')
     
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         print(request.form)  # Debugging statement
@@ -90,7 +90,7 @@ def register():
             flash('An error occurred. Please try again.', 'danger')
             return redirect(url_for('register'))
     
-    return render_template('home.html')
+    return render_template('login.html')
 
 # SUCCESSFUL LOGIN (PENDING IF/ELSE)
 @app.route('/home')
