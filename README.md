@@ -1,4 +1,0 @@
-# SCHOOL PROJECT TESTING
-
-*In progress*
-
