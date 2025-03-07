@@ -8,7 +8,6 @@ from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
