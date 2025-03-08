@@ -7,9 +7,9 @@ def create_admin():
         print('Admin user already exists!')
     else:
         admin = User(
-            username='admin1',
-            email='admin@ex',
-            password=generate_password_hash('admin', method='pbkdf2:sha256'),
+            username='admin1', 
+            email='admin@ex', # FOR CREATING ADMIN email
+            password=generate_password_hash('admin', method='pbkdf2:sha256'), # ADMIN PASSWORD change "admin"
             is_admin=True
         )
         db.session.add(admin)
