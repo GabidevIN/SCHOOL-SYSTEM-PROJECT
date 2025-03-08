@@ -12,9 +12,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Qwerty123'  # Update this line with the correct password
+app.config['MYSQL_PASSWORD'] = '131418'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -78,6 +78,7 @@ def login():
                 return redirect(url_for('main'))
         else:
             flash('Invalid username or password!', 'danger')
+            print("REDIRECTION ERROR") # ERROR CHECKING
             return redirect(url_for('login'))
 
     return render_template('login.html')
