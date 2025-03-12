@@ -78,7 +78,9 @@ def login():
                 return redirect(url_for('main'))
         else:
             flash('Invalid username or password!', 'danger')
+
             print("REDIRECTION ERROR") # ERROR CHECKING
+            
             return redirect(url_for('login'))
 
     return render_template('login.html')
