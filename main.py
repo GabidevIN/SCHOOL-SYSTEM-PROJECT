@@ -7,25 +7,27 @@ from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Qwerty123'  # Update this line with the correct password
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
-mysql = MySQL(app)
-migrate = Migrate(app, db)
+try:
+    db = SQLAlchemy(app)
+    mysql = MySQL(app)
+    migrate = Migrate(app, db)
+except Exception as e:
+    print(f"Error connecting to the database: {e}")
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False) 
+    password = db.Column(db.String(120), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -34,14 +36,13 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-
 class RegistrationRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     approved = db.Column(db.Boolean, default=False)
-    
+
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
 
@@ -88,17 +89,17 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-        
+
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
-        
+
         if user_exists or email_exists:
             flash('Username or email already exists!', 'danger')
             return redirect(url_for('register'))
-        
+
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         registration_request = RegistrationRequest(username=username, email=email, password=hashed_password)
-        
+
         try:
             db.session.add(registration_request)
             db.session.commit()
@@ -107,7 +108,7 @@ def register():
         except Exception as e:
             flash('An error occurred. Please try again.', 'danger')
             return redirect(url_for('register'))
-    
+
     return render_template('login.html')
 
 @app.route('/admin/dashboard')
@@ -120,8 +121,6 @@ def admin_dashboard():
     if not user or not user.is_admin:
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
-
-    # Debug statement to check session data
     print(f"Admin Dashboard accessed by user_id: {session['user_id']}")
 
     registration_requests = RegistrationRequest.query.all()
@@ -181,6 +180,15 @@ def decline_registration(request_id):
         flash('Registration request not found.', 'danger')
 
     return redirect(url_for('admin_dashboard'))
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
