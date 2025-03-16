@@ -13,7 +13,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -47,15 +47,28 @@ class RegistrationRequest(db.Model):
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
 
+class Grade(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    subject = db.Column(db.String(80), nullable=False)
+    grade = db.Column(db.Float, nullable=False)
+    student = db.relationship('User', backref=db.backref('grades', lazy=True))
+
+    def __repr__(self):
+        return f'<Grade {self.subject} - {self.grade}>'
+
 with app.app_context():
     db.create_all()
 
-@app.route('/home')
-def main():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-    username = session.get('username', 'Guest')
-    return render_template('main.html', username=username)
+
+with app.app_context():
+    db.create_all()
+    
+
+@app.route('/')
+def index():
+    return render_template('login.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -80,6 +93,9 @@ def login():
                 return redirect(url_for('main'))
         else:
             flash('Invalid username or password!', 'danger')
+
+            print("REDIRECTION ERROR") # ERROR PAG MERON
+            
             return redirect(url_for('login'))
 
     return render_template('login.html')
@@ -111,6 +127,13 @@ def register():
             return redirect(url_for('register'))
 
     return render_template('login.html')
+
+@app.route('/home')
+def main():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    username = session.get('username', 'Guest')
+    return render_template('main.html', username=username)
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -161,6 +184,7 @@ def approve_registration(request_id):
 
     return redirect(url_for('admin_dashboard'))
 
+
 @app.route('/admin/decline/<int:request_id>', methods=['POST'])
 def decline_registration(request_id):
     if 'user_id' not in session:
@@ -184,10 +208,49 @@ def decline_registration(request_id):
 
 
 
+#list ng mga bulgago 
+@app.route('/users')
+def list_users():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    users = User.query.all()
+    return render_template('users.html', users=users)
 
 
 
+#grades ng mga bulgago
+@app.route('/grades', methods=['GET', 'POST'])
+def manage_grades():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
 
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        student_id = request.form.get('student_id')
+        subject = request.form.get('subject')
+        grade = request.form.get('grade')
+
+        new_grade = Grade(student_id=student_id, subject=subject, grade=grade)
+        db.session.add(new_grade)
+        db.session.commit()
+        flash('Grade added successfully!', 'success')
+        return redirect(url_for('manage_grades'))
+
+    students = User.query.all()
+    grades = Grade.query.all()
+    return render_template('grades.html', students=students, grades=grades)
 
 
 
