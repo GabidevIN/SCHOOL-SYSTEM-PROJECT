@@ -4,6 +4,8 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css')}}"> <!-- CSS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='login.js')}}"></script>
+
 
 </head>
 
@@ -38,7 +40,12 @@
                 <label for="toggle" class ="switch" >No account?</label>
 
             </form>
-            <button class="location">Available location</button>
+
+            <!-- Available location -->
+            <button class="location" onclick="openDialog()">Available Location</button>
+            <dialog class="availLoc" id="popup-location">
+                <button class="availclose" onclick="closeDialog()">Close</button>
+            </dialog>
 
         </div>
             <div class="background"></div>
@@ -69,7 +76,13 @@
                     <!-- Toggle back to Login -->
                 <label for="toggle" class = "switch">Already have an account?</label>
             </form>
-            <button class="career">Available Career</button>
+
+            <!-- Available Career -->
+            <button class="career" onclick="document.getElementById('popup-career').showModal()">Available Career</button>
+            <dialog id="popup-career">
+                <p>Here is the available career.</p>
+                <button onclick="document.getElementById('popup-career').close()">Close</button>
+            </dialog>
 
         </div>
     </div>
