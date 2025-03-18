@@ -15,3 +15,12 @@ function closeDialog() {
         dialog.close(); // Now close the dialog
     }, 500); // Matches CSS animation duration (0.5s)
 }
+
+
+function openDialog(dialogId) {
+    document.getElementById(dialogId).showModal();
+}
+
+function closeDialog(dialogId) {
+    document.getElementById(dialogId).close();
+}
