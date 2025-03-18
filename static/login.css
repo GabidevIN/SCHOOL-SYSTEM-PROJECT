@@ -263,12 +263,11 @@ button:hover {
 }
 
 .availclose {
-    margin-top: 3.5rem; /* Adjust as needed */
+    margin-top: 3.5rem;
     width: 52.5%;
     border-radius: 15px 0 15px 0; 
 
 }
-
 .availog {
     width: 75%;
     height: 75%;
@@ -297,3 +296,80 @@ button:hover {
 }
 
 
+/*Career*/
+.availcar {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: transparent;
+    padding: 20px;
+    border: none;
+    transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+.availcar[open] {
+    animation: fadeIn 0.5s ease-in forwards;
+    pointer-events: auto;
+}
+
+.availcar.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+    to {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+}
+
+.carclose {
+    margin-top: 3.5rem;
+    width: 52.5%;
+    border-radius: 15px 0 15px 0; 
+
+}
+.availcard {
+    width: 75%;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #002428, #005055);
+    position: absolute;
+    top: 52.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px 0 25px 0;
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
+                inset 5px 5px 15px rgba(0, 0, 0, 0.5),
+                inset -5px -5px 10px rgba(255, 255, 255, 0.2); 
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    transition: transform 1s ease, box-shadow 1s ease;
+}
+
+.availcard:hover {
+    transform: translate(-50%, -50%) scale(1.025);
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
+                inset 5px 5px 15px rgba(0, 0, 0, 0.5),
+                inset -5px -5px 10px rgba(255, 255, 255, 0.2); 
+}
