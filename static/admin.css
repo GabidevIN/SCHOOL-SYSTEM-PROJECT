@@ -3,8 +3,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
+
+
+/* DASH BOARD */
 header {
     display: flex;
     justify-content: space-between;
@@ -74,6 +78,43 @@ header {
     background-color: darkred;
 }
 
+
+.menu{
+    height: 100%;
+    width: 100%;
+}
+
+/* MENU BAR */
+.Menu-tab {
+    position: fixed;
+    width: 25rem; 
+    height: 85%; 
+    background: #D9D9D9;
+    border: 1px solid #000;
+    z-index: 3;
+    top: 52.5%;
+    left: 12.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px 0 25px 0;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: top;  
+    align-items: center; 
+    gap: 1rem;
+}
+
+.home, .Admission {
+    width: 17.5rem;
+    height: 2.5rem;
+    border-radius:  0 15px 0 15px;
+    margin: 10px;
+}
+
+
+
+/* BACKGROUND */
+
 .background {
     position: fixed; 
     top: 0;
@@ -84,17 +125,31 @@ header {
     z-index: 1;
 }
 
+
+/* ADMISSION DASHBOARD */
 .table-container {
-    position: relative;
+    position: fixed;
+    width: 70%; 
+    height: 85%; 
+    background-color: white;
+    opacity: 0.5;
+    top: 52.5%;
+    left: 61.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 0 25px 0 25px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
     z-index: 5;
+    
 }
 
 
 .approval {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-collapse: collapse;
     width: 80%;
     max-width: 800px;
@@ -108,8 +163,4 @@ th, td {
 
 th {
     background-color: #f4f4f4;
-}
-
-button {
-    margin: 2px;
 }
