@@ -1,9 +1,9 @@
-function openDialog() {
+function locationDialog() {
     const dialog = document.getElementById('popup-location');
     dialog.showModal();
 }
 
-function closeDialog() {
+function locationsDialog() {
     const dialog = document.getElementById('popup-location');
 
     dialog.classList.add('fade-out');
@@ -14,11 +14,18 @@ function closeDialog() {
     }, 500);
 }
 
-
-function openDialog(dialogId) {
-    document.getElementById(dialogId).showModal();
+function careerDialog() {
+    const dialog = document.getElementById('popup-career');
+    dialog.showModal();
 }
 
-function closeDialog(dialogId) {
-    document.getElementById(dialogId).close();
+function careersDialog() {
+    const dialog = document.getElementById('popup-career');
+
+    dialog.classList.add('fade-out');
+
+    setTimeout(() => {
+        dialog.classList.remove('fade-out');
+        dialog.close();
+    }, 500);
 }
