@@ -60,10 +60,10 @@
                 <td>{{ request.email }}</td>
                 <td>
                     <form action="{{ url_for('approve_registration', request_id=request.id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-success">Approve</button>
+                        <button type="submit" class="btn-success">Approve</button>
                     </form>
                     <form action="{{ url_for('decline_registration', request_id=request.id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Decline</button>
+                        <button type="submit" class="btn-danger">Decline</button>
                     </form>
                 </td>
             </tr>
