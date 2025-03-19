@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grades</title>
+    <title>Admin - Grades</title>
 </head>
 <body>
-    <h1>Grades for {{ student.username }}</h1>
+    <h1>All Grades</h1>
     <table>
         <thead>
             <tr>
+                <th>Student</th>
                 <th>Subject</th>
                 <th>Grade</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for grade in grades %}
             <tr>
+                <td>{{ grade.student.username }}</td>
                 <td>{{ grade.subject }}</td>
                 <td>{{ grade.grade }}</td>
+                <td>
+                    <a href="{{ url_for('edit_grade', grade_id=grade.id) }}">Edit</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{{ url_for('main') }}">Back to Home</a>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
 </body>
 </html>

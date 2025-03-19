@@ -225,33 +225,6 @@ def list_users():
 
 
 
-#grades ng mga bulgago
-@app.route('/grades', methods=['GET', 'POST'])
-def manage_grades():
-    if 'user_id' not in session:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
-
-    current_user = db.session.get(User, session['user_id'])
-    if not current_user or not current_user.is_admin:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
-
-    if request.method == 'POST':
-        student_id = request.form.get('student_id')
-        subject = request.form.get('subject')
-        grade = request.form.get('grade')
-
-        new_grade = Grade(student_id=student_id, subject=subject, grade=grade)
-        db.session.add(new_grade)
-        db.session.commit()
-        flash('Grade added successfully!', 'success')
-        return redirect(url_for('manage_grades'))
-
-    students = User.query.all()
-    grades = Grade.query.all()
-    return render_template('grades.html', students=students, grades=grades)
-
 
 
 if __name__ == '__main__':
