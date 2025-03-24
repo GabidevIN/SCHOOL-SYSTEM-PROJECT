@@ -1,10 +1,47 @@
+<!-- filepath: c:\Users\Eugene\OneDrive\Documents\2nd year\SCHOOL-SYSTEM-PROJECT\SCHOOL-SYSTEM-PROJECT\templates\admin_dashboard.html -->
+<!-- filepath: c:\Users\gabri\OneDrive\Desktop\BPU\templates\admin_dashboard.html -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Users List</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css')}}"> <!-- CSS FILE -->
+
+  <title>Admin Dashboard</title>
 </head>
 <body>
+
+<!-- DASHBOARD -->
+<header>    
+    <a href="#" class="logo" data-target="home">LOGO</a>
+    <nav>
+        <ul class="dash">
+            <li><a href="#" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="#" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <button class="home"> HOME</button>
+        <button class="admission">ADMISSION </button>
+        <button class="list">LIST </button>
+        <button class="calendar">CALENDAR </button>
+        <button class="grade">GRADE </button>  
+    </div>
+</section>
+
+<!-- APPROVAL TABLE -->
+<div class="table-container">
     <h1>Users List</h1>
     <table>
         <thead>
@@ -26,5 +63,14 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+<script>
+
+</script>
+
+
+<div class="background"> </div>
+
 </body>
 </html>
