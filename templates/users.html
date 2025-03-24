@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css')}}"> <!-- CSS FILE -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css')}}"> <!-- CSS FILE -->
+<script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+
 
   <title>Admin Dashboard</title>
 </head>
@@ -32,16 +34,16 @@
 <!-- MANU TABLE -->
 <section class="menu">
     <div class="Menu-tab">
-        <button class="home"> HOME</button>
-        <button class="admission">ADMISSION </button>
-        <button class="list">LIST </button>
-        <button class="calendar">CALENDAR </button>
-        <button class="grade">GRADE </button>  
+        <a href="/home" class="list">HOME</a>
+        <a href="/admin/dashboard" class="list">ADMISSION</a>
+        <a href="/users" class="list">LIST</a>
+        <a href="/calendar" class="list">CALENDAR</a>
+        <a href="/grades" class="list">GRADE</a>
     </div>
 </section>
 
 <!-- APPROVAL TABLE -->
-<div class="table-container">
+<section class="table-container">
     <h1>Users List</h1>
     <table>
         <thead>
@@ -63,14 +65,9 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
+</section>
 
-<script>
-
-</script>
-
-
-<div class="background"> </div>
+<section class="background"> </section>
 
 </body>
 </html>
