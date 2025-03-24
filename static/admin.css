@@ -52,16 +52,22 @@ header {
 .nav {
     text-decoration: none;
     color: black;
-    font-size: 1.15rem;
-    padding: 8px 12px;
-    margin: 15px;
-    transition: 0.3s ease-in-out;
+    font-size: 1.25rem;
+    padding: 3.5px 35px;
+    margin: 3px;
+    border-radius: 2rem;
+    transition: all 0.6s ease-in-out;
+    display: inline-block;
 }
 
 .nav:hover {
-    background: grey;
-    border-radius: 5px;
+    background: black;
+    color: white;
+    border-radius: 2rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
+
 
 .btn-logout {
     background-color: red;
@@ -105,11 +111,21 @@ header {
 
 .home, .admission, .list, .calendar, .grade {
     width: 17.5rem;
+    color: black;
+    text-decoration: none;
     height: 2.5rem;
-    border-radius:  0 15px 0 15px;
+    border-radius: 0 15px 0 15px;
     margin: 10px;
+    transition: all 0.4s ease-in-out;
 }
 
+.home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
+    transform: scale(1.05);
+    background: black;
+    color: white;
+    border-radius: 25px 0 25px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 
 /* BACKGROUND */
