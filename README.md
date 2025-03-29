@@ -1,7 +1,13 @@
 # SCHOOL PROJECT TESTING
 
+*Accomplished*
+- Admin Panel 0.1v
+- Student Dashboard 0.1v
+- Approval button 0.1v
+- Login 0.1v
+
 *In progress*
-- Admin Panel
-- Student Dashboard
-- Approval button
+- Login -- Better Login experience
+- Login -- Available Location
+- Login -- Available Career
 
