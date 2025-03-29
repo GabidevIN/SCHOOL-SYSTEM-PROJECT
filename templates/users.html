@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Users List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
 </head>
 <body>
-    <h1>Users List</h1>
-    <table>
+    <h1>List of Users</h1>
+    <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Is Admin</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +22,10 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.is_admin }}</td>
+                <td>
+                    <a href="{{ url_for('view_grades', user_id=user.id) }}">View Grades</a>
+                    <a href="{{ url_for('add_grade', user_id=user.id) }}">Add Grade</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

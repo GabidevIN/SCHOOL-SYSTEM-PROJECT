@@ -7,13 +7,15 @@ from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -28,8 +30,14 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
-    
+    is_admin = db.Column(db.Boolean, default=False) 
+    profile_picture = db.Column(db.String(120), default='default.jpg') 
+    full_name = db.Column(db.String(120), nullable=True)  # New
+    address = db.Column(db.String(255), nullable=True)  # New
+    contact_number = db.Column(db.String(15), nullable=True)  # New
+    supporting_document = db.Column(db.String(120), nullable=True)  # New
+    is_new = db.Column(db.Boolean, default=True)  # new
+    approved = db.Column(db.Boolean, default=False)  #new
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -43,11 +51,18 @@ class RegistrationRequest(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     approved = db.Column(db.Boolean, default=False)
+    is_new = db.Column(db.Boolean, default=True) 
+    full_name = db.Column(db.String(120), nullable=True)  # New
+    address = db.Column(db.String(255), nullable=True)  # New
+    contact_number = db.Column(db.String(15), nullable=True)  #new
+    supporting_document = db.Column(db.String(120), nullable=True) # New
+    is_new = db.Column(db.Boolean, default=True) # New
+    
 
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
 
-class Grade(db.Model):
+class Grade(db.Model): #pota wala pa to
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     subject = db.Column(db.String(80), nullable=False)
@@ -56,11 +71,20 @@ class Grade(db.Model):
 
     def __repr__(self):
         return f'<Grade {self.subject} - {self.grade}>'
+    
+UPLOAD_FOLDER = 'static/uploads'  # Folder
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 with app.app_context():
     db.create_all()
-
-
+    
 with app.app_context():
     db.create_all()
     
@@ -69,15 +93,24 @@ with app.app_context():
 def index():
     return render_template('login.html')
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
-        user = User.query.filter_by(email=email).first()
+        registration_request = RegistrationRequest.query.filter_by(email=email).first()
+        print(f"Registration Request: {registration_request}")
 
+        user = User.query.filter_by(email=email).first()
+        print(f"User: {user}")
+
+        if registration_request and registration_request.is_new:
+            print(f"Redirecting to extra registration for {registration_request.username}")
+            session['user_id'] = registration_request.id 
+            return redirect(url_for('extra_registration'))
+
+        # Check
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
             session['username'] = user.username
@@ -87,16 +120,15 @@ def login():
             print(f"Session user_id: {session['user_id']}")
             print(f"Session username: {session['username']}")
 
+            # Redirect
             if user.is_admin:
                 return redirect(url_for('admin_dashboard'))
             else:
                 return redirect(url_for('main'))
-        else:
-            flash('Invalid username or password!', 'danger')
-
-            print("REDIRECTION ERROR") # ERROR PAG MERON
             
-            return redirect(url_for('login'))
+        flash('Invalid username or password!', 'danger')
+        print("REDIRECTION ERROR")
+        return redirect(url_for('login'))
 
     return render_template('login.html')
 
@@ -128,12 +160,75 @@ def register():
 
     return render_template('login.html')
 
-@app.route('/home')
+@app.route('/additional-registration', methods=['GET', 'POST'])
+def additional_registration():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('main'))
+
+    # Check
+    registration_request = RegistrationRequest.query.filter_by(email=user.email).first()
+    if not registration_request or not registration_request.is_new:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+
+        registration_request.is_new = False
+        db.session.commit()
+        flash('Additional registration completed!', 'success')
+        return redirect(url_for('main'))
+
+    return render_template('add_registration.html')
+
+@app.route('/main')
 def main():
     if 'user_id' not in session:
+        flash('Access denied!', 'danger')
         return redirect(url_for('login'))
-    username = session.get('username', 'Guest')
-    return render_template('main.html', username=username)
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('login'))
+
+    return render_template('main.html', user=user) 
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+        # Update user information
+        user.full_name = request.form.get('full_name')
+        user.address = request.form.get('address')
+        user.contact_number = request.form.get('contact_number')
+
+        # Handle file upload for supporting document
+        if 'file' in request.files:
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.supporting_document = filename
+
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('profile'))
+
+    return render_template('profileinfo.html', user=user)
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -168,15 +263,20 @@ def approve_registration(request_id):
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
 
-    registration_request = db.session.get(RegistrationRequest, request_id)
+    registration_request = RegistrationRequest.query.get(request_id)
     if registration_request:
+        # Create
         new_user = User(
             username=registration_request.username,
             email=registration_request.email,
-            password=registration_request.password
+            password=registration_request.password,
+            full_name=registration_request.full_name,
+            address=registration_request.address,
+            contact_number=registration_request.contact_number,
+            supporting_document=registration_request.supporting_document
         )
         db.session.add(new_user)
-        db.session.delete(registration_request)
+        db.session.delete(registration_request)  # Remove
         db.session.commit()
         flash(f'Registration request for {new_user.username} has been approved.', 'success')
     else:
@@ -207,7 +307,6 @@ def decline_registration(request_id):
     return redirect(url_for('admin_dashboard'))
 
 
-
 #list ng mga bulgago 
 @app.route('/users')
 def list_users():
@@ -225,6 +324,78 @@ def list_users():
 
 
 
+@app.route('/extra-registration', methods=['GET', 'POST'])
+def extra_registration():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    registration_request = RegistrationRequest.query.filter_by(id=session['user_id']).first()
+    if not registration_request or registration_request.approved:
+        flash('Access denied or already approved!', 'danger')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+        full_name = request.form.get('full_name')
+        address = request.form.get('address')
+        contact_number = request.form.get('contact_number')
+
+        # file upload
+        if 'file' not in request.files:
+            flash('No file part!', 'danger')
+            return redirect(request.url)
+
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file!', 'danger')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            # Update
+            registration_request.full_name = full_name
+            registration_request.address = address
+            registration_request.contact_number = contact_number
+            registration_request.supporting_document = filename
+            db.session.commit()
+
+            flash('Extra registration details submitted successfully!', 'success')
+            return redirect(url_for('main'))
+
+    return render_template('ex_reg.html')
+
+@app.route('/upload-picture', methods=['GET', 'POST'])
+def upload_picture():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part!', 'danger')
+            return redirect(request.url)
+
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file!', 'danger')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            user.profile_picture = filename  # Save the filename in the database
+            db.session.commit()
+            flash('Profile picture uploaded successfully!', 'success')
+            return redirect(url_for('main'))
+
+    return render_template('upload_picture.html', user=user)
 
 
 if __name__ == '__main__':
