@@ -34,8 +34,8 @@ body {
     margin: 17.5px 12.5px 12.5px 17.5px;
     width: 70rem; 
     height: 35.5rem; 
-    background: #003135; 
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    background: linear-gradient(90deg, #073237, #37959c);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
     text-align: center; 
     overflow: hidden;
     z-index: 1;
@@ -63,7 +63,7 @@ body {
     position: absolute; 
     width: 50%; 
     height: 100%; 
-    background: rgb(39, 99, 119); 
+    background: linear-gradient(90deg, #073237, #37959c);
     top: 0;
     transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity .6s ease-in;
     border-radius: 25px; 
@@ -76,12 +76,11 @@ body {
     position: absolute; 
     width: 50%; 
     height: 100%; 
-    background: rgb(39, 99, 119); 
+    background: linear-gradient(90deg, #37959c, #073237);
     top: 0;
     transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity .6s ease-in;
     border-radius: 25px; 
-    box-shadow: 30px 0 30px 0 rgba(0,0,0,0.5);
-
+    box-shadow: -30px 0 30px rgba(0,0,0,0.5);
     z-index: 3;
     pointer-events: none;
 }
@@ -181,7 +180,7 @@ button:hover {
     width: 100%; 
     padding: 15px; 
     margin-top: 13.5rem;
-    background: rgb(39, 99, 119); 
+    background: linear-gradient(90deg, #073237, #37959c);
     text-align: center;
     font-weight: 700;
     color: white;
@@ -198,7 +197,7 @@ button:hover {
     font-weight: 700;
     padding: 15px; 
     margin-top: 7.8rem;
-    background: rgb(39, 99, 119); 
+    background: linear-gradient(90deg, #37959c, #073237);
     text-align: center;
     color: white;
     border: none; 
@@ -217,7 +216,7 @@ button:hover {
 }
 
 
-/*LOCATION*/
+                            /*LOCATION*/
 .availLoc {
     width: 100%;
     height: 100%;
@@ -274,7 +273,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(145deg, #002428, #005055);
+    background: linear-gradient(145deg, #002428, #37959c);
     position: absolute;
     top: 52.5%;
     left: 50%;
@@ -296,7 +295,7 @@ button:hover {
 }
 
 
-/*Career*/
+                            /*LOCATION*/
 .availcar {
     width: 100%;
     height: 100%;
@@ -353,15 +352,12 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(145deg, #002428, #005055);
+    background: linear-gradient(145deg, #002428, #37959c);
     position: absolute;
     top: 52.5%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);       
     border-radius: 25px 0 25px 0;
-    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
-                inset 5px 5px 15px rgba(0, 0, 0, 0.5),
-                inset -5px -5px 10px rgba(255, 255, 255, 0.2); 
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
     transition: transform 1s ease, box-shadow 1s ease;

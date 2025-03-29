@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css')}}"> <!-- CSS FILE -->
-    <script type="text/javascript" src="{{ url_for('static', filename='login.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='login.js')}}"></script> <!-- JS FILE -->
 
 
 </head>
@@ -13,7 +13,7 @@
 <div class="background1">
 
 
-<div class="container">
+<section class="container">
     <input type="checkbox" id="toggle"> 
         
     <div class="forms">
@@ -42,9 +42,9 @@
             </form>
 
             <!-- Available location -->
-            <button class="location" onclick="openDialogs('popup-location')">Available Location</button>
+            <button class="location" onclick="openDialog('popup-location')">Available Location</button>
             <dialog class="availLoc" id="popup-location">
-            <button class="availclose" onclick="closeDialogs('popup-location')">Close</button>
+            <button class="availclose" onclick="closeDialog('popup-location')">Close</button>
             <div class="availog">LOCATION IN LIST</div>
             </dialog>
 
@@ -79,9 +79,9 @@
             </form>
 
             <!-- Available Career -->
-            <button class="career" onclick="openDialog('popup-career')">Available Career</button>
+            <button class="career" onclick="careerDialog('popup-career')">Available Career</button>
             <dialog class="availcar" id="popup-career">
-            <button class="carclose" onclick="closeDialog('popup-career')">Close</button>
+            <button class="carclose" onclick="careersDialog('popup-career')">Close</button>
             <div class="availcard">CAREER IN LIST</div>
             </dialog>
 

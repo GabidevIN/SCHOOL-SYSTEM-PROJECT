@@ -1,13 +1,14 @@
 <!-- filepath: c:\Users\Eugene\OneDrive\Documents\2nd year\SCHOOL-SYSTEM-PROJECT\SCHOOL-SYSTEM-PROJECT\templates\admin_dashboard.html -->
 <!-- filepath: c:\Users\gabri\OneDrive\Desktop\BPU\templates\admin_dashboard.html -->
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin.css')}}"> <!-- CSS FILE -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin.css')}}"> <!-- CSS FILE -->
+<script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+
 
   <title>Admin Dashboard</title>
 </head>
@@ -29,8 +30,19 @@
     </form>
 </header>
 
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/home" class="list">HOME</a>
+        <a href="/admin/dashboard" class="list">ADMISSION</a>
+        <a href="/users" class="list">LIST</a>
+        <a href="/calendar" class="list">CALENDAR</a>
+        <a href="/grades" class="list">GRADE</a>
+    </div>
+</section>
+
 <!-- APPROVAL TABLE -->
-<div class="table-container">
+<section class="table-container">
     <table class="approval">
         <thead>
             <tr>
@@ -46,19 +58,19 @@
                 <td>{{ request.email }}</td>
                 <td>
                     <form action="{{ url_for('approve_registration', request_id=request.id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-success">Approve</button>
+                        <button type="submit" class="btn-success">Approve</button>
                     </form>
                     <form action="{{ url_for('decline_registration', request_id=request.id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Decline</button>
+                        <button type="submit" class="btn-danger">Decline</button>
                     </form>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
+</section>
 
+<div class="background"> </div>
 
-<div class="background"></div>
 </body>
 </html>

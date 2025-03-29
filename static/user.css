@@ -6,8 +6,6 @@
     overflow: hidden;
 }
 
-
-
 /* DASH BOARD */
 header {
     display: flex;
@@ -133,8 +131,6 @@ header {
 }
 
 
-
-
 /* BACKGROUND */
 
 .background {
@@ -148,7 +144,7 @@ header {
 }
 
 
-/* ADMISSION DASHBOARD */
+/* LIST DASHBOARD */
 .table-container {
     position: fixed;
     width: 70%; 
@@ -167,63 +163,6 @@ header {
     padding: 20px;
     overflow: hidden;
 }
-
-.approval {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-.approval thead {
-    display: table;
-    width: 100%;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 10;
-}
-
-.approval tbody {
-    display: block;
-    max-height: 400px;
-    overflow-y: auto;
-    width: 100%;
-}
-
-.approval tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-.btn-danger, .btn-success{
-    width: 6rem;
-    height: 1.5rem;
-    transition: transform .2s ease-in-out;
-    margin: 10px;
-    border-radius: 10px;
-}
-
-.btn-danger:hover,.btn-success:hover{
-    transform: scale(1.1);
-}
-
-.btn-success{
-    background-color: green;
-}
-.btn-danger{
-    background-color: red;
-}
-
 
 
 
@@ -263,3 +202,4 @@ body.loaded {
 header, .Menu-tab {
     transition: opacity 0.5s ease-in-out;
 }
+

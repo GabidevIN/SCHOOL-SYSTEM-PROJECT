@@ -1,9 +1,9 @@
-function openDialog() {
+function locationDialog() {
     const dialog = document.getElementById('popup-location');
     dialog.showModal();
 }
 
-function closeDialog() {
+function locationsDialog() {
     const dialog = document.getElementById('popup-location');
 
     dialog.classList.add('fade-out');
@@ -14,11 +14,12 @@ function closeDialog() {
     }, 500);
 }
 
-
-function openDialog(dialogId) {
-    document.getElementById(dialogId).showModal();
+function careerDialog() {
+    const dialog = document.getElementById('popup-career');
+    dialog.showModal();
 }
 
+<<<<<<< HEAD
 function closeDialog(dialogId) {
     document.getElementById(dialogId).close();
 }
@@ -30,6 +31,10 @@ function openDialogs() {
 
 function closeDialogs() {
     const dialog = document.getElementById('popup-location');
+=======
+function careersDialog() {
+    const dialog = document.getElementById('popup-career');
+>>>>>>> ef63f8fb72821e2968a620f539ccf52c354d99ea
 
     dialog.classList.add('fade-out');
 
@@ -37,6 +42,7 @@ function closeDialogs() {
         dialog.classList.remove('fade-out');
         dialog.close();
     }, 500);
+<<<<<<< HEAD
 }
 
 
@@ -46,4 +52,6 @@ function openDialogs(dialogId) {
 
 function closeDialogs(dialogId) {
     document.getElementById(dialogId).close();
+=======
+>>>>>>> ef63f8fb72821e2968a620f539ccf52c354d99ea
 }
