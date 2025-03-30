@@ -55,5 +55,19 @@ function closeCareerDialog() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    let images = document.querySelectorAll(".background1");
+    let index = 0;
+
+    function switchImage() {
+        images.forEach(img => img.classList.remove("active"));
+        images[index].classList.add("active");
+        index = (index + 1) % images.length;
+    }
+
+    switchImage();
+    setInterval(switchImage, 4000);
+});
+
 
 

@@ -28,3 +28,4 @@ document.addEventListener("DOMContentLoaded", function () {
         loader.classList.remove("active");
     });
 });
+
