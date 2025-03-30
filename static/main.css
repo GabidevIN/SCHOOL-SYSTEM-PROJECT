@@ -84,32 +84,44 @@ header {
     z-index: 1;
 }
 
-.table-container {
-    position: relative;
+/* MENU BAR */
+.Menu-tab {
+    position: fixed;
+    width: 25rem; 
+    height: 85%; 
+    background: #D9D9D9;
+    z-index: 3;
+    top: 52.5%;
+    left: 12.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px 0 25px 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    z-index: 5;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: top;  
+    align-items: center; 
+    gap: 1rem;
 }
 
-
-.approval {
-    border-collapse: collapse;
-    width: 80%;
-    max-width: 800px;
+.home, .admission, .list, .calendar, .grade {
+    width: 17.5rem;
+    color: black;
+    background-color: white;
     text-align: center;
+    text-decoration: none;
+    line-height: 2.5rem;
+    border: 1px solid black;
+    height: 2.5rem;
+    border-radius: 0 15px 0 15px;
+    margin: 10px;
+    transition: all 0.4s ease-in-out;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-button {
-    margin: 2px;
+.home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
+    transform: scale(1.05);
+    background: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 25px 0 25px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }

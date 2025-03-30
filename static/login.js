@@ -19,7 +19,6 @@ function careerDialog() {
     dialog.showModal();
 }
 
-<<<<<<< HEAD
 function closeDialog(dialogId) {
     document.getElementById(dialogId).close();
 }
@@ -31,10 +30,6 @@ function openDialogs() {
 
 function closeDialogs() {
     const dialog = document.getElementById('popup-location');
-=======
-function careersDialog() {
-    const dialog = document.getElementById('popup-career');
->>>>>>> ef63f8fb72821e2968a620f539ccf52c354d99ea
 
     dialog.classList.add('fade-out');
 
@@ -42,7 +37,6 @@ function careersDialog() {
         dialog.classList.remove('fade-out');
         dialog.close();
     }, 500);
-<<<<<<< HEAD
 }
 
 
@@ -52,6 +46,4 @@ function openDialogs(dialogId) {
 
 function closeDialogs(dialogId) {
     document.getElementById(dialogId).close();
-=======
->>>>>>> ef63f8fb72821e2968a620f539ccf52c354d99ea
 }
