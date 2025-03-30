@@ -1,49 +1,59 @@
-function locationDialog() {
-    const dialog = document.getElementById('popup-location');
-    dialog.showModal();
-}
-
-function locationsDialog() {
-    const dialog = document.getElementById('popup-location');
-
-    dialog.classList.add('fade-out');
-
-    setTimeout(() => {
-        dialog.classList.remove('fade-out');
-        dialog.close();
-    }, 500);
-}
-
-function careerDialog() {
-    const dialog = document.getElementById('popup-career');
-    dialog.showModal();
+function openDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (dialog) {
+        dialog.showModal();
+    }
 }
 
 function closeDialog(dialogId) {
-    document.getElementById(dialogId).close();
+    const dialog = document.getElementById(dialogId);
+    if (dialog) {
+        dialog.classList.add('fade-out');
+
+        setTimeout(() => {
+            dialog.classList.remove('fade-out');
+            dialog.close();
+        }, 500);
+    }
 }
 
-function openDialogs() {
+function careerDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (dialog) {
+        dialog.showModal();
+    }
+}
+
+function carexitDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (dialog) {
+        dialog.classList.add('fade-out');
+
+        setTimeout(() => {
+            dialog.classList.remove('fade-out');
+            dialog.close();
+        }, 500);
+    }
+}
+
+function openCareerDialog() {
     const dialog = document.getElementById('popup-location');
-    dialog.showModal();
+    if (dialog) {
+        dialog.showModal();
+    }
 }
 
-function closeDialogs() {
+function closeCareerDialog() {
     const dialog = document.getElementById('popup-location');
+    if (dialog) {
+        dialog.classList.add('fade-out');
 
-    dialog.classList.add('fade-out');
-
-    setTimeout(() => {
-        dialog.classList.remove('fade-out');
-        dialog.close();
-    }, 500);
+        setTimeout(() => {
+            dialog.classList.remove('fade-out');
+            dialog.close();
+        }, 500);
+    }
 }
 
 
-function openDialogs(dialogId) {
-    document.getElementById(dialogId).showModal();
-}
 
-function closeDialogs(dialogId) {
-    document.getElementById(dialogId).close();
-}
