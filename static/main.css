@@ -149,4 +149,122 @@ header {
     border: 1px solid black;
     border-radius: 25px 0 25px 0;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+/* NOTE BAR */
+.note-tab {
+    position: fixed;
+    width: 45rem; 
+    height: 85%; 
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    z-index: 3;
+    top: 52.5%;
+    left:43.5%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    border-radius: 0 25px 0 25px;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: top;  
+    align-items: center; 
+    gap: 1rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    z-index: 3;
+}
+
+/* CALENDAR BAR */
+.calendars-tab {
+    position: fixed;
+    width: 40rem; 
+    height: 45%; 
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    z-index: 3;
+    top: 32.5%;
+    left:81%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    border-radius: 25px 0 25px 0;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: top;  
+    align-items: center; 
+    gap: 1rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    z-index: 3;
+}
+
+/* TUITION BAR */
+.tuition-tab {
+    position: fixed;
+    width: 40rem; 
+    height: 37.5%; 
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    z-index: 3;
+    top: 76.25%;
+    left:81%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    border-radius: 0 25px 0 25px ;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: top;  
+    align-items: center; 
+    gap: 1rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    z-index: 3;
+}
+
+
+
+/* CALENDAR */
+#calendarss {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.calendarss-header {
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(145deg, #f1f5f9,#dbeafe,#c0d9f9 );
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px 0 0 0;
+    border: 1px solid black;
+}
+
+.calendarss-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: linear-gradient(145deg, #f1f5f9,#dbeafe,#c0d9f9 );
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 0 0 25px 0;
+
+}
+
+.calendarss-day {
+    padding: 22.5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.calendarss-day:hover {
+    background-color: #c0d9f9;
+    border-radius: 15px;
+
+}
+
+
+.today {
+    background-color: #c0d9f9;
+    border-radius: 15px;
 }
