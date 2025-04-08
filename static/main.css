@@ -10,14 +10,16 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: linear-gradient(145deg, #ffffff, #bbf6ff);
+    background: linear-gradient(145deg, #b3e0f7, #c6dafd);
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     position: absolute;
+    border: 1px solid black;
+
 }
 
 .logo {
@@ -78,7 +80,7 @@ header {
 }
 
 .btn-logout {
-    background-color: red;
+    background: linear-gradient(90deg, #DC2626, #B91C1C  );
     color: white;
     border: none;
     padding: 8px 12px;
@@ -92,25 +94,28 @@ header {
     background-color: darkred;
 }
 
+/* BACKGROUND */
 .background {
     position: fixed; 
     top: 0;
     left: 0;
     width: 100vw; 
     height: 100vh; 
-    background: #314041; 
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
     z-index: 1;
 }
+
 
 /* MENU BAR */
 .Menu-tab {
     position: fixed;
     width: 25rem; 
     height: 85%; 
-    background: #D9D9D9;
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
     z-index: 3;
     top: 52.5%;
     left: 12.5%;
+    border: 1px solid black;
     transform: translate(-50%, -50%);
     border-radius: 25px 0 25px 0;
     display: flex;
@@ -119,12 +124,14 @@ header {
     justify-content: top;  
     align-items: center; 
     gap: 1rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
 }
+
 
 .home, .admission, .list, .calendar, .grade {
     width: 17.5rem;
     color: black;
-    background-color: white;
+    background-color: rgba(147, 197, 253, 0.6);
     text-align: center;
     text-decoration: none;
     line-height: 2.5rem;
@@ -137,9 +144,9 @@ header {
 
 .home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
     transform: scale(1.05);
-    background: black;
-    color: white;
-    border: 1px solid white;
+    background-color: #21364f99;
+    color: black;
+    border: 1px solid black;
     border-radius: 25px 0 25px 0;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }

@@ -55,7 +55,7 @@ body {
     margin: 17.5px 12.5px 12.5px 17.5px;
     width: 70rem; 
     height: 35.5rem; 
-    background: linear-gradient(90deg, #073237, #37959c);
+    background: linear-gradient(90deg, #2c475d, #4d677c ,#8bbbe0, #c6dafd);
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
     text-align: center; 
     overflow: hidden;
@@ -115,7 +115,7 @@ body {
     position: absolute; 
     width: 50%; 
     height: 100%; 
-    background: linear-gradient(90deg, #073237, #37959c);
+    background: linear-gradient(90deg, #4d677c ,#8bbbe0);
     top: 0;
     transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity .6s ease-in;
     border-radius: 25px; 
@@ -128,7 +128,7 @@ body {
     position: absolute; 
     width: 50%; 
     height: 100%; 
-    background: linear-gradient(90deg, #37959c, #073237);
+    background: linear-gradient(90deg,#8bbbe0, #4d677c );
     top: 0;
     transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity .6s ease-in;
     border-radius: 25px; 
@@ -166,8 +166,8 @@ input {
     display: block;
     margin: 5px auto;
     padding: 15px;
-    border: 3px solid rgb(60, 104, 118);
-    background-color: rgb(37, 80, 94);
+    border: 3px solid #75a1bf;
+    background-color: #4f7f9e;
     border-radius: 5px;
     font-size: large;
     color: white;
@@ -183,7 +183,7 @@ input::placeholder {
 button {
     width: 57%; 
     padding: 12px; 
-    background-color: rgb(37, 80, 94); 
+    background-color: #4f7f9e;
     color: white;
     margin: 5px auto;
     border: none; 
@@ -195,7 +195,7 @@ button {
 }
 
 button:hover {
-    background-color: rgb(30, 70, 85); 
+    background-color: #4f7f9e;
     transform: scale(1.05);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -232,7 +232,7 @@ button:hover {
     width: 100%; 
     padding: 15px; 
     margin-top: 13.5rem;
-    background: linear-gradient(90deg, #073237, #37959c);
+    background: linear-gradient(90deg, #4d677c ,#8bbbe0);
     text-align: center;
     font-weight: 700;
     color: white;
@@ -249,7 +249,7 @@ button:hover {
     font-weight: 700;
     padding: 15px; 
     margin-top: 7.8rem;
-    background: linear-gradient(90deg, #37959c, #073237);
+    background: linear-gradient(90deg, #8bbbe0,#4d677c );
     text-align: center;
     color: white;
     border: none; 
@@ -261,8 +261,8 @@ button:hover {
 }
 
 /* BUTTON COLOR // HOVER FOR BUTTON */
-.career:hover, .location:hover {
-    background: rgb(30, 85, 105);
+.career:hover, .location:hover {    
+    background: #8bbbe0;
     transform: scale(1.05);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -325,7 +325,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(145deg, #002428, #37959c);
+    background: linear-gradient(145deg, #4d6a7d, #7faedc);
     position: absolute;
     top: 52.5%;
     left: 50%;
@@ -404,7 +404,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(145deg, #002428, #37959c);
+    background: linear-gradient(145deg, #4d6a7d, #7faedc);
     position: absolute;
     top: 52.5%;
     left: 50%;
