@@ -13,9 +13,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -35,6 +35,8 @@ class User(db.Model):
     full_name = db.Column(db.String(120), nullable=True)  # New
     address = db.Column(db.String(255), nullable=True)  # New
     contact_number = db.Column(db.String(15), nullable=True)  # New
+    courses = db.Column(db.String(120), nullable=True)  # New
+    
     supporting_document = db.Column(db.String(120), nullable=True)  # New
     is_new = db.Column(db.Boolean, default=True)  # new
     approved = db.Column(db.Boolean, default=False)  #new
@@ -57,10 +59,23 @@ class RegistrationRequest(db.Model):
     contact_number = db.Column(db.String(15), nullable=True)  #new
     supporting_document = db.Column(db.String(120), nullable=True) # New
     is_new = db.Column(db.Boolean, default=True) # New
-    
+    course = db.Column(db.String(120), nullable=True)  # New
+    BSCPE = db.Column(db.String(80), nullable=False)
+    BSIE = db.Column(db.String(80), nullable=False)
+    BSEE = db.Column(db.String(80), nullable=False)
+     
 
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
+    
+class course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    BSCPE = db.Column(db.String(80), nullable=False)
+    BSIE = db.Column(db.String(80), nullable=False)
+    BSEE = db.Column(db.String(80), nullable=False)
+
+    def __repr__(self):
+        return f'<Course {self.course_name}>'
 
 class Grade(db.Model): #pota wala pa to
     id = db.Column(db.Integer, primary_key=True)
@@ -71,6 +86,8 @@ class Grade(db.Model): #pota wala pa to
 
     def __repr__(self):
         return f'<Grade {self.subject} - {self.grade}>'
+    
+
     
 UPLOAD_FOLDER = 'static/uploads'  # Folder
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -331,16 +348,22 @@ def extra_registration():
         return redirect(url_for('login'))
 
     registration_request = RegistrationRequest.query.filter_by(id=session['user_id']).first()
-    if not registration_request or registration_request.approved:
-        flash('Access denied or already approved!', 'danger')
+    if not registration_request:
+        flash('Access denied!', 'danger')
         return redirect(url_for('main'))
+
+    if registration_request.approved:
+        flash('You have already completed your registration!', 'info')
+        return redirect(url_for('ex_register'))
 
     if request.method == 'POST':
         full_name = request.form.get('full_name')
         address = request.form.get('address')
         contact_number = request.form.get('contact_number')
+        selected_course = request.form.get('course')  # Get the selected course
+        flash(f'You selected: {selected_course}', 'success')
 
-        # file upload
+        # File upload
         if 'file' not in request.files:
             flash('No file part!', 'danger')
             return redirect(request.url)
@@ -358,13 +381,27 @@ def extra_registration():
             registration_request.full_name = full_name
             registration_request.address = address
             registration_request.contact_number = contact_number
+            registration_request.course = selected_course 
             registration_request.supporting_document = filename
+            registration_request.approved = True  # Mark as approved
             db.session.commit()
 
             flash('Extra registration details submitted successfully!', 'success')
-            return redirect(url_for('main'))
+            return redirect(url_for('ex_register'))
 
-    return render_template('ex_reg.html')
+    courses = ['BSCPE', 'BSIE', 'BSEE']
+    return render_template('ex_reg.html', registration_request=registration_request, courses=courses)
+
+@app.route('/ex_register')
+def ex_register():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    extra_details = RegistrationRequest.query.filter_by(id=session['user_id']).first()
+    last_user = User.query.order_by(User.id.desc()).first()
+
+    return render_template('register_complete.html', extra_details=extra_details, last_user=last_user)
 
 @app.route('/upload-picture', methods=['GET', 'POST'])
 def upload_picture():
@@ -396,6 +433,9 @@ def upload_picture():
             return redirect(url_for('main'))
 
     return render_template('upload_picture.html', user=user)
+
+
+
 
 
 if __name__ == '__main__':
