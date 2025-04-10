@@ -3,40 +3,56 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    overflow: hidden;
 }
 
-
-
-/* DASH BOARD */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: #D9D9D9;
+    background: linear-gradient(145deg, #b3e0f7, #c6dafd);
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    position: absolute;
+    border: 1px solid black;
+
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: #000000;
+    left: 25%;
+}
+
+.logos {
+    position: absolute;
+    top: -17.5%;
+    left: 12.5%; 
+    transform: translateX(-50%); 
+    width: 85px;
+    height: 85px;
+    transition: transform 0.7s ease-in-out;
+}
+
+.logos:hover {
+    transform: translateX(-50%) scale(0.95);
 }
 
 .dash {
     list-style: none;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 10.5%;
 }
+
 
 .nav-center {
     display: flex;
@@ -52,25 +68,19 @@ header {
 .nav {
     text-decoration: none;
     color: black;
-    font-size: 1.25rem;
-    padding: 3.5px 35px;
-    margin: 3px;
-    border-radius: 2rem;
-    transition: all 0.6s ease-in-out;
-    display: inline-block;
+    font-size: 1.15rem;
+    padding: 8px 12px;
+    margin: 15px;
+    transition: 0.3s ease-in-out;
 }
 
 .nav:hover {
-    background: black;
-    color: white;
-    border-radius: 2rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
+    background: grey;
+    border-radius: 5px;
 }
 
-
 .btn-logout {
-    background-color: red;
+    background: linear-gradient(90deg, #DC2626, #B91C1C  );
     color: white;
     border: none;
     padding: 8px 12px;
@@ -84,21 +94,16 @@ header {
     background-color: darkred;
 }
 
-
-.menu{
-    height: 100%;
-    width: 100%;
-}
-
 /* MENU BAR */
 .Menu-tab {
     position: fixed;
     width: 25rem; 
     height: 85%; 
-    background: linear-gradient(90deg, #ffffff, #a1a7a8);
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
     z-index: 3;
     top: 52.5%;
     left: 12.5%;
+    border: 1px solid black;
     transform: translate(-50%, -50%);
     border-radius: 25px 0 25px 0;
     display: flex;
@@ -107,6 +112,7 @@ header {
     justify-content: top;  
     align-items: center; 
     gap: 1rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
 }
 
 .home, .admission, .list, .calendar, .grade {
@@ -134,16 +140,14 @@ header {
 
 
 
-
 /* BACKGROUND */
-
 .background {
     position: fixed; 
     top: 0;
     left: 0;
     width: 100vw; 
     height: 100vh; 
-    background: #314041; 
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
     z-index: 1;
 }
 
@@ -153,7 +157,7 @@ header {
     position: fixed;
     width: 70%; 
     height: 85%; 
-    background: #D9D9D9;
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
     opacity: 1;
     top: 52.5%;
     left: 61.5%;
@@ -166,6 +170,9 @@ header {
     z-index: 5;
     padding: 20px;
     overflow: hidden;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    border: 1px solid black;
+
 }
 
 .approval {
