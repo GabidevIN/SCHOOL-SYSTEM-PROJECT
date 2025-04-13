@@ -258,9 +258,12 @@ def admin_dashboard():
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
     print(f"Admin Dashboard accessed by user_id: {session['user_id']}")
+    
+    registration_requests = RegistrationRequest.query.all()
+    completed_registrations = RegistrationRequest.query.filter_by(approved=True).all()
 
     registration_requests = RegistrationRequest.query.all()
-    return render_template('admin_dashboard.html', registration_requests=registration_requests)
+    return render_template('admin_dashboard.html', registration_requests=registration_requests, completed_registrations=completed_registrations)
 
 @app.route('/admin/home')
 def admin_home():
