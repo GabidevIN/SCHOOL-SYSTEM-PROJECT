@@ -1,0 +1,23 @@
+<!-- filepath: c:\Users\Eugene\OneDrive\Documents\2nd year\SCHOOL-SYSTEM-PROJECT\SCHOOL-SYSTEM-PROJECT\templates\admin_dashboard.html -->
+<!-- filepath: c:\Users\gabri\OneDrive\Desktop\BPU\templates\admin_dashboard.html -->
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Full Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.full_name }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

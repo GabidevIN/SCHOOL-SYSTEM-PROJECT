@@ -16,7 +16,7 @@
     </div>
     <nav>
         <ul class="dash">
-            <li><a href="#" class="nav" data-target="about">About</a></li>
+            <li><a href="{{ url_for('about') }}" class="nav" data-target="about">About</a></li>
             <li><a href="#" class="nav" data-target="contact">Contact</a></li>
             <li><a href="{{ url_for('main') }}" class="nav" data-target="profile">Return</a></li>
             
@@ -38,6 +38,8 @@
             <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="150">
             <title>Upload Profile Picture</title>
         </head>
+
+        <!-- PROFILE PICTURE -->
         <body>
             <h1>Upload Profile Picture</h1>
             <form method="POST" enctype="multipart/form-data">
@@ -47,6 +49,7 @@
             </form>
         </div>
 
+    <!-- PROFILE DETAILS -->
     <div class="profile-details">
         <p><strong>Username:</strong> {{ user.username }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
@@ -62,27 +65,33 @@
                         <label for="full_name" class="form-label">Full Name:</label>
                         <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" class="form-input">
                     </div>
+                    <!-- INPUT ADDRESS -->
+
                     <div class="form-group">
                         <label for="address" class="form-label">Address:</label>
                         <input type="text" id="address" name="address" value="{{ user.address }}" class="form-input">
                     </div>
+
+                    <!-- INPUT CONTACT NUMBER -->
                     <div class="form-group">
                         <label for="contact_number" class="form-label">Contact Number:</label>
                         <input type="text" id="contact_number" name="contact_number" value="{{ user.contact_number }}" class="form-input">
                     </div>
+
+                    <!-- INPUT SUPPORT DOCUMENTS -->
                     <div class="form-group">
                         <label for="file" class="form-label">Supporting Document:</label>
                         <input type="file" id="file" name="file" class="file-input">
+
                         {% if user.supporting_document %}
                             <p class="file-info">Current Document: {{ user.supporting_document }}</p>
                         {% endif %}
+
+                    <!-- UPLOAD PROFILE -->
                     </div>
                     <button type="submit" class="submit-btn">Update Profile</button>
                 </form>
-
         </div>
     </div>
-
-    
 </body>
 </html>

@@ -1,0 +1,59 @@
+<!-- filepath: c:\Users\Eugene\OneDrive\Documents\2nd year\SCHOOL-SYSTEM-PROJECT\SCHOOL-SYSTEM-PROJECT\templates\admin_dashboard.html -->
+<!-- filepath: c:\Users\gabri\OneDrive\Desktop\BPU\templates\admin_dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_home.css')}}"> <!-- CSS FILE -->
+<script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+
+
+  <title>Admin Dashboard</title>
+</head>
+<body>
+
+<!-- DASHBOARD -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="#" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/admin/home" class="list">HOME</a>
+        <a href="/admin/dashboard" class="list">ADMISSION</a>
+        <a href="/users" class="list">LIST</a>
+        <a href="/calendar" class="list">CALENDAR</a>
+        <a href="/grades" class="list">GRADE</a>
+    </div>
+</section>
+
+<!-- MANU TABLE -->
+<section class="hello">
+    <div class= "hello-tab">
+
+    </div>
+</section>
+
+
+
+</body>
+</html>

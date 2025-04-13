@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css')}}"> <!-- CSS FILE -->
+
+</head>
+
+
+<body>
+<!-- DASHBOARD -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="{{ url_for('main') }}" class="nav" data-target="about">Return</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="{{ url_for('profile') }}" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- MAIN BODY -->
+
+
+</body>
+</html>

@@ -5,6 +5,8 @@
     font-family: Arial, sans-serif;
 }
 
+
+/* HEADER/NAVIGATION */
 header {
     display: flex;
     justify-content: space-between;
@@ -19,7 +21,6 @@ header {
     z-index: 1000;
     position: absolute;
     border: 1px solid black;
-
 }
 
 .logo {
@@ -268,3 +269,6 @@ header {
     background-color: #c0d9f9;
     border-radius: 15px;
 }
+
+/* CALENDAR */
+
