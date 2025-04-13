@@ -52,7 +52,10 @@
         <thead>
             <tr>
                 <th>Username</th>
+                <th>Full Name</th>
                 <th>Email</th>
+                <th>Course</th>
+                <th>Supporting Document</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -60,7 +63,16 @@
             {% for request in registration_requests %}
             <tr>
                 <td>{{ request.username }}</td>
+                <td>{{ request.full_name }}</td>
                 <td>{{ request.email }}</td>
+                <td>{{ request.course }}</td>
+                <td>
+                    {% if request.supporting_document %}
+                    <a href="{{ url_for('static', filename='uploads/' + request.supporting_document) }}" target="_blank">View Document</a>
+                    {% else %}
+                    No Document
+                    {% endif %}
+                </td>
                 <td>
                     <form action="{{ url_for('approve_registration', request_id=request.id) }}" method="post" style="display:inline;">
                         <button type="submit" class="btn-success">Approve</button>
