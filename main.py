@@ -139,7 +139,7 @@ def login():
 
             # Redirect
             if user.is_admin:
-                return redirect(url_for('admin_dashboard'))
+                return redirect(url_for('admin_home'))
             else:
                 return redirect(url_for('main'))
             
