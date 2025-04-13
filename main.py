@@ -67,15 +67,6 @@ class RegistrationRequest(db.Model):
 
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
-    
-class course(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    BSCPE = db.Column(db.String(80), nullable=False)
-    BSIE = db.Column(db.String(80), nullable=False)
-    BSEE = db.Column(db.String(80), nullable=False)
-
-    def __repr__(self):
-        return f'<Course {self.course_name}>'
 
 class Grade(db.Model): #pota wala pa to
     id = db.Column(db.Integer, primary_key=True)
@@ -363,7 +354,7 @@ def extra_registration():
         full_name = request.form.get('full_name')
         address = request.form.get('address')
         contact_number = request.form.get('contact_number')
-        selected_course = request.form.get('course')  # Get the selected course
+        selected_course = request.form.get('course')  
         flash(f'You selected: {selected_course}', 'success')
 
         # File upload
@@ -379,14 +370,13 @@ def extra_registration():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-            # Update
+            
             registration_request.full_name = full_name
             registration_request.address = address
             registration_request.contact_number = contact_number
             registration_request.course = selected_course 
             registration_request.supporting_document = filename
-            registration_request.approved = True  # Mark as approved
+            registration_request.approved = True 
             db.session.commit()
 
             flash('Extra registration details submitted successfully!', 'success')
@@ -430,7 +420,7 @@ def upload_picture():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            user.profile_picture = filename  # Save the filename in the database
+            user.profile_picture = filename  
             db.session.commit()
             flash('Profile picture uploaded successfully!', 'success')
             return redirect(url_for('main'))
