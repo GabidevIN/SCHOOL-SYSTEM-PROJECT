@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin.css')}}"> <!-- CSS FILE -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_home.css')}}"> <!-- CSS FILE -->
 <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
 
 
@@ -46,34 +46,14 @@
     </div>
 </section>
 
-<!-- APPROVAL TABLE -->
-<section class="table-container">
-    <table class="approval">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in registration_requests %}
-            <tr>
-                <td>{{ request.username }}</td>
-                <td>{{ request.email }}</td>
-                <td>
-                    <form action="{{ url_for('approve_registration', request_id=request.id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn-success">Approve</button>
-                    </form>
-                    <form action="{{ url_for('decline_registration', request_id=request.id) }}" method="post" style="display:inline;">
-                        <button type="submit" class="btn-danger">Decline</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<!-- MANU TABLE -->
+<section class="hello">
+    <div class= "hello-tab">
+
+    </div>
 </section>
+
+
 
 </body>
 </html>

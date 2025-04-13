@@ -5,19 +5,21 @@
     font-family: Arial, sans-serif;
 }
 
+/* HEADER/NAVIGATION */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: linear-gradient(145deg, #ffffff, #bbf6ff);
+    background: linear-gradient(145deg, #b3e0f7, #c6dafd);
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     position: absolute;
+    border: 1px solid black;
 }
 
 .logo {
@@ -92,29 +94,30 @@ header {
     background-color: darkred;
 }
 
+/* BACKGROUND */
 .background {
     position: fixed; 
     top: 0;
     left: 0;
     width: 100vw; 
     height: 100vh; 
-    background: #314041; 
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
     z-index: 1;
 }
 
 /* PROFILE */
-
 .profile-container {
     position: absolute;
     top: 53.5%;
     left: 50%;
-    width: 55%;
-    height: 55%;
+    width: 65%;
+    height: 65%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    background: linear-gradient(90deg, #ffffff, #a1a7a8);
+    background: linear-gradient(145deg, #b3e0f7, #f0faff);
     border-radius: 0 35px 0 35px;
-    content: ce;
+    border: 1px solid black;
+    box-shadow: 7.5px 15px 15px rgba(0, 0, 0, 0.7);
 }
 
 .profileh1 {
@@ -124,19 +127,22 @@ header {
     transform: translate(-50%, -50%);
     font-size: 25px;
 }
+
+
+
 .profile-picture{
     position: absolute;
     top: 35%;
-    left: 75%;
-    font-size: 15px;
+    left: 72%;
+    font-size: 1rem;
     transform: translate(-50%, -50%);
 }
 
 .profile-details{
     position: absolute;
-    top: 15%;
-    left: 15%;
-    font-size: 17.5px;
+    top: 17.5%;
+    left: 18.5%;
+    font-size: 1.5rem;
     transform: translate(-50%, -50%);
 }
 
@@ -146,7 +152,6 @@ header {
     left: 17.5%;
     transform: translate(-50%, -50%);
 }
-
 
 .profile-form-container {
     max-width: 500px;
@@ -170,20 +175,34 @@ header {
 .form-input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
     font-size: 16px;
 }
 
-.file-input {
+.file-input {   
     width: 100%;
     padding: 8px;
 }
 
+.file-input::file-selector-button {
+    background-color: #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 7.5px 2.75rem;
+    color: white;
+    transition: 0.3s;
+}
+
+.file-input::file-selector-button:hover {
+    background-color: #003166;
+
+}
+
 .file-info {
     font-size: 14px;
-    color: #555;
-    margin-top: 5px;
+    color: #000000;
+    margin-top: 1rem;
 }
 
 .submit-btn {
@@ -196,8 +215,9 @@ header {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
+    border: 1px solid #000000;
 }
 
 .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #003166;
 }

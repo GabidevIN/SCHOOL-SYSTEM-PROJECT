@@ -245,6 +245,20 @@ def admin_dashboard():
     registration_requests = RegistrationRequest.query.all()
     return render_template('admin_dashboard.html', registration_requests=registration_requests)
 
+@app.route('/admin/home')
+def admin_home():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    users = User.query.all()
+    return render_template('admin_home.html', users=users) 
+
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
@@ -397,6 +411,20 @@ def upload_picture():
 
     return render_template('upload_picture.html', user=user)
 
+@app.route('/about')
+def about():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('login'))
+
+    return render_template('about.html', user=user) 
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
+
+ 
