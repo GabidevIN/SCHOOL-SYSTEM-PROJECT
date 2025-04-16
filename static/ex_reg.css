@@ -18,9 +18,28 @@
 
 /* REGISTRATION */
 .registration {
+    position: fixed;
+    top: 50%;
+    left: 36.5%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 65%;
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    border-radius: 25px 0 25px 0 ;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    border: 1px solid black;
+
+}
+
+/* DATA PRIVACY THINGY */
+.explanation{
     position: absolute;
     top: 50%;
-    left: 35%;
+    left: 63.5%;
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
@@ -32,8 +51,15 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 2;
     border: 1px solid black;
-
 }
+
+.statements {
+    padding: 17.5px;
+    text-align: justify;
+    font-size: 1.3rem;
+    margin-top: -40%;
+}
+
 
 
 .registration-container {
@@ -98,14 +124,14 @@ padding: 2%;}
 .files {
     position: relative;
     display: inline-block;
-    background-color: #4CAF50;
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
     color: white;
     padding: 12px 20px;
     font-size: 15px;
     font-weight: 500;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 1s ease-in-out;
     margin-top: 10px;
     text-align: center;
     width: 100%;
@@ -113,11 +139,7 @@ padding: 2%;}
 }
 
 .files:hover {
-    background-color: #45a049;
-}
-
-.files:active {
-    background-color: #3e8e41;
+    background: #73a6ff;
 }
 
 p {
