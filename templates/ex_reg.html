@@ -4,25 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extra Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Optional CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='ex_reg.css') }}"> <!-- Optional CSS -->
 </head>
 <body>
+
+<!-- EXTRA REGISTRATION -->
+<section class="registration">
+
+    <!-- REGISTRATION CONTAINER -->
     <div class="registration-container">
-        <h1>Extra Registration</h1>
-        <p>Please provide the required information to complete your registration.</p>
-        <form method="POST" enctype="multipart/form-data">
+
+        <!-- REGISTRATION CONTENT -->
+        <form class= "exregis"method="POST" enctype="multipart/form-data">
+            <!-- TITLE/DISCRIPTION -->
+            <h1 class ="title1">Extra Registration</h1>
+            <p class = "title2">Please provide the required information to complete your registration.</p>
+
+            <!-- NAME / INFORMATIONS -->    
             <div>
                 <label for="full_name">Full Name:</label>
-                <input type="text" id="full_name" name="full_name" value="{{ registration_request.full_name }}" required>
+                <input class="inputs" type="text" id="full_name" name="full_name" value="{{ registration_request.full_name }}" required>
             </div>
+
             <div>
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" value="{{ registration_request.address }}" required>
+                <input class="inputs" type="text" id="address" name="address" value="{{ registration_request.address }}" required>
             </div>
+
             <div>
                 <label for="contact_number">Contact Number:</label>
-                <input type="text" id="contact_number" name="contact_number" value="{{ registration_request.contact_number }}" required>
+                <input class="inputs" type="text" id="contact_number" name="contact_number" value="{{ registration_request.contact_number }}" required>
             </div>
+
+            <!-- COURSE OPTIONS -->
             <div class="mb-3">
                 <label for="course" class="form-label">Select a Course</label>
                 <select class="form-select" id="course" name="course" required>
@@ -32,15 +46,30 @@
                     {% endfor %}
                 </select>
             </div>
+
+            <!-- DOCUMENT SUPPORT -->
             <div>
                 <label for="file">Supporting Document:</label>
-                <input type="file" id="file" name="file">
+
+                <input  class = "filesum" type="file" id="file" name="file">
                 {% if registration_request.supporting_document %}
                     <p>Current Document: {{ registration_request.supporting_document }}</p>
                 {% endif %}
+
+                
             </div>
-            <button type="submit">Submit</button>
-        </form>            ...
+
+            <!-- SUBMIT -->
+            <button class="sumbit" type="submit">Submit</button>
+
+            
+        </form>            
     </div>
+</section>
+
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
 </body>
 </html>

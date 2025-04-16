@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+/* BACKGROUND */
+.background {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    z-index: 1;
+}
+
+
+/* REGISTRATION */
+.registration {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 65%;
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    border-radius: 0 25px 0 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    border: 1px solid black;
+
+}
+
+
+.registration-container {
+    position: absolute;
+    z-index: 2;
+}
+
+.exregis{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25rem;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.title1 {
+    position: absolute;
+    top: -22.5%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+}
+
+.title2 {
+    position: absolute;
+    top: -12.5%;
+    left: 50%;
+    width: 150%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+}
+
+.registration div {
+    display: flex;
+    flex-direction: column;
+padding: 2%;}
+
+.registration div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-select, .inputs{
+    padding: 10px;
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    color: white;
+    border: 1px solid lightblue;
+    border-radius: 8px;
+    font-size: 14px;
+
+}
+
+.filesum {
+    display: none;
+}
+
+.files {
+    position: relative;
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.files:hover {
+    background-color: #45a049;
+}
+
+.files:active {
+    background-color: #3e8e41;
+}
+
+p {
+    font-size: 14px;
+    color: #333;
+    margin-top: 8px;
+}
+
+
+.sumbit {
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px;
+    font-size: 16px;
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    border: 1px solid lightblue;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+    width: 100%;
+}
+
+.sumbit:hover {
+    background: #73a6ff;
+}
