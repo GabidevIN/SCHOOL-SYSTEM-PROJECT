@@ -29,19 +29,23 @@
 
         <p><strong>Course:</strong> {{ extra_details.course }}</p>
 
-        <p><strong>Supporting Document:</strong> 
-            <a href="{{ url_for('static', filename='uploads/' + extra_details.supporting_document) }}" target="_blank">
+        <p> 
+            <a class="button" href="{{ url_for('static', filename='uploads/' + extra_details.supporting_document) }}" target="_blank">
                 View Document
             </a>
         </p>
+
 
     </div>
 </section>
 
 
+<!--  Di na siguro ipakita yung mga last na nag register sur
+
     <h2>Last Registered User</h2>
     <p><strong>Username:</strong> {{ last_user.username }}</p>
-    <p><strong>Email:</strong> {{ last_user.email }}</p>
+    <p><strong>Email:</strong> {{ last_user.email }}</p> 
+-->
 
 
 <!-- BACKGROUND -->
