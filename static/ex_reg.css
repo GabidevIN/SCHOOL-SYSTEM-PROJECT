@@ -110,7 +110,7 @@ padding: 2%;}
 .form-select, .inputs{
     padding: 10px;
     background: linear-gradient(90deg, #b3e0f7, #c6dafd);
-    color: white;
+    color: black;
     border: 1px solid lightblue;
     border-radius: 8px;
     font-size: 14px;
@@ -148,6 +148,17 @@ p {
     margin-top: 8px;
 }
 
+.OPTION {
+    background-color: #c6dafd;
+    color: black;
+    cursor: pointer;
+}
+
+.OPTIONT {
+    background-color: #c6dafd;
+    color: black;
+    font-weight: bold;
+}
 
 .sumbit {
     position: absolute;
@@ -157,7 +168,7 @@ p {
     padding: 12px;
     font-size: 16px;
     background: linear-gradient(90deg, #b3e0f7, #c6dafd);
-    border: 1px solid lightblue;
+    border:lightblue 1px solid ;
     color: #fff;
     border-radius: 8px;
     cursor: pointer;
@@ -168,3 +179,28 @@ p {
 .sumbit:hover {
     background: #73a6ff;
 }
+
+.return {
+    position: absolute;
+    top: 13.5%;
+    width: 10%;
+    left: 29%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 0 20px 0 20px;
+    font-size: 16px;
+    border: black 1px solid;
+    text-align: center;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.return:hover {
+    background: #e96767;
+}
+

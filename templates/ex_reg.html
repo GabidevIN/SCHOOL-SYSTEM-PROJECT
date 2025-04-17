@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='ex_reg.css') }}"> <!-- Optional CSS -->
 </head>
 <body>
+<!-- RETURN -->
+<div class="Return-container"> 
+    <a href="/about" class="return" data-target="about">RETURN</a>
+</div>
 
 <!-- EXTRA REGISTRATION -->
 <section class="registration">
@@ -17,7 +21,7 @@
         <!-- REGISTRATION CONTENT -->
         <form class= "exregis"method="POST" enctype="multipart/form-data">
             <!-- TITLE/DISCRIPTION -->
-            <h1 class ="title1">Extra Registration</h1>
+            <h1 class ="title1">ADDITIONAL INFORMATIONS </h1>
             <p class = "title2">Please provide the required information to complete your registration.</p>
 
             <!-- NAME / INFORMATIONS -->    
@@ -40,9 +44,9 @@
             <div class="mb-3">
                 <label for="course" class="form-label">Select a Course</label>
                 <select class="form-select" id="course" name="course" required>
-                    <option value="" disabled selected>Choose a course</option>
+                    <option class ="OPTIONT" value="" disabled selected>Choose a course</option>
                     {% for course in courses %}
-                        <option value="{{ course }}">{{ course }}</option>
+                        <option class ="OPTION" value="{{ course }}">{{ course }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -64,6 +68,8 @@
         </form>            
     </div>
 </section>
+
+
 
 
 <!-- EXTRA REGISTRATION -->
