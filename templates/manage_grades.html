@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Grades</title>
+</head>
+<body>
+    <h1>Manage Student Grades</h1>
+    <form method="POST">
+        <label for="student_id">Select Student:</label>
+        <select id="student_id" name="student_id" required>
+            {% for student in students %}
+            <option value="{{ student.id }}">{{ student.full_name or student.username }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="subject">Select Subject:</label>
+        <select id="subject" name="subject" required>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+        </select>
+
+        <label for="grade">Enter Grade:</label>
+        <input type="number" id="grade" name="grade" step="0.01" required>
+
+        <button type="submit">Update Grade</button>
+    </form>
+
+    <h2>Existing Grades</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Subject</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                {% for grade in student.grades %}
+                <tr>
+                    <td>{{ student.full_name or student.username }}</td>
+                    <td>{{ grade.subject }}</td>
+                    <td>{{ grade.grade }}</td>
+                </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

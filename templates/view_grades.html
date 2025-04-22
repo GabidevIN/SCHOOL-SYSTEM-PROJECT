@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grades for {{ student.username }}</title> <!-- AWTS -->
+    <title>View Grades</title>
 </head>
 <body>
-    <h1>Grades for {{ student.username }}</h1>
-    <table>
+    <h1>Welcome, {{ user.full_name or user.username }}</h1>
+    <h2>Your Grades</h2>
+    <table border="1">
         <thead>
             <tr>
                 <th>Subject</th>
@@ -23,6 +24,6 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="{{ url_for('list_users') }}">Back to Users</a>
+    <a href="{{ url_for('main') }}">Back to Main</a>
 </body>
 </html>

@@ -345,7 +345,7 @@ def list_users():
         return redirect(url_for('login'))
 
     users = User.query.all()
-    return render_template('users.html', users=users)
+    return render_template('user_list.html', users=users)
 
 
 
@@ -453,6 +453,22 @@ def about():
         return redirect(url_for('login'))
 
     return render_template('about.html', user=user) 
+
+@app.route('/grades', methods=['GET'])
+def view_grades():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('login'))
+
+    # Fetch grades for the logged-in student
+    grades = Grade.query.filter_by(student_id=user.id).all()
+
+    return render_template('view_grades.html', user=user, grades=grades)
 
 
 
