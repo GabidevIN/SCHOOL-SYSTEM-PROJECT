@@ -3,32 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Grades</title>
+    <title>Admin Grades</title>
 </head>
 <body>
-    <h1>All Grades</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Student</th>
-                <th>Subject</th>
-                <th>Grade</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for grade in grades %}
-            <tr>
-                <td>{{ grade.student.username }}</td>
-                <td>{{ grade.subject }}</td>
-                <td>{{ grade.grade }}</td>
-                <td>
-                    <a href="{{ url_for('edit_grade', grade_id=grade.id) }}">Edit</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+    {% if student %}
+        <h1>Grades for {{ student.full_name }}</h1>
+        <p><strong>Student ID:</strong> {{ student.id }}</p>
+        {% if grades %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Semester</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in grades %}
+                <tr>
+                    <td>{{ grade.subject }}</td>
+                    <td>{{ grade.semester }}</td>
+                    <td>{{ grade.grade }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No grades available for this student.</p>
+        {% endif %}
+        <a href="{{ url_for('admin_grades') }}">Back to All Students</a>
+    {% else %}
+        <h1>All Students</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>course</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.full_name }}</td>
+                    <td>{{ student.courses }}</td>
+                    s
+                    <td>
+                        <a href="{{ url_for('admin_grades_for_student', student_id=student.id) }}">View Grades</a>
+                
+                        <a href="{{ url_for('add_grades', student_id=student.id) }}">Edit Grades</a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 </body>
 </html>

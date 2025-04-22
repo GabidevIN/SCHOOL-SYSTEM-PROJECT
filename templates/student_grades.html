@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grades</title>
 </head>
 <body>
-    <h1>Grades for {{ student.username }}</h1>
+    <h1>Grades for {{ student.full_name }}</h1>
+    <p><strong>Student ID:</strong> {{ student.id }}</p>
+    {% if grades %}
     <table>
         <thead>
             <tr>
                 <th>Subject</th>
+                <th>Semester</th>
                 <th>Grade</th>
             </tr>
         </thead>
@@ -18,11 +18,15 @@
             {% for grade in grades %}
             <tr>
                 <td>{{ grade.subject }}</td>
+                <td>{{ grade.semester }}</td>
                 <td>{{ grade.grade }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{{ url_for('main') }}">Back to Home</a>
+    {% else %}
+    <p>No grades available.</p>
+    {% endif %}
+    <a href="{{ url_for('main') }}">Back to Dashboard</a>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extra Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='ex_reg.css') }}"> <!-- Optional CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='ex_reg.css') }}"> 
 </head>
 <body>
 <!-- RETURN -->
@@ -15,16 +15,12 @@
 <!-- EXTRA REGISTRATION -->
 <section class="registration">
 
-    <!-- REGISTRATION CONTAINER -->
     <div class="registration-container">
 
-        <!-- REGISTRATION CONTENT -->
         <form class= "exregis"method="POST" enctype="multipart/form-data">
-            <!-- TITLE/DISCRIPTION -->
             <h1 class ="title1">ADDITIONAL INFORMATIONS </h1>
             <p class = "title2">Please provide the required information to complete your registration.</p>
 
-            <!-- NAME / INFORMATIONS -->    
             <div>
                 <label for="full_name">Full Name:</label>
                 <input class="inputs" type="text" id="full_name" name="full_name" value="{{ registration_request.full_name }}" required>
@@ -40,8 +36,7 @@
                 <input class="inputs" type="text" id="contact_number" name="contact_number" value="{{ registration_request.contact_number }}" required>
             </div>
 
-            <!-- COURSE OPTIONS -->
-            <div class="mb-3">
+                <div class="mb-3">
                 <label for="course" class="form-label">Select a Course</label>
                 <select class="form-select" id="course" name="course" required>
                     <option class ="OPTIONT" value="" disabled selected>Choose a course</option>
@@ -63,7 +58,6 @@
                 
             </div>
 
-            <!-- SUBMIT -->
             <button class="sumbit" type="submit">Submit</button>
         </form>            
     </div>

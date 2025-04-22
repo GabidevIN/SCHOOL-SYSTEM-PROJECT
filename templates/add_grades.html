@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Grades</title>
+</head>
+<body>
+    <h1>Add Grades for {{ student.full_name }}</h1>
+    <form method="POST">
+        <label for="semester">Semester:</label>
+        <select name="semester" id="semester">
+            <option value="1">1</option>
+        </select>
+        <br><br>
+        {% for subject in subjects %}
+        <div>
+            <label for="{{ subject }}">{{ subject }}</label>
+            <input type="number" step="0.01" name="{{ subject }}" id="{{ subject }}" placeholder="Enter grade">
+        </div>
+        {% endfor %}
+        <br>
+        <button type="submit">Submit Grades</button>
+    </form>
+</body>
+</html>

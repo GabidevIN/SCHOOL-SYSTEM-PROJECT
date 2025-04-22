@@ -13,9 +13,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -72,6 +72,7 @@ class Grade(db.Model): #pota wala pa to
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     subject = db.Column(db.String(80), nullable=False)
+    semester = db.Column(db.Integer, nullable=False)
     grade = db.Column(db.Float, nullable=False)
     student = db.relationship('User', backref=db.backref('grades', lazy=True))
 
@@ -90,9 +91,6 @@ if not os.path.exists(UPLOAD_FOLDER):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-with app.app_context():
-    db.create_all()
-    
 with app.app_context():
     db.create_all()
     
@@ -168,32 +166,6 @@ def register():
 
     return render_template('login.html')
 
-@app.route('/additional-registration', methods=['GET', 'POST'])
-def additional_registration():
-    if 'user_id' not in session:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
-
-    user = db.session.get(User, session['user_id'])
-    if not user:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('main'))
-
-    # Check
-    registration_request = RegistrationRequest.query.filter_by(email=user.email).first()
-    if not registration_request or not registration_request.is_new:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('main'))
-
-    if request.method == 'POST':
-
-        registration_request.is_new = False
-        db.session.commit()
-        flash('Additional registration completed!', 'success')
-        return redirect(url_for('main'))
-
-    return render_template('add_registration.html')
-
 @app.route('/main')
 def main():
     if 'user_id' not in session:
@@ -205,7 +177,8 @@ def main():
         flash('User not found!', 'danger')
         return redirect(url_for('login'))
 
-    return render_template('main.html', user=user) 
+    print("Rendering main.html") 
+    return render_template('main.html', user=user)
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -248,12 +221,11 @@ def admin_dashboard():
     if not user or not user.is_admin:
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
-    print(f"Admin Dashboard accessed by user_id: {session['user_id']}")
-    
-    registration_requests = RegistrationRequest.query.all()
+
+    # Fetch pending and completed registration requests
+    registration_requests = RegistrationRequest.query.filter_by(approved=True).all()
     completed_registrations = RegistrationRequest.query.filter_by(approved=True).all()
 
-    registration_requests = RegistrationRequest.query.all()
     return render_template('admin_dashboard.html', registration_requests=registration_requests, completed_registrations=completed_registrations)
 
 @app.route('/admin/home')
@@ -298,7 +270,9 @@ def approve_registration(request_id):
             full_name=registration_request.full_name,
             address=registration_request.address,
             contact_number=registration_request.contact_number,
-            supporting_document=registration_request.supporting_document
+            supporting_document=registration_request.supporting_document,
+            courses = registration_request.course,
+
         )
         db.session.add(new_user)
         db.session.delete(registration_request)  # Remove
@@ -390,7 +364,8 @@ def extra_registration():
             registration_request.contact_number = contact_number
             registration_request.course = selected_course 
             registration_request.supporting_document = filename
-            registration_request.approved = True 
+            registration_request.approved = True  #approved
+            registration_request.is_new = False  #
             db.session.commit()
 
             flash('Extra registration details submitted successfully!', 'success')
@@ -405,8 +380,13 @@ def ex_register():
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
 
+    # Fetch the registration request
     extra_details = RegistrationRequest.query.filter_by(id=session['user_id']).first()
-    last_user = User.query.order_by(User.id.desc()).first()
+    if not extra_details:
+        flash('No registration details found!', 'danger')
+        return redirect(url_for('main'))
+    last_user = db.session.get(User, session['user_id'])
+
 
     return render_template('register_complete.html', extra_details=extra_details, last_user=last_user)
 
@@ -454,24 +434,116 @@ def about():
 
     return render_template('about.html', user=user) 
 
-@app.route('/grades', methods=['GET'])
-def view_grades():
+#grades na to
+
+SUBJECTS = [
+    "Physics 1",
+    "Chemistry",
+    "CAD",
+    "Physical Education 1"
+]
+
+@app.route('/admin/grades', methods=['GET'])
+def admin_grades():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
 
-    user = db.session.get(User, session['user_id'])
-    if not user:
-        flash('User not found!', 'danger')
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
         return redirect(url_for('login'))
 
-    # Fetch grades for the logged-in student
-    grades = Grade.query.filter_by(student_id=user.id).all()
+    students = User.query.all()
+    return render_template('admin_grades.html', students=students)
 
-    return render_template('view_grades.html', user=user, grades=grades)
+@app.route('/admin/grades/<int:student_id>', methods=['GET'])
+def admin_grades_for_student(student_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
 
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
 
+    student = User.query.get(student_id)
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('admin_grades'))
 
+    grades = Grade.query.filter_by(student_id=student.id).all()
+
+    return render_template('admin_grades.html', student=student, grades=grades)
+
+@app.route('/admin/add-grades/<int:student_id>', methods=['GET', 'POST'])
+def add_grades(student_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    student = User.query.get(student_id)
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('admin_grades'))
+
+    if request.method == 'POST':
+        for subject in SUBJECTS:
+            grade_value = request.form.get(subject)
+            if grade_value:
+                existing_grade = Grade.query.filter_by(student_id=student.id, subject=subject).first()
+                if existing_grade:
+                    existing_grade.grade = float(grade_value)  # Update
+                else:
+                    # new grade
+                    new_grade = Grade(
+                        student_id=student.id,
+                        subject=subject,
+                        semester=request.form.get('semester', 1),
+                        grade=float(grade_value)
+                    )
+                    db.session.add(new_grade)
+        db.session.commit()
+        flash('Grades added/updated successfully!', 'success')
+        return redirect(url_for('admin_grades'))
+
+    return render_template('add_grades.html', student=student, subjects=SUBJECTS)
+
+@app.route('/admin/view-grades', methods=['GET'])
+def admin_view_grades():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+    students_with_grades = db.session.query(User).join(Grade).distinct().all()
+    grades = Grade.query.all()
+
+    return render_template('admin_view_grades.html', students=students_with_grades, grades=grades)
+
+@app.route('/student/grades', methods=['GET'])
+def student_grades():
+    if 'user_id' not in session:
+        flash('Access denied! Please log in.', 'danger')
+        return redirect(url_for('login'))
+
+    student = db.session.get(User, session['user_id'])
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('login'))
+
+    grades = Grade.query.filter_by(student_id=student.id).all()
+
+    return render_template('student_grades.html', student=student, grades=grades)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

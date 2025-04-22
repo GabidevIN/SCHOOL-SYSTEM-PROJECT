@@ -17,6 +17,7 @@
     <!-- COMPLETE CONTAINER -->
     <div class="complete-container">
 
+
         <h1>Registration Complete</h1>
 
         <h2>Extra Registration Details</h2>
@@ -28,6 +29,7 @@
         <p><strong>Contact Number:</strong> {{ extra_details.contact_number }}</p>
 
         <p><strong>Course:</strong> {{ extra_details.course }}</p>
+        
 
         <p> 
             <a class="button" href="{{ url_for('static', filename='uploads/' + extra_details.supporting_document) }}" target="_blank">
@@ -42,9 +44,6 @@
 
 <!--  Di na siguro ipakita yung mga last na nag register sur
 
-    <h2>Last Registered User</h2>
-    <p><strong>Username:</strong> {{ last_user.username }}</p>
-    <p><strong>Email:</strong> {{ last_user.email }}</p> 
 -->
 
 
