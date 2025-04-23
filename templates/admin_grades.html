@@ -3,38 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grading.css')}}"> <!-- CSS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
     <title>Admin Grades</title>
 </head>
 <body>
-    {% if student %}
-        <h1>Grades for {{ student.full_name }}</h1>
-        <p><strong>Student ID:</strong> {{ student.id }}</p>
-        {% if grades %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Semester</th>
-                    <th>Grade</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for grade in grades %}
-                <tr>
-                    <td>{{ grade.subject }}</td>
-                    <td>{{ grade.semester }}</td>
-                    <td>{{ grade.grade }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+<!-- DASHBOARD -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="#" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/admin/home" class="list">HOME</a>
+        <a href="/admin/dashboard" class="list">ADMISSION</a>
+        <a href="/users" class="list">LIST</a>
+        <a href="/admin/grades" class="list">GRADE</a>
+    </div>
+</section>
+
+<!--VIEW GRADE-->
+<section class=viewed>
+    <div class=viewed-container>
+        {% if student %}
+            <h1>Grades for {{ student.full_name }}</h1>
+            <p><strong>Student ID:</strong> {{ student.id }}</p>
+            {% if grades %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Semester</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grade in grades %}
+                    <tr>
+                        <td>{{ grade.subject }}</td>
+                        <td>{{ grade.semester }}</td>
+                        <td>{{ grade.grade }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No grades available for this student.</p>
+            {% endif %}
+            <a href="{{ url_for('admin_grades') }}">Back to All Students</a>
         {% else %}
-        <p>No grades available for this student.</p>
-        {% endif %}
-        <a href="{{ url_for('admin_grades') }}">Back to All Students</a>
-    {% else %}
-        <h1>All Students</h1>
-        <table>
+    </div>
+</section>
+<!-- Title for Grading-->
+    <h1>All Students</h1>
+<!--GRADING Content-->
+<section class="viewing">
+    <div class ="view-container">
+        <table class ="view-table">
             <thead>
                 <tr>
                     <th>Student Name</th>
@@ -47,7 +90,7 @@
                 <tr>
                     <td>{{ student.full_name }}</td>
                     <td>{{ student.courses }}</td>
-                    s
+                    
                     <td>
                         <a href="{{ url_for('admin_grades_for_student', student_id=student.id) }}">View Grades</a>
                 
@@ -59,5 +102,7 @@
             </tbody>
         </table>
     {% endif %}
+    </div>
+</section<>
 </body>
 </html>

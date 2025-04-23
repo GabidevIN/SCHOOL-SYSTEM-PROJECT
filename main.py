@@ -13,9 +13,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
+app.config['MYSQL_PASSWORD'] = '131418'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -53,7 +53,6 @@ class RegistrationRequest(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     approved = db.Column(db.Boolean, default=False)
-    is_new = db.Column(db.Boolean, default=True) 
     full_name = db.Column(db.String(120), nullable=True)  # New
     address = db.Column(db.String(255), nullable=True)  # New
     contact_number = db.Column(db.String(15), nullable=True)  #new
@@ -365,7 +364,7 @@ def extra_registration():
             registration_request.course = selected_course 
             registration_request.supporting_document = filename
             registration_request.approved = True  #approved
-            registration_request.is_new = False  #
+            registration_request.is_new = True  #
             db.session.commit()
 
             flash('Extra registration details submitted successfully!', 'success')

@@ -1,32 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='view.css')}}"> <!-- CSS FILE -->
+
 </head>
+
 <body>
-    <h1>Grades for {{ student.full_name }}</h1>
-    <p><strong>Student ID:</strong> {{ student.id }}</p>
-    {% if grades %}
-    <table>
-        <thead>
-            <tr>
-                <th>Subject</th>
-                <th>Semester</th>
-                <th>Grade</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for grade in grades %}
-            <tr>
-                <td>{{ grade.subject }}</td>
-                <td>{{ grade.semester }}</td>
-                <td>{{ grade.grade }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>No grades available.</p>
-    {% endif %}
-    <a href="{{ url_for('main') }}">Back to Dashboard</a>
+<!-- DASHBOARD -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="/about" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+        <!-- MAIN BODY -->
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/main" class="list">HOME</a>
+        <a href="{{ url_for('student_grades') }}" class="list">GRADES</a>
+        <a href="" class="list">SUBJECTS</a>
+    </div>
+</section>
+
+<section class="gradeview">
+    <div class="gradeview-div">
+        <h1>Grades for {{ student.full_name }}</h1>
+            <p><strong>Student ID:</strong> {{ student.id }}</p>
+            {% if grades %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Semester</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grade in grades %}
+                    <tr>
+                        <td>{{ grade.subject }}</td>
+                        <td>{{ grade.semester }}</td>
+                        <td>{{ grade.grade }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No grades available.</p>
+            {% endif %}
+    </div>
+</section> 
+
 </body>
 </html>

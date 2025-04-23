@@ -1,31 +1,72 @@
 <!-- filepath: c:\Users\Eugene\OneDrive\Documents\2nd year\SCHOOL-SYSTEM-PROJECT\SCHOOL-SYSTEM-PROJECT\templates\admin_dashboard.html -->
 <!-- filepath: c:\Users\gabri\OneDrive\Desktop\BPU\templates\admin_dashboard.html -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='userlist.css')}}"> <!-- CSS FILE -->
+<script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
 
 
-<table>
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Full Name</th>
-            <th>Address</th>
-            <th>Phone Number</th>
-            <th>Courses</th>
-            <th>Supporting Document</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.full_name }}</td>
-            <td>{{ user.address }}</td>
-            <td>{{ user.phone_number }}</td>
-            <td>{{ user.courses }}</td>
-            <td>{{ user.supporting_document }}</td>
+<!-- DASHBOARD -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="#" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
 
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/admin/home" class="list">HOME</a>
+        <a href="/admin/dashboard" class="list">ADMISSION</a>
+        <a href="/users" class="list">LIST</a>
+        <a href="/admin/grades" class="list">GRADE</a>
+    </div>
+</section>
+
+
+
+<section class="listed">
+
+    <div class ="listed-container">
+
+        <table class = "listed-table">
+            <thead class = "information-table">
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Full Name</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Courses</th>
+                    <th>Supporting Document</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.full_name }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.courses }}</td>
+                    <td>{{ user.supporting_document }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
