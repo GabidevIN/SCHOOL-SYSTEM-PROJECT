@@ -191,7 +191,7 @@ header {
 
 .approval tbody {
     display: block;
-    max-height: 800px;
+    max-height: 775px;
     overflow-y: auto;
     width: 100%;
 }
