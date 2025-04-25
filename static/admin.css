@@ -185,13 +185,13 @@ header {
     width: 100%;
     position: sticky;
     top: 0;
-    background-color: white;
+    background-color: #b3e0f7;
     z-index: 10;
 }
 
 .approval tbody {
     display: block;
-    max-height: 400px;
+    max-height: 800px;
     overflow-y: auto;
     width: 100%;
 }
@@ -203,8 +203,10 @@ header {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #000000;
+    background-color: #dbeafe;
     padding: 10px;
+    
 }
 
 th {
@@ -224,22 +226,29 @@ th {
 }
 
 .btn-success{
-    background-color: green;
+    background-color: rgb(111, 255, 111);
 }
 .btn-danger{
-    background-color: red;
+    background-color: rgb(255, 83, 83);
+}
+
+.viewing-doc{
+    text-decoration: none;
+    background-color: rgb(111, 255, 111);
+    border-radius: 25px;
+    padding: 5px;
+    border: 1px solid #000000;
+
 }
 
 
 
 
 /* TESTING */
-
 body {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
-
 body.loaded {
     opacity: 1;
 }

@@ -53,7 +53,6 @@ class RegistrationRequest(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     approved = db.Column(db.Boolean, default=False)
-    is_new = db.Column(db.Boolean, default=True) 
     full_name = db.Column(db.String(120), nullable=True)  # New
     address = db.Column(db.String(255), nullable=True)  # New
     contact_number = db.Column(db.String(15), nullable=True)  #new
@@ -211,6 +210,37 @@ def profile():
 
     return render_template('profileinfo.html', user=user)
 
+@app.route('/profile/admin', methods=['GET', 'POST'])
+def profile_admin():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+        # Update user information
+        user.full_name = request.form.get('full_name')
+        user.address = request.form.get('address')
+        user.contact_number = request.form.get('contact_number')
+
+        # Handle file upload for supporting document
+        if 'file' in request.files:
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.supporting_document = filename
+
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('profile'))
+
+    return render_template('profileinfo_admin.html', user=user)
+
 @app.route('/admin/dashboard')
 def admin_dashboard():
     if 'user_id' not in session:
@@ -365,7 +395,7 @@ def extra_registration():
             registration_request.course = selected_course 
             registration_request.supporting_document = filename
             registration_request.approved = True  #approved
-            registration_request.is_new = False  #
+            registration_request.is_new = True  #
             db.session.commit()
 
             flash('Extra registration details submitted successfully!', 'success')
@@ -545,7 +575,20 @@ def student_grades():
 
     return render_template('student_grades.html', student=student, grades=grades)
 
+@app.route('/student/sub', methods=['GET'])
+def student_subjects():
+    if 'user_id' not in session:
+        flash('Access denied! Please log in.', 'danger')
+        return redirect(url_for('login'))
+
+    student = db.session.get(User, session['user_id'])
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('login'))
+
+    grades = Grade.query.filter_by(student_id=student.id).all()
+
+    return render_template('student_subjects.html', student=student, grades=grades)
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
-
- 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='view.css')}}"> <!-- CSS FILE -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='subjects.css')}}"> <!-- CSS FILE -->
 
 </head>
 
@@ -37,32 +37,9 @@
     </div>
 </section>
 
-<section class="gradeview">
-    <div class="gradeview-div">
-        <h1>Grades for {{ student.full_name }}</h1>
-            <p><strong>Student ID:</strong> {{ student.id }}</p>
-            {% if grades %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Subject</th>
-                        <th>Semester</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for grade in grades %}
-                    <tr>
-                        <td>{{ grade.subject }}</td>
-                        <td>{{ grade.semester }}</td>
-                        <td>{{ grade.grade }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <p>No grades available.</p>
-            {% endif %}
+<section class="subjectview">
+    <div class="subjectview-div">
+        
     </div>
 </section> 
 
