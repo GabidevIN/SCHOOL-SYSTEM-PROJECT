@@ -5,14 +5,59 @@ body {
     
 }
 
+
+.background-img-container{
+    width: 80rem;
+    height: 50rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 801;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+}
+
+.background-img {
+    width: 80rem;
+    height: 50rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 800;
+    transform: translate(-50%, -50%);
+    border: #184657 2px solid;
+    border-radius: 25px;
+    box-shadow: 0 0 5rem 1rem rgba(0, 0, 0, 0.5);
+    animation: image-entrance 3s ease-in-out forwards;
+    animation-delay: 7.5s;
+    animation-fill-mode: both;
+    transition: opacity 1s ease-in-out;
+    filter: blur(15px);
+}
+
+@keyframes image-entrance {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.2;
+
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 .INTRO-LOGO {
     width: 25rem;
     height: auto;
     position: fixed;
     top: 50%;
     left: 50%;
+    z-index: 101;
     transform: translate(-50%, -50%);
-    z-index: 10;
     animation: LOGO-entrance 5s ease-in-out forwards;
     animation-delay: 1s;
     animation-fill-mode: both;
@@ -95,20 +140,20 @@ body {
     0% {
         opacity: 0;
         top: 100%;
-        transform: translate(-50%, -55%) scale(0.8); /* Start smaller */
+        transform: translate(-50%, -55%) scale(0.8);
     }
 
     50% {
         opacity: 0.2;
         top: 55%;
-        transform: translate(-50%, -55%) scale(.75); /* Bounce effect */
+        transform: translate(-50%, -55%) scale(.75);
     }
 
     100% {
         opacity: 1;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -55%) scale(1); /* Final scale */
+        transform: translate(-50%, -55%) scale(1);
     }
 }
 
@@ -116,19 +161,19 @@ body {
     0% {
         opacity: 0;
         top: 100%;
-        transform: translate(-50%, -50%) scale(0.8); /* Start smaller */
+        transform: translate(-50%, -50%) scale(0.8);
     }
 
     50% {
         opacity: 0.2;
         top: 55%;
-        transform: translate(-50%, -50%) scale(.75); /* Bounce effect */
+        transform: translate(-50%, -50%) scale(.75);
     }
 
     100% {
         opacity: 1;
         top: 50%;
-        transform: translate(-50%, -50%) scale(1); /* Final scale */
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
@@ -155,13 +200,29 @@ body {
 .tit{
     font-weight: bold;
     font-size: 25px;
+    animation: text-entrance 2s ease-in-out forwards;
+    animation-delay: 7.5s;
+    animation-fill-mode: both;
 }
 
 .h2mis{
     font-style: italic;
     font-size: 17.5px;
-
+    animation: text-entrance 2s ease-in-out forwards;
+    animation-delay: 7.5s;
+    animation-fill-mode: both;
 }
+
+@keyframes text-entrance {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 
 /* Hover effect */
 .overlay-background:hover {
@@ -505,10 +566,14 @@ button:hover {
 @keyframes background-change {
     0% {
         background: #b3e0f7;
-
     }
+
+    50% {
+        background: white; 
+    }
+
     100% {
-        background: #D9D9D9; 
+        background: #b3e0f7; 
     }
 }
 
@@ -595,7 +660,7 @@ button:hover {
     font-family: 'IBM Plex Sans', sans-serif;
     color: #000000;
     opacity: 1;
-    z-index: 1000;
+    z-index: 100;
     pointer-events: none;
     animation: slow-entrance 3s ease-in-out ;
     animation-fill-mode: forwards;
@@ -603,16 +668,32 @@ button:hover {
 
 @keyframes slow-entrance {
     0% {
-        opacity: 1;
-        font-size: 9rem;
+        opacity: 0;
+        font-size: 6rem;
         color: #FFFFFF;
     }
 
-    
+    30% {
+        opacity: 1;
+        font-size: 5rem;
+        color: #FFFFFF;
+    }
+    65% {
+        opacity: 1;
+        font-size: 4rem;
+        color: #FFFFFF;
+    }
+
+    80% {
+        opacity: 0;
+        font-size: 3rem;
+        color: #FFFFFF;
+    }
 
     100% {
         opacity: 0;
-        font-size: 7.5rem;
+        font-size: 6rem;
+        color: #FFFFFF;
     }
 }
 
