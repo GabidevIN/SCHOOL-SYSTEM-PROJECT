@@ -5,7 +5,6 @@ body {
     
 }
 
-
 .background-img-container{
     width: 80rem;
     height: 50rem;
@@ -18,7 +17,7 @@ body {
 }
 
 .background-img {
-    width: 80rem;
+    width: 100rem;
     height: 50rem;
     position: fixed;
     top: 50%;
