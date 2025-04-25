@@ -658,6 +658,7 @@ button:hover {
     transform: translate(-50%, -50%);
     font-family: 'IBM Plex Sans', sans-serif;
     color: #000000;
+    font-weight: bold;
     opacity: 1;
     z-index: 100;
     pointer-events: none;
@@ -697,3 +698,38 @@ button:hover {
 }
 
 
+
+/* TESTING */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+body.loaded {
+    opacity: 1;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.loader.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+header, .Menu-tab {
+    transition: opacity 0.5s ease-in-out;
+}
