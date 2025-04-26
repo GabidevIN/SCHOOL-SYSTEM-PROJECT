@@ -40,7 +40,7 @@ body {
     }
 
     50% {
-        opacity: 0.2;
+        opacity: 0.5;
 
     }
 
@@ -57,7 +57,7 @@ body {
     left: 50%;
     z-index: 101;
     transform: translate(-50%, -50%);
-    animation: LOGO-entrance 5s ease-in-out forwards;
+    animation: LOGO-entrance 6s ease-in-out forwards;
     animation-delay: 1s;
     animation-fill-mode: both;
 }
@@ -110,7 +110,7 @@ body {
     overflow: visible;    
     z-index: 10000;
     animation: login-entrance 3s ease-in-out;
-    animation-delay: 5s;
+    animation-delay: 6s;
     animation-fill-mode: both;
 }
 
@@ -131,7 +131,7 @@ body {
     border-radius: 0 35px 0 35px ;
     transition: transform 1s ease-in-out, box-shadow 0.4s ease-in-out;
     animation: overlay-entrance 3s ease-in-out;
-    animation-delay: 5s;
+    animation-delay: 6s;
     animation-fill-mode: both;
 }
 
@@ -200,7 +200,7 @@ body {
     font-weight: bold;
     font-size: 25px;
     animation: text-entrance 2s ease-in-out forwards;
-    animation-delay: 7.5s;
+    animation-delay: 8.5s;
     animation-fill-mode: both;
 }
 
@@ -208,7 +208,7 @@ body {
     font-style: italic;
     font-size: 17.5px;
     animation: text-entrance 2s ease-in-out forwards;
-    animation-delay: 7.5s;
+    animation-delay: 8.5s;
     animation-fill-mode: both;
 }
 
@@ -560,7 +560,7 @@ button:hover {
     width: 100vw; 
     height: 100vh; 
     z-index: 1;
-    animation: background-change 5s ease-in-out forwards;
+    animation: background-change 7s ease-in-out forwards;
 }
 @keyframes background-change {
     0% {
@@ -587,7 +587,7 @@ button:hover {
     overflow: hidden;
     z-index: 1000;
     animation: move-entrance 5s ease-in-out forwards;
-    animation-delay: 1s;
+    animation-delay: 2s;
     animation-fill-mode: both;
 }
 
@@ -650,7 +650,6 @@ button:hover {
     }
 }
 
-/*ENTRANCE*/
 .hello-overlay {
     position: fixed;
     top: 50%;
@@ -659,10 +658,12 @@ button:hover {
     font-family: 'IBM Plex Sans', sans-serif;
     color: #000000;
     font-weight: bold;
-    opacity: 1;
+    opacity: 0;
     z-index: 100;
     pointer-events: none;
-    animation: slow-entrance 3s ease-in-out ;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: slow-entrance 5s ease-in-out forwards;
     animation-fill-mode: forwards;
 }
 
@@ -670,17 +671,28 @@ button:hover {
     0% {
         opacity: 0;
         font-size: 6rem;
+        width: 0%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         color: #FFFFFF;
     }
 
     30% {
         opacity: 1;
+        width: 22.5%;
         font-size: 5rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         color: #FFFFFF;
     }
     65% {
         opacity: 1;
         font-size: 4rem;
+        top: 50%;
+        left: 52%;
+        transform: translate(-50%, -50%);
         color: #FFFFFF;
     }
 
@@ -696,8 +708,6 @@ button:hover {
         color: #FFFFFF;
     }
 }
-
-
 
 /* TESTING */
 body {

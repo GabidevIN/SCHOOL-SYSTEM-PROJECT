@@ -239,7 +239,7 @@ def admin_home():
         return redirect(url_for('login'))
 
     users = User.query.all()
-    return render_template('TESTINGWAVES.html', users=users) 
+    return render_template('admin_home.html', users=users) 
 
 @app.route('/logout', methods=['POST'])
 def logout():
