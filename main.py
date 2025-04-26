@@ -40,6 +40,8 @@ class User(db.Model):
     supporting_document = db.Column(db.String(120), nullable=True)  # New
     is_new = db.Column(db.Boolean, default=True)  # new
     approved = db.Column(db.Boolean, default=False)  #new
+    
+    
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -143,7 +145,14 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
 
+        # Check if passwords match
+        if password != confirm_password:
+            flash('Passwords do not match!', 'danger')
+            return redirect(url_for('register'))
+
+        # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
 
@@ -151,6 +160,7 @@ def register():
             flash('Username or email already exists!', 'danger')
             return redirect(url_for('register'))
 
+        # Hash the password and save the registration request
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         registration_request = RegistrationRequest(username=username, email=email, password=hashed_password)
 
@@ -163,7 +173,7 @@ def register():
             flash('An error occurred. Please try again.', 'danger')
             return redirect(url_for('register'))
 
-    return render_template('login.html')
+    return render_template('register.html')
 
 @app.route('/main')
 def main():
@@ -270,7 +280,7 @@ def admin_home():
         return redirect(url_for('login'))
 
     users = User.query.all()
-    return render_template('admin_home.html', users=users) 
+    return render_template('TESTINGWAVES.html', users=users) 
 
 @app.route('/logout', methods=['POST'])
 def logout():

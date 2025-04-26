@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Main Page</title>
     <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='login.css')}}"/><!-- CSS FILE -->
-    <script type="text/javascript" src="{{ url_for('static', filename='login.js')}}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
 
   </head>
 
@@ -58,6 +58,10 @@
                     <label for="password-reg" class ="password-reg-cs">Password</label>
                     <input type="password" id="password" name="password" required  placeholder="Enter Password">
                 </div>
+                <div class="form-register">
+                  <label for="confirm_password"</label>
+                  <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm Password">
+              </div>
             
                 <button type="submit" class="btn btn-primary-reg">Enroll</button>
 
@@ -97,7 +101,7 @@
 <!-- BACKGROUND -->
 <div class="background"></div>
 <!-- STARTING OVERLAY -->
-<div class="hello-overlay">HELLO</div>
+<div class="hello-overlay">WELCOME</div>
 
 <!-- WAVING CONTENT -->
 </div>
@@ -116,6 +120,11 @@
       </g>
     </svg>
 </div>      
+
+<div class= "background-img-container">
+  <img src="static/background/bg1.jpeg" class="background-img">
+
+</div>
 
 </body>
 </html>
