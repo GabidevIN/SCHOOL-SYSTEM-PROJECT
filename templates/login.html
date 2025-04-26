@@ -1,79 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css')}}"> <!-- CSS FILE -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='login.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='login.js')}}"></script> <!-- JS FILE -->
 
-
-</head>
+  </head>
 
 <body>
-<!-- BACKGROUND -->
-<div class="background2">
-<img src="static/background/bg1.jpeg" class="background1">
-<img src="static/background/bg2.jpeg" class="background1">
-<img src="static/background/bg3.jpeg" class="background1">
-<img src="static/background/bg4.jpeg" class="background1">
+<img src="static/uploads/LOGO.png" class="INTRO-LOGO">
 
-
-
-<section class="container">
-    <input type="checkbox" id="toggle"> 
-        
+<!--LOGIN/REGISTER CONTAINER-->
+<section class="login-container">
+  <input type="checkbox" id="toggle">     
     <div class="forms">
+      <!-- Login Form -->
+      <div class="login">
+          <form method="POST" action="{{ url_for('login') }}">
+            <h3 class="TITLE">LOGIN</h3>
+            <div class="form-group">
+              <label for="email-log" class = "email-cs">Email Address</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
+            </div>
 
-        <!-- Login Form -->
-        <div class="login">
-            <form method="POST" action="{{ url_for('login') }}">
-                <h3 class="TITLE">LOGIN</h3>
-
-                <div class="form-group">
-                    <label for="email-log" class = "email-cs">Email Address</label>
-                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
-                </div>
-
-                 <div class="form-group">
-                    <label for="password-log" class = "password-cs">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"/>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Login</button>
-                
-
-                <!-- Toggle to Register -->
-                <label for="toggle" class ="switch" >No account?</label>
-
-            </form>
+            <div class="form-group">
+              <label for="password-log" class = "password-cs">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"/>
+            </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            <!-- Toggle to Register -->
+            <label for="toggle" class ="switch" >No account?</label>
+          </form>
 
             <!-- Available location -->
             <button class="location" onclick="openDialog('popup-location')">Available Location</button>
             <dialog class="availLoc" id="popup-location">
-            <button class="availclose" onclick="closeDialog('popup-location')">Close</button>
-            <div class="availog">LOCATION IN LIST</div>
+              <button class="availclose" onclick="closeDialog('popup-location')">Close</button>
+              <div class="availog">LOCATION IN LIST</div>
             </dialog>
-
-        </div>
-            <!--BACKGROUND AND LOGO FOR MISSION VISSION-->
-            <div class="background">
-            <img src="static/uploads/LOGO.png" class="LogoC">
-
-            <div class="vissions"> 
-            
-            <h1 class="tit">Mission:<br></h1>
-            <h2 class="h2mis">"To empower students with knowledge, creativity, and strong moral values, fostering a lifelong passion for learning in a dynamic and inclusive environment."<br><br></h2>
-
-            <h1 class="tit">Vision:<br></h1>
-            <h2 class="h2mis">"To be a leading institution that nurtures future leaders, innovators, and compassionate individuals who contribute positively to society and the world."</h2>
-            </h1>
-            </div>
-            
-        </div>
-            
-
-        <!-- Register Form -->
-        <div class="register">
+      </div>
+          <div class="register">
             <form method="POST" action="{{ url_for('register') }}">
                 <h3 class="TITLE">ENROLL</h3>
 
@@ -101,7 +68,7 @@
             <!-- Available Career -->
             <button class="career" onclick="careerDialog('popup-career')">Available Career</button>
             <dialog class="availcar" id="popup-career">
-            <button class="carclose" onclick="carexitDialog('popup-career')">Close</button>
+            <button zclass="carclose" onclick="carexitDialog('popup-career')">Close</button>
             <section class="carreer-sec">
                 <div class="availcard">
                     <div class="testing">test</div>
@@ -113,11 +80,42 @@
         </div>
     </div>
 </div>
+</section>
 
-
-
-
+<!--BACKGROUND AND LOGO FOR MISSION VISSION-->
+<div class="overlay-background">
+  <img src="static/uploads/LOGO.png" class="LogoC">
+    <div class="vissions"> 
+    <h1 class="tit">Mission:<br></h1>
+    <h2 class="h2mis">"To empower students with knowledge, creativity, and strong moral values, fostering a lifelong passion for learning in a dynamic and inclusive environment."<br><br></h2>
+    <h1 class="tit">Vision:<br></h1>
+    <h2 class="h2mis">"To be a leading institution that nurtures future leaders, innovators, and compassionate individuals who contribute positively to society and the world."</h2>
+    </h1>
+  </div>       
 </div>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+<!-- STARTING OVERLAY -->
+<div class="hello-overlay">HELLO</div>
+
+<!-- WAVING CONTENT -->
+</div>
+  <div class="wave-content">
+
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+      </defs>
+
+      <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="#77CAE8" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="#68A9C0" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+          <use xlink:href="#gentle-wave" x="48" y="2" fill="#648F9F" />
+      </g>
+    </svg>
+</div>      
 
 </body>
 </html>

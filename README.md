@@ -1,12 +1,12 @@
 # SCHOOL PROJECT TESTING
 
 *Accomplished*
-- Admin Panel 0.2v - updated
+- Admin Panel 0.3V - updated
 - Student Dashboard 0.2v - updated
 - Approval button 0.2v - updated
-- Login 0.2v - updated
-- List of student 0.1v
-- grade of student 0.1v
+- Login 1v - HEAVY UPDATE (LITTLE MORE POLISH)
+- List of student 0.2v
+- grade of student 0.2v
 - Better Registration 0.1v
 
 *In progress*
