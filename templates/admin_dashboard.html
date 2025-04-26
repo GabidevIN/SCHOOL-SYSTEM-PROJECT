@@ -5,6 +5,8 @@
     <title>Main Page</title>
     <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='admin.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='searching2.js')}}"></script> <!-- JS//SEARCHING FILE -->
+
 
   </head>
 
@@ -39,6 +41,8 @@
 
 <!-- APPROVAL TABLE -->
 <section class="table-container">
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" onkeyup="searchTable()" placeholder="Search for students..." class="search-bar">
     <table class="approval">
         <thead>
             <tr>

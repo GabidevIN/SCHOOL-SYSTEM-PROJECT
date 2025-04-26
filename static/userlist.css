@@ -175,12 +175,9 @@ header {
         left: 58%;
         transform: translate(-50%, -50%);
     }
-    80% {
-        left: 60%;
-        transform: translate(-50%, -50%);
-    }
+
     100% {
-        left: 59.25%;
+        left: 60.5%;
         transform: translate(-50%, -50%);
     }
 }
@@ -193,8 +190,14 @@ header {
     color: white;
     font-size: 16px;
     border-radius: 5px;
-    background: linear-gradient(90deg, #8bbbe0, #c6dafd)
+    background: linear-gradient(90deg, #8bbbe0, #c6dafd);
+    transition: all 1s ease;
 }
+
+.search-bar:hover {
+    background: #8bbbe0;
+}
+
 
 
 .listed-container{
@@ -250,7 +253,7 @@ th {
 
 .listed-table tbody {
     display: block;
-    max-height: 670px;
+    max-height: 590px;
     overflow-y: auto;
     width: 100%;
     -ms-overflow-style: none;

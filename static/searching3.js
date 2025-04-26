@@ -1,11 +1,12 @@
 // FOR SEARCHING TO GIN
 
-// FOR LIST OF STUDENTS
+
+// FOR LIST OF APPLICANTS
 function searchTable() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchBar");
     filter = input.value.toUpperCase();
-    table = document.querySelector(".listed-table");
+    table = document.querySelector(".view-table");
     tr = table.getElementsByTagName("tr");
 
     for (i = 1; i < tr.length; i++) {
