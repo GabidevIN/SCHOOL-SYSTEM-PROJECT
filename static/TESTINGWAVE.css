@@ -5,6 +5,7 @@ body {
     
 }
 
+
 /*DASHBOARD*/
 header {
     position: fixed;
@@ -104,6 +105,7 @@ header {
     gap: 1rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
+
 
 .home, .admission, .list, .calendar, .grade {
     width: 17.5rem;
