@@ -13,9 +13,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -40,6 +40,8 @@ class User(db.Model):
     supporting_document = db.Column(db.String(120), nullable=True)  # New
     is_new = db.Column(db.Boolean, default=True)  # new
     approved = db.Column(db.Boolean, default=False)  #new
+    
+    
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -143,7 +145,14 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
 
+        # Check if passwords match
+        if password != confirm_password:
+            flash('Passwords do not match!', 'danger')
+            return redirect(url_for('register'))
+
+        # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
 
@@ -151,6 +160,7 @@ def register():
             flash('Username or email already exists!', 'danger')
             return redirect(url_for('register'))
 
+        # Hash the password and save the registration request
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         registration_request = RegistrationRequest(username=username, email=email, password=hashed_password)
 
@@ -163,7 +173,7 @@ def register():
             flash('An error occurred. Please try again.', 'danger')
             return redirect(url_for('register'))
 
-    return render_template('login.html')
+    return render_template('register.html')
 
 @app.route('/main')
 def main():
@@ -209,6 +219,37 @@ def profile():
         return redirect(url_for('profile'))
 
     return render_template('profileinfo.html', user=user)
+
+@app.route('/profile/admin', methods=['GET', 'POST'])
+def profile_admin():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('main'))
+
+    if request.method == 'POST':
+        # Update user information
+        user.full_name = request.form.get('full_name')
+        user.address = request.form.get('address')
+        user.contact_number = request.form.get('contact_number')
+
+        # Handle file upload for supporting document
+        if 'file' in request.files:
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.supporting_document = filename
+
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('profile'))
+
+    return render_template('profileinfo_admin.html', user=user)
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -544,7 +585,20 @@ def student_grades():
 
     return render_template('student_grades.html', student=student, grades=grades)
 
+@app.route('/student/sub', methods=['GET'])
+def student_subjects():
+    if 'user_id' not in session:
+        flash('Access denied! Please log in.', 'danger')
+        return redirect(url_for('login'))
+
+    student = db.session.get(User, session['user_id'])
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('login'))
+
+    grades = Grade.query.filter_by(student_id=student.id).all()
+
+    return render_template('student_subjects.html', student=student, grades=grades)
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
-
- 

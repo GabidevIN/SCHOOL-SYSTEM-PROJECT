@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* HEADER/NAVIGATION */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(145deg, #b3e0f7, #c6dafd);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid black;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+    left: 25%;
+}
+
+.logos {
+    position: absolute;
+    top: -17.5%;
+    left: 12.5%; 
+    transform: translateX(-50%); 
+    width: 85px;
+    height: 85px;
+    transition: transform 0.7s ease-in-out;
+}
+
+.logos:hover {
+    transform: translateX(-50%) scale(0.95);
+}
+
+.dash {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10.5%;
+}
+
+
+.nav-center {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex: 1;
+}
+
+.nav-center li {
+    list-style: none;
+}
+
+.nav {
+    text-decoration: none;
+    color: black;
+    font-size: 1.15rem;
+    padding: 8px 12px;
+    margin: 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.nav:hover {
+    background: grey;
+    border-radius: 5px;
+}
+
+.btn-logout {
+    background: linear-gradient(90deg, #DC2626, #B91C1C  );
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.btn-logout:hover {
+    background-color: darkred;
+}
+
+/* BACKGROUND */
+.background {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh; 
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    z-index: 1;
+}
+
+
+/* MENU BAR */
+.Menu-tab {
+    position: fixed;
+    width: 25rem; 
+    height: 85%; 
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    z-index: 3;
+    top: 52.5%;
+    left: 12.5%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    border-radius: 25px 0 25px 0;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: top;  
+    align-items: center; 
+    gap: 1rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+}
+
+
+.home, .admission, .list, .calendar, .grade {
+    width: 17.5rem;
+    color: black;
+    background-color: rgba(147, 197, 253, 0.6);
+    text-align: center;
+    text-decoration: none;
+    line-height: 2.5rem;
+    border: 1px solid black;
+    height: 2.5rem;
+    border-radius: 0 15px 0 15px;
+    margin: 10px;
+    transition: all 0.4s ease-in-out;
+}
+
+.home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
+    transform: scale(1.05);
+    background-color: #21364f99;
+    color: black;
+    border: 1px solid black;
+    border-radius: 25px 0 25px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+.subjectview{
+    position: fixed;
+    width: 70%; 
+    height: 85%; 
+    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    opacity: 1;
+    top: 52.5%;
+    left: 61.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 0 25px 0 25px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 10;
+    padding: 20px;
+    overflow: hidden;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    border: 1px solid black;
+}
+
+.subjectview-div{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    scale: 1rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; 
+    border-radius: 0 25px 0 25px; 
+}

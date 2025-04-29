@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='subjects.css')}}"> <!-- CSS FILE -->
+
+</head>
+
+<body>
+<!-- DASHBOARD -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="/about" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+        <!-- MAIN BODY -->
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/main" class="list">HOME</a>
+        <a href="{{ url_for('student_grades') }}" class="list">GRADES</a>
+        <a href="/student/sub" class="list">SUBJECTS</a>
+    </div>
+</section>
+
+<section class="subjectview">
+    <div class="subjectview-div">
+        
+    </div>
+</section> 
+
+</body>
+</html>
