@@ -592,7 +592,7 @@ def about_us():
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
-    return render_template('TESTINGWAVES.html', student=student, grades=grades)
+    return render_template('TESTINGWAVE.html', student=student, grades=grades)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
