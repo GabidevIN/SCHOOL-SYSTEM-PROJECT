@@ -284,7 +284,7 @@ header {
 
 .approval tbody {
     display: block;
-    max-height: 730px;
+    max-height: 585px;
     overflow-y: auto;
     width: 100%;
     scrollbar-width: none;

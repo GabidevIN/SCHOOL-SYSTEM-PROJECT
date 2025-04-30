@@ -600,5 +600,20 @@ def student_subjects():
 
     return render_template('student_subjects.html', student=student, grades=grades)
 
+@app.route('/student/about', methods=['GET'])
+def about_us():
+    if 'user_id' not in session:
+        flash('Access denied! Please log in.', 'danger')
+        return redirect(url_for('login'))
+
+    student = db.session.get(User, session['user_id'])
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('login'))
+
+    grades = Grade.query.filter_by(student_id=student.id).all()
+
+    return render_template('TESTINGWAVES.html', student=student, grades=grades)
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

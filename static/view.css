@@ -149,22 +149,21 @@ header {
 .gradeview{
     position: fixed;
     width: 70%; 
-    height: 77.5%; 
-    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
+    height: 72.5%; 
+    background: linear-gradient(320deg, #4d677c, #8bbbe0, #c6dafd);
     opacity: 1;
-    top: 52.5%;
-    left: 61%;
+    top: 50%;
+    left: 59.25%;
     transform: translate(-50%, -50%);
     border-radius: 0 25px 0 25px; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    z-index: 1101;
+    z-index: 1500;
     padding: 20px;
     overflow: hidden;
     box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
-    border: 1px solid black;
 }
 
 .gradeview-title {
