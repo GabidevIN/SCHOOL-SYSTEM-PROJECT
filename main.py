@@ -147,33 +147,13 @@ def register():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
-        # Check if passwords match
+        print(f"Password: {password}, Confirm Password: {confirm_password}")  # Debugging
+
         if password != confirm_password:
             flash('Passwords do not match!', 'danger')
-            return redirect(url_for('register'))
+            return render_template('register.html')  # Ensure this is correct
 
-        # Check if username or email already exists
-        user_exists = User.query.filter_by(username=username).first()
-        email_exists = User.query.filter_by(email=email).first()
-
-        if user_exists or email_exists:
-            flash('Username or email already exists!', 'danger')
-            return redirect(url_for('register'))
-
-        # Hash the password and save the registration request
-        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-        registration_request = RegistrationRequest(username=username, email=email, password=hashed_password)
-
-        try:
-            db.session.add(registration_request)
-            db.session.commit()
-            flash('Registration request submitted! Please wait for approval.', 'success')
-            return redirect(url_for('login'))
-        except Exception as e:
-            flash('An error occurred. Please try again.', 'danger')
-            return redirect(url_for('register'))
-
-    return render_template('register.html')
+    return render_template('register.html')  # Ensure this is correct
 
 @app.route('/main')
 def main():
@@ -201,12 +181,11 @@ def profile():
         return redirect(url_for('main'))
 
     if request.method == 'POST':
-        # Update user information
+
         user.full_name = request.form.get('full_name')
         user.address = request.form.get('address')
         user.contact_number = request.form.get('contact_number')
 
-        # Handle file upload for supporting document
         if 'file' in request.files:
             file = request.files['file']
             if file and allowed_file(file.filename):
