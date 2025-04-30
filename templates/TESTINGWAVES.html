@@ -5,7 +5,7 @@
     <title>Main Page</title>
     <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='TESTINGWAVE.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
-
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js')}}"></script> <!-- JS FILE -->
   </head>
 
 <body>
@@ -29,23 +29,22 @@
 
 <!-- MANU TABLE -->
 <section class="menu">
+    <img src="static/uploads/LOGO.png" class="logos">
     <div class="Menu-tab">
-        <a href="/admin/home" class="list">HOME</a>
-        <a href="/admin/dashboard" class="list">ADMISSION</a>
-        <a href="/users" class="list">LIST</a>
-        <a href="/admin/grades" class="list">GRADE</a>
+        <a href="/main" class="list">HOME</a>
+        <a href="{{ url_for('student_grades') }}" class="list">GRADES</a>
+        <a href="" class="list">SUBJECTS</a>
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
+<!-- MANU TABLE -->
+<section class="menu">
+    <div class="Menu-tab">
+        <a href="/main" class="list">HOME</a>
+        <a href="{{ url_for('student_grades') }}" class="list">GRADES</a>
+        <a href="" class="list">SUBJECTS</a>
+    </div>
+</section>
 
 <!-- BACKGROUND -->
 <div class="background"></div>
@@ -80,6 +79,7 @@
     </g>
   </svg>
 </div>      
+
 
 </body>
 </html>

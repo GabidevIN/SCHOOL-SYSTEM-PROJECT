@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Grades</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='adding.css')}}"> <!-- CSS FILE -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='ADDING_grades.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
-</head>
+    <script type="text/javascript" src="{{ url_for('static', filename='searching3.js')}}"></script> <!-- JS FILE -->
+
+
+  </head>
 
 <body>
 
 <!-- DASHBOARD -->
 <header>    
-    <div href="#" class="logo" data-target="home">
-            <img src="static/uploads/LOGO.png" class="logos">
-    </div>
     <nav>
         <ul class="dash">
             <li><a href="#" class="nav" data-target="about">About</a></li>
             <li><a href="#" class="nav" data-target="contact">Contact</a></li>
-            <li><a href="/profile/admin" class="nav" data-target="profile">Profile</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
             
         </ul>
     </nav>  
+
     <form action="{{ url_for('logout') }}" method="post" class="logout-form">
         <button type="submit" class="btn btn-logout">Logout</button>
     </form>
+    
 </header>
-
-<!-- BACKGROUND -->
-<div class="background"></div>
 
 <!-- MANU TABLE -->
 <section class="menu">
@@ -41,25 +39,62 @@
     </div>
 </section>
 
-<section class="adding">
-    <div class="adding-container">
-    <h1>Add Grades for {{ student.full_name }}</h1>
-    <form method="POST">
-        <label for="semester">Semester:</label>
-        <select name="semester" id="semester">
-            <option value="1">1</option>
-        </select>
-        <br><br>
-        {% for subject in subjects %}
-        <div>
-            <label for="{{ subject }}">{{ subject }}</label>
-            <input type="number" step="0.01" name="{{ subject }}" id="{{ subject }}" placeholder="Enter grade">
-        </div>
-        {% endfor %}
-        <br>
-        <button type="submit">Submit Grades</button>
-    </form>
-</div>
+<!--VIEW GRADE-->
+<section class = "addgrade">
+    <div class = "add-container">
+        <h1>Add Grades for {{ student.full_name }}</h1>
+        <form method="POST" class="grade-form">
+            <label for="semester">Semester:</label>
+            <select name="semester" id="semester" class="SEMESTER">
+                <option value="1">1</option>
+            </select>
+
+            {% for subject in subjects %}
+            <div class="input-group">
+                <label for="{{ subject }}">{{ subject }}</label>
+                <input type="number" min="1" max="5" step=".25" name="{{ subject }}" id="{{ subject }}" placeholder="Enter grade">
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-changes">Submit Grades</button>
+        </form>
+    </div>
 </section>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- WAVING CONTENT -->
+<div class="wave-content">
+
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+
+    <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="#77CAE8" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="#68A9C0" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+        <use xlink:href="#gentle-wave" x="48" y="2" fill="#648F9F" />
+    </g>
+  </svg>
+</div>      
+
+<!-- WAVING LAYERED -->
+<div class="wave-layered">
+
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+
+    <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+    </g>
+  </svg>
+</div>      
+
+
 </body>
 </html>

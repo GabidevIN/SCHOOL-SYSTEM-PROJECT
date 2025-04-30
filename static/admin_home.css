@@ -1,47 +1,24 @@
-* {
-    margin: 0;
+body {
+    margin:0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    overflow: hidden;
+    
 }
 
+/*DASHBOARD*/
 header {
+    position: fixed;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 15px 30px;
-    background: linear-gradient(145deg, #b3e0f7, #c6dafd);
-    position: fixed;
+    background: linear-gradient(165deg, #4d677c ,#8bbbe0, #c6dafd, white);
     width: 100%;
     top: 0;
     left: 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    position: absolute;
-    border: 1px solid black;
-
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000000;
-    left: 25%;
-}
-
-.logos {
-    position: absolute;
-    top: -17.5%;
-    left: 12.5%; 
-    transform: translateX(-50%); 
-    width: 85px;
-    height: 85px;
-    transition: transform 0.7s ease-in-out;
-}
-
-.logos:hover {
-    transform: translateX(-50%) scale(0.95);
+    z-index: 1050;
+    border-bottom: 1px solid white;
 }
 
 .dash {
@@ -69,76 +46,90 @@ header {
     text-decoration: none;
     color: black;
     font-size: 1.15rem;
-    padding: 8px 12px;
-    margin: 15px;
+    padding: 8px 25px;
     transition: 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+    background-color: #b3e0f7;
+    border: white 1px solid;
+    border-radius: 25px;
 }
 
 .nav:hover {
-    background: grey;
-    border-radius: 5px;
+    background: white;
+    color: black;
+    border-radius: 25px;
 }
 
 .btn-logout {
-    background: linear-gradient(90deg, #DC2626, #B91C1C  );
+    position: fixed;
+    background: linear-gradient(90deg, #DC2626, #B91C1C);
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 8px 25px;
     font-size: 1rem;
     cursor: pointer;
-    transition: 0.3s;
-    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1051;
+    top: .5%;
+    right: 5%;
+    transform: translate(50%, 50%);
+    border-radius: 25px;
 }
 
 .btn-logout:hover {
     background-color: darkred;
+    transform: translate(50%, 50%) scale(1.1);
 }
+
+
 
 /* MENU BAR */
 .Menu-tab {
     position: fixed;
-    width: 25rem; 
-    height: 85%; 
-    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
-    z-index: 3;
-    top: 52.5%;
-    left: 12.5%;
-    border: 1px solid black;
-    transform: translate(-50%, -50%);
-    border-radius: 25px 0 25px 0;
+    width: 21rem; 
+    height: 100%; 
+    background: linear-gradient(145deg, #4d677c ,#8bbbe0, #c6dafd);
+    z-index: 1100;
+    top: 50%;
+    left: 0;
+    border-right: 1px solid white;
+    transform: translateY(-50%);
     display: flex;
     padding: 2rem;
     flex-direction: column; 
-    justify-content: top;  
+    justify-content: center;  
     align-items: center; 
     gap: 1rem;
-    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
 
 .home, .admission, .list, .calendar, .grade {
     width: 17.5rem;
+    height: 2.75rem;
     color: black;
-    background-color: white;
+    background-color: #b3e0f7;
     text-align: center;
     text-decoration: none;
-    line-height: 2.5rem;
-    border: 1px solid black;
-    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 0 15px 0 15px;
     margin: 10px;
     transition: all 0.4s ease-in-out;
+    border: 1px solid white;
+
 }
 
 .home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
     transform: scale(1.05);
-    background: black;
-    color: white;
-    border: 1px solid white;
+    background: white;
+    color: black;
     border-radius: 25px 0 25px 0;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
 }
-
-
 
 /* BACKGROUND */
 .background {
@@ -147,16 +138,81 @@ header {
     left: 0;
     width: 100vw; 
     height: 100vh; 
-    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
-    z-index: 1;
+    z-index: 900;
+    background: #b3e0f7; 
+    pointer-events: none;
+}
+
+/* WAVING EFFECTS */
+.wave-content {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1000;
+    bottom: -10px;
+}
+
+.wave-layered {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1105;
+    bottom: -20px;
+    pointer-events: none;
+}
+
+.waves {
+    position:fixed;
+    width: 100%;
+    height:100vh;
+    margin-bottom:-7px;
+    min-height:100px;
+    max-height:150px;
+}
+
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+  
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px,0,0);
+    }
+    100% {
+        transform: translate3d(85px,0,0);
+    }
 }
 
 
+/* TESTING */
 body {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
-
 body.loaded {
     opacity: 1;
 }
@@ -167,7 +223,7 @@ body.loaded {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,25 +241,4 @@ body.loaded {
 
 header, .Menu-tab {
     transition: opacity 0.5s ease-in-out;
-}
-
-.hello-tab{
-    position: fixed;
-    width: 70%; 
-    height: 85%; 
-    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
-    opacity: 1;
-    top: 52.5%;
-    left: 61.5%;
-    transform: translate(-50%, -50%);
-    border-radius: 0 25px 0 25px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 5;
-    padding: 20px;
-    overflow: hidden;
-    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
-    border: 1px solid black;
 }
