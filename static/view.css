@@ -164,6 +164,25 @@ header {
     padding: 20px;
     overflow: hidden;
     box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    animation: DASH-entrance 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+    animation-delay: .1s;
+    animation-fill-mode: both;
+}
+
+@keyframes DASH-entrance {
+    0% {
+        left: 200%;
+        transform: translate(-50%, -50%);
+    }
+    60% {
+        left: 58%;
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        left: 60.5%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .gradeview-title {

@@ -15,7 +15,6 @@
     <nav>
         <ul class="dash">
             <li><a href="/main" class="nav" data-target="about">Return</a></li>
-            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
             <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
         </ul>
     </nav>  
@@ -26,14 +25,36 @@
     
 </header>
 
+
 <section class ="aboutContainer">
-<img src="{{ url_for('static', filename='about/akino.jpg') }}" class="INTRO-LOGO">
+  <div class="imagecontains">
+    <img src="{{ url_for('static', filename='about/akino.jpg') }}" class="aqipic">
+      <div class="info"> Gabriel Stephen Aquino
+    </div>
+  </div>
 
 
+  <img src="{{ url_for('static', filename='uploads/LOGO.png') }}" class="logos">
+  <div class = "rectangularanim"></div>
+    <div class="motto">
+      <h1>"Empowering Minds, Shaping Futures."</h1>
+      <h2>To emphasizes the idea of nurturing students' potential and guiding them toward success. Let me know if you'd like any adjustments or a different approach!</h2>
+    </div>
+
+
+  <div class="imagecontains">
+    <img src="{{ url_for('static', filename='about/arida.jpg') }}" class="aripic">
+    <div class="info"> Eugene Gaud Arida
+    </div>
+  </div>
+  
 
 
 </section>
 
+<div class="contactbox">
+
+</div>
 
 
 

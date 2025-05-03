@@ -117,42 +117,37 @@ a[data-target="about"]:hover {
     pointer-events: none;
 }
 
-.aboutContainer {
-    position: fixed;
-    height: 70%;
-    width: 67.5%;
-    background: linear-gradient(145deg, #4d6a7d, #7faedc);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%); /* start slightly above final position */
-    z-index: 1500;
-    border-radius: 25px 0 25px 0;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
-    opacity: 0;
-    animation: entrance 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-    animation-delay: 0.25s;
-    animation-fill-mode: both;
+.contact-wrapper {
+    position: relative;
 }
 
-@keyframes entrance {
-    0% {
-        transform: translate(-50%, -30%);
-        opacity: 0;
-    }
-
-    50%{
-        transform: translate(-50%, -52%);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%);
-        opacity: 1;
-    }
+.contact-popup {
+    position: relative;
+    display: inline-block;
 }
 
+.contact-popup > summary {
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
 
+.contact-popup > summary::-webkit-details-marker {
+    display: none; /* hide arrow on Chrome/Safari */
+}
 
+.contact-box {
+    position: absolute;
+    top: 110%; /* show below the button */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 220px;
+    z-index: 100;
+}
 
 
 /* WAVING EFFECTS */

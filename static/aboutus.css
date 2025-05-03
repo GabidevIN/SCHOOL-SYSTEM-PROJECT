@@ -124,20 +124,60 @@ a[data-target="about"]:hover {
     background: linear-gradient(145deg, #4d6a7d, #7faedc);
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -60%); /* start slightly above final position */
+    transform: translate(-50%, -60%);
     z-index: 1500;
     border-radius: 25px 0 25px 0;
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
     opacity: 0;
-    animation: entrance 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation: bebe 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     animation-delay: 0.25s;
+    animation-fill-mode: both;
+}
+
+@keyframes bebe {
+    0% {
+        transform: translate(-50%, -30%);
+        opacity: 0;
+        height: 0%;
+        width: 0%;
+        border-radius: 30px;
+    }
+
+    50%{
+        transform: translate(-50%, -52%);
+        opacity: 1;
+        height: 35%;
+        width: 33.75%;
+        border-radius: 30px;
+
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        height: 70%;
+        width: 67.5%;
+        border-radius: 25px 0 25px 0;
+    }
+}
+
+
+.imagecontains {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+    height: 45vh;
+    overflow: hidden;
+    animation: entrance 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 2s;
     animation-fill-mode: both;
 }
 
 @keyframes entrance {
     0% {
-        transform: translate(-50%, -30%);
+        transform: translate(-50%, -40%);
         opacity: 0;
     }
 
@@ -152,6 +192,173 @@ a[data-target="about"]:hover {
 }
 
 
+.logos {
+    position: fixed;
+    width: 35%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: lolo 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+    z-index: 2;
+}
+
+@keyframes lolo {
+    0% {
+        transform: translate(-50%, -40%);
+        opacity: 0;
+        filter: blur(0);
+    }
+    50% {
+        transform: translate(-50%, -52%);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        filter: blur(4px);  
+    }
+}
+
+.motto {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 1.5;
+    color: white;
+    animation: texte 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 2s;
+    animation-fill-mode: both;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes texte {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+.imagecontains:first-child {
+    left: 12.5%;
+}
+
+.imagecontains:last-child {
+    left: 87.5%;
+}
+
+.aqipic, .aripic {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 1s ease-in-out;
+}
+
+
+
+
+.aqipic {
+    border-radius: 0 25px 0 25px;
+}
+
+.aripic {
+    border-radius: 25px 0 25px 0;
+}
+
+.imagecontains:hover .aqipic,
+.imagecontains:hover .aripic {
+    filter: blur(2px);
+    border-radius: 25px;
+}
+
+.info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg, rgba(77, 106, 125, 0.7), rgba(127, 174, 220, 0.7));
+    color: white;
+    text-align: center;
+    width: 75%;
+    height: 50%;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    font-size: 1rem;
+    border-radius: 0 25px 0 25px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+
+.imagecontains:hover .info {
+    background: linear-gradient(145deg, rgba(77, 106, 125, 0.7), rgba(127, 174, 220, 0.7));
+    opacity: 1;
+}
+
+.contactbox{
+    height: 70%;
+    width: 5vw;
+    position: fixed;
+    top: 50%;
+    left: 12.5%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg, #4d6a7d, #7faedc);
+    z-index: 1499;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+    animation: contacts 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 2s;
+
+    animation-fill-mode: both;
+    pointer-events: none;
+}
+
+@keyframes contacts {
+    0% {
+        left: 35%;
+        height: 0%;
+        border-radius: 30px;
+        opacity: 0;
+    }
+    50% {
+        left: 35%;
+        height: 10%;
+        border-radius: 30px;
+        opacity: 0;
+
+    }
+
+    75%{
+        left: 12.5%;
+        height: 10%;
+        border-radius: 30px;
+        opacity: 1;
+
+    }
+    100% {
+        left: 12.5%;
+        height: 70%;
+        border-radius: 0 25px 0 25px;
+        opacity: 1;
+
+    }
+}
 
 
 
