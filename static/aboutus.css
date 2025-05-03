@@ -12,7 +12,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px 30px;
+    padding: 6.5px 30px;
     background: linear-gradient(165deg, #4d677c ,#8bbbe0, #c6dafd, white);
     width: 100%;
     top: 0;
@@ -22,13 +22,25 @@ header {
     border-bottom: 1px solid white;
 }
 
+a[data-target="about"] {
+    background-color: #7AE2CF;
+    color: black; 
+    transform: all 2s ease-in-out;   
+    font-weight: bold;
+}
+
+a[data-target="about"]:hover {
+    background-color: #db835f;
+    color: black;    
+}
+
 .dash {
     list-style: none;
     display: flex;
     width: 100%;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 10.5%;
+    padding-right: -40.5%;
 }
 
 
@@ -39,22 +51,31 @@ header {
     flex: 1;
 }
 
+
 .nav-center li {
     list-style: none;
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     color: black;
     font-size: 1.15rem;
     padding: 8px 25px;
     transition: 0.3s ease-in-out;
-    justify-content: center;
-    align-items: center;
-    margin: 25px;
+    margin: 0 1.25rem;
     background-color: #b3e0f7;
     border: white 1px solid;
     border-radius: 25px;
+    width: fit-content;
+    transform: translateX(-3.5rem);
 }
 
 .nav:hover {
@@ -84,127 +105,6 @@ header {
     transform: translate(50%, 50%) scale(1.1);
 }
 
-
-
-/* MENU BAR */
-.Menu-tab {
-    position: fixed;
-    width: 21rem; 
-    height: 100%; 
-    background: linear-gradient(145deg, #4d677c ,#8bbbe0, #c6dafd);
-    z-index: 1100;
-    top: 50%;
-    left: 0;
-    border-right: 1px solid white;
-    transform: translateY(-50%);
-    display: flex;
-    padding: 2rem;
-    flex-direction: column; 
-    justify-content: center;  
-    align-items: center; 
-    gap: 1rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-}
-
-.logos {
-    width: 100%;
-    height: auto;
-    max-width: 300px;
-    margin-bottom: 2rem;
-    position: relative;
-    top: 0;
-    left: 50px;
-    transition: transform 0.3s ease-in-out;
-    z-index: 1200;
-    pointer-events: none;
-}
-
-
-.home, .admission, .list, .calendar, .grade {
-    width: 17.5rem;
-    height: 2.75rem;
-    color: black;
-    background-color: #b3e0f7;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0 15px 0 15px;
-    margin: 10px;
-    transition: all 0.4s ease-in-out;
-    border: 1px solid white;
-
-}
-
-.home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
-    transform: scale(1.05);
-    background: white;
-    color: black;
-    border-radius: 25px 0 25px 0;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid white;
-}
-
-.viewedsub{
-    position: fixed;
-    width: 70%; 
-    height: 72.5%; 
-    background: linear-gradient(320deg, #4d677c, #8bbbe0, #c6dafd);
-    opacity: 1;
-    top: 50%;
-    left: 59.25%;
-    transform: translate(-50%, -50%);
-    border-radius: 0 25px 0 25px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 1500;
-    padding: 20px;
-    overflow: hidden;
-    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
-    animation: DASH-entrance 1.6s cubic-bezier(0.77, 0, 0.175, 1);
-    animation-delay: .1s;
-    animation-fill-mode: both;
-}
-
-.viewedsub-container {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(145deg, #4d677c, #8bbbe0, #c6dafd);
-    border: black 1px solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 25px 0 25px;
-}
-
-.grade-table {
-    width: 100%;
-    max-width: 800px;
-    margin: 40px auto;
-    border-collapse: collapse;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .grade-table thead {
-    background-color: #f7fafc;
-    color: black;
-  }
-  
-  .grade-table th, .grade-table td {
-    padding: 14px 20px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .grade-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
 /* BACKGROUND */
 .background {
     position: fixed; 
@@ -216,6 +116,44 @@ header {
     background: #b3e0f7; 
     pointer-events: none;
 }
+
+.aboutContainer {
+    position: fixed;
+    height: 70%;
+    width: 67.5%;
+    background: linear-gradient(145deg, #4d6a7d, #7faedc);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%); /* start slightly above final position */
+    z-index: 1500;
+    border-radius: 25px 0 25px 0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    animation: entrance 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 0.25s;
+    animation-fill-mode: both;
+}
+
+@keyframes entrance {
+    0% {
+        transform: translate(-50%, -30%);
+        opacity: 0;
+    }
+
+    50%{
+        transform: translate(-50%, -52%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+
+
+
 
 /* WAVING EFFECTS */
 .wave-content {

@@ -1,4 +1,3 @@
-from flask import Flask
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
@@ -601,20 +600,19 @@ def student_subjects():
 
     return render_template('student_subjects.html', student=student, grades=grades)
 
-@app.route('/student/about', methods=['GET'])
-def about_us():
+@app.route('/student/about')
+def abouts():
     if 'user_id' not in session:
-        flash('Access denied! Please log in.', 'danger')
+        flash('Access denied!', 'danger')
         return redirect(url_for('login'))
 
-    student = db.session.get(User, session['user_id'])
-    if not student:
-        flash('Student not found!', 'danger')
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
         return redirect(url_for('login'))
 
-    grades = Grade.query.filter_by(student_id=student.id).all()
-
-    return render_template('TESTINGWAVES.html', student=student, grades=grades)
+    print("Rendering about.html") 
+    return render_template('about.html', user=user)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

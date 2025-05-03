@@ -78,9 +78,6 @@ a[data-target="about"]:hover {
     transform: translateX(-3.5rem);
 }
 
-
-
-
 .nav:hover {
     background: white;
     color: black;
@@ -119,6 +116,44 @@ a[data-target="about"]:hover {
     background: #b3e0f7; 
     pointer-events: none;
 }
+
+.aboutContainer {
+    position: fixed;
+    height: 70%;
+    width: 67.5%;
+    background: linear-gradient(145deg, #4d6a7d, #7faedc);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%); /* start slightly above final position */
+    z-index: 1500;
+    border-radius: 25px 0 25px 0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    animation: entrance 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 0.25s;
+    animation-fill-mode: both;
+}
+
+@keyframes entrance {
+    0% {
+        transform: translate(-50%, -30%);
+        opacity: 0;
+    }
+
+    50%{
+        transform: translate(-50%, -52%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+
+
+
 
 /* WAVING EFFECTS */
 .wave-content {

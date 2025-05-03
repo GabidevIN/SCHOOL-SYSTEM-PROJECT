@@ -29,7 +29,7 @@
 
 <!-- MANU TABLE -->
 <section class="menu">
-    <img src="static/uploads/LOGO.png" class="logos">
+    <img src="{{ url_for('static', filename='uploads/LOGO.png') }}" class="logos">
     <div class="Menu-tab">
         <a href="/main" class="list">HOME</a>
         <a href="{{ url_for('student_grades') }}" class="list">GRADES</a>
