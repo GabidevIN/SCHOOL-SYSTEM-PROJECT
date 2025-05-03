@@ -146,10 +146,11 @@ def register():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
-        # Check if passwords match
+        print(f"Password: {password}, Confirm Password: {confirm_password}")  # Debugging
+
         if password != confirm_password:
             flash('Passwords do not match!', 'danger')
-            return redirect(url_for('register'))
+            return render_template('register.html')  # Ensure this is correct
 
 
         # Check if username or email already exists
@@ -201,12 +202,11 @@ def profile():
         return redirect(url_for('main'))
 
     if request.method == 'POST':
-        # Update user information
+
         user.full_name = request.form.get('full_name')
         user.address = request.form.get('address')
         user.contact_number = request.form.get('contact_number')
 
-        # Handle file upload for supporting document
         if 'file' in request.files:
             file = request.files['file']
             if file and allowed_file(file.filename):
