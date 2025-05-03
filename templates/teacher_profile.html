@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}"> <!-- Optional CSS -->
+
+</head>
+<body>
+
+<!-- DASH  -->
+<header>    
+    <div href="#" class="logo" data-target="home">
+            <img src="static/uploads/LOGO.png" class="logos">
+    </div>
+    <nav>
+        <ul class="dash">
+            <li><a href="{{ url_for('about') }}" class="nav" data-target="about">About</a></li>
+            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/teacher/dashboard" class="nav" data-target="profile">RETURN</a></li>
+            
+            
+        </ul>
+    </nav>  
+    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</header>
+
+<!-- BG -->
+<div class="background"></div>
+
+<!-- PROFILE -->
+<div class="profile-container">
+    <h1 class ="profileh1">Profile Information</h1>
+
+    <div class="profile-picture">
+            <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="150">
+            <title>Upload Profile Picture</title>
+        </head>
+
+        <!-- PROFILE PICTURE -->
+        <body>
+            <h1>Upload Profile Picture</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="file">Choose a picture:</label>
+                <input type="file" name="file" id="file" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+    <!-- PROFILE DETAILS -->
+    <div class="profile-details">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Role:</strong> Teacher</p>
+    </div>
+
+        <!-- CHANGING NAME ETC -->
+        <div class="profile-actions">
+            <form method="POST" enctype="multipart/form-data">
+
+                <form method="POST" class="profile-form-container">
+                    <div class="form-group">
+                        <label for="full_name" class="form-label">Full Name:</label>
+                        <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" class="form-input">
+                    </div>
+                    <!-- INPUT ADDRESS -->
+
+                    <div class="form-group">
+                        <label for="address" class="form-label">Address:</label>
+                        <input type="text" id="address" name="address" value="{{ user.address }}" class="form-input">
+                    </div>
+
+                    <!-- INPUT CONTACT NUMBER -->
+                    <div class="form-group">
+                        <label for="contact_number" class="form-label">Contact Number:</label>
+                        <input type="text" id="contact_number" name="contact_number" value="{{ user.contact_number }}" class="form-input">
+                    </div>
+
+                    <!-- INPUT SUPPORT DOCUMENTS -->
+                    <div class="form-group">
+                        <label for="file" class="form-label">Supporting Document:</label>
+                        <input type="file" id="file" name="file" class="file-input">
+
+                        {% if user.supporting_document %}
+                            <p class="file-info">Current Document: {{ user.supporting_document }}</p>
+                        {% endif %}
+
+                    <!-- UPLOAD PROFILE -->
+                    </div>
+                    <button type="submit" class="submit-btn">Update Profile</button>
+                </form>
+        </div>
+    </div>
+</body>
+</html>
