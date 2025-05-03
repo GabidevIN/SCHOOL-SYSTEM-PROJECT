@@ -39,9 +39,15 @@
 
 <!-- NOTES -->
 <section class="note">
-    <div class="note-tab">
-
-    <div>
+    <form method="POST" action="/main" class="note-form">
+        <div class="note-tab">
+            <label for="note">Notes:</label>
+            <textarea id="note" name="note" class="form-input">{{ user.note or '' }}</textarea>
+        </div>
+        <div class="note-tab">
+            <button type="submit" class="btn btn-save">Save</button>
+        </div>
+    </form>
 </section>
 
 <!-- CALENDAR -->

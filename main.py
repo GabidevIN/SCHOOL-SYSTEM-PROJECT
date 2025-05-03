@@ -13,9 +13,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -32,14 +32,18 @@ class User(db.Model):
     password = db.Column(db.String(120), nullable=False)
     is_admin = db.Column(db.Boolean, default=False) 
     profile_picture = db.Column(db.String(120), default='default.jpg') 
-    full_name = db.Column(db.String(120), nullable=True)  # New
-    address = db.Column(db.String(255), nullable=True)  # New
-    contact_number = db.Column(db.String(15), nullable=True)  # New
-    courses = db.Column(db.String(120), nullable=True)  # New
+    full_name = db.Column(db.String(120), nullable=True) 
+    address = db.Column(db.String(255), nullable=True)
+    contact_number = db.Column(db.String(15), nullable=True) 
+    courses = db.Column(db.String(120), nullable=True) 
     
-    supporting_document = db.Column(db.String(120), nullable=True)  # New
-    is_new = db.Column(db.Boolean, default=True)  # new
-    approved = db.Column(db.Boolean, default=False)  #new
+    supporting_document = db.Column(db.String(120), nullable=True) 
+    is_new = db.Column(db.Boolean, default=True) 
+    approved = db.Column(db.Boolean, default=False) 
+    
+    is_teacher = db.Column(db.Boolean, default=False)   #new
+    note = db.Column(db.String(255), nullable=True)  # New
+    
     
     
 
@@ -155,7 +159,7 @@ def register():
 
     return render_template('register.html')  # Ensure this is correct
 
-@app.route('/main')
+@app.route('/main', methods=['GET', 'POST'])
 def main():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
@@ -166,7 +170,14 @@ def main():
         flash('User not found!', 'danger')
         return redirect(url_for('login'))
 
-    print("Rendering main.html") 
+    if request.method == 'POST':
+        # Save the note
+        note = request.form.get('note')
+        if note:
+            user.note = note
+            db.session.commit()
+            flash('Note saved successfully!', 'success')
+
     return render_template('main.html', user=user)
 
 @app.route('/profile', methods=['GET', 'POST'])
@@ -593,6 +604,147 @@ def about_us():
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('TESTINGWAVE.html', student=student, grades=grades)
+
+@app.route('/teacher/dashboard')
+def teacher_dashboard():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user or not user.is_teacher:  # Check for teacher role
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    students = User.query.all()  # Fetch all students
+    return render_template('teacher_dashboard.html', students=students)
+
+@app.route('/teacher/grades', methods=['GET'])
+def teacher_grades():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_teacher:  # Check for teacher role
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    students = User.query.all()
+    return render_template('teacher_grades.html', students=students)
+
+@app.route('/teacher/grades/<int:student_id>', methods=['GET'])
+def teacher_grades_for_student(student_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_teacher:  # Check for teacher role
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    student = User.query.get(student_id)
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('teacher_grades'))
+
+    grades = Grade.query.filter_by(student_id=student.id).all()
+
+    return render_template('teacher_grades.html', student=student, grades=grades)
+
+@app.route('/teacher/add-grades/<int:student_id>', methods=['GET', 'POST'])
+def teacher_add_grades(student_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_teacher:  # Check for teacher role
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    student = User.query.get(student_id)
+    if not student:
+        flash('Student not found!', 'danger')
+        return redirect(url_for('teacher_grades'))
+
+    if request.method == 'POST':
+        for subject in SUBJECTS:
+            grade_value = request.form.get(subject)
+            if grade_value:
+                existing_grade = Grade.query.filter_by(student_id=student.id, subject=subject).first()
+                if existing_grade:
+                    existing_grade.grade = float(grade_value)  # Update
+                else:
+                    # Add new grade
+                    new_grade = Grade(
+                        student_id=student.id,
+                        subject=subject,
+                        semester=request.form.get('semester', 1),
+                        grade=float(grade_value)
+                    )
+                    db.session.add(new_grade)
+        db.session.commit()
+        flash('Grades added/updated successfully!', 'success')
+        return redirect(url_for('teacher_grades'))
+
+    return render_template('add_grades.html', student=student, subjects=SUBJECTS)
+
+@app.route('/teacher/view-grades', methods=['GET'])
+def teacher_view_grades():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_teacher:  # Check for teacher role
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    students_with_grades = db.session.query(User).join(Grade).distinct().all()
+    grades = Grade.query.all()
+
+    return render_template('teacher_view_grades.html', students=students_with_grades, grades=grades)
+
+@app.route('/teacher/profile', methods=['GET', 'POST'])
+def teacher_profile():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user or not user.is_teacher:  # Ensure the user is a teacher
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        # Handle profile updates
+        full_name = request.form.get('full_name')
+        address = request.form.get('address')
+        contact_number = request.form.get('contact_number')
+
+        # Update user details
+        if full_name:
+            user.full_name = full_name
+        if address:
+            user.address = address
+        if contact_number:
+            user.contact_number = contact_number
+
+        # Handle file upload for profile picture
+        if 'file' in request.files:
+            file = request.files['file']
+            if file.filename != '':
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.profile_picture = filename
+
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('teacher_profile'))
+
+    return render_template('teacher_profile.html', user=user)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
