@@ -366,6 +366,8 @@ button:hover {
     display: inline-block;
     z-index: 5;
     transition: transform 0.4s ease-in-out 0.4s, ease-in-out 0.4s, background 0.3s ease-in-out;
+    overflow: hidden;
+
 }
 
 .career {
@@ -397,44 +399,15 @@ button:hover {
     width: 100%;
     height: 100%;
     opacity: 0;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(0x);
     -webkit-backdrop-filter: blur(10px);
     background: transparent;
     padding: 20px;
     border: none;
     transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out;
     pointer-events: none;
-}
+    overflow: hidden;
 
-.availLoc[open] {
-    animation: fadeIn 0.5s ease-in forwards;
-    pointer-events: auto;
-}
-
-.availLoc.fade-out {
-    animation: fadeOut 0.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
-    to {
-        opacity: 1;
-        backdrop-filter: blur(10px);
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        backdrop-filter: blur(10px);
-    }
-    to {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
 }
 
 .availclose {
@@ -466,68 +439,7 @@ button:hover {
     justify-content: space-between;
     gap: 20px;
 }
-  
-
-.rectangle,  .rectangle2, .rectangle3,.rectangle4 {
-    width: 45%;
-    height: 42.5%;
-}
-
-.availog img {
-    width: 100%;
-    height: 100%; 
-}
-
-.rectangle, .rectangle2, .rectangle3, .rectangle4{
-    position: relative;
-    background-color: #d9ecff;
-    padding: 24px;
-    color: #333;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: sans-serif;
-    text-align: left;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.5s;
-}
-
-  
-.rectangle, .rectangle2, .rectangle3, .rectangle4 {
-    position: relative;
-  }
-  
-.rectangle:hover, .rectangle2:hover, .rectangle3:hover, .rectangle4:hover {
-    transform: scale(1.02);
-    background-color: #cde4ff;
-  }
-  
-.availog:hover {
-    transform: translate(-50%, -50%) scale(1.025);
-    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
-                inset 5px 5px 15px rgba(0, 0, 0, 0.5),
-                inset -5px -5px 10px rgba(255, 255, 255, 0.2); 
-}
-  
-.info {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 10px;
-    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
-  }
-  
-.rectangle:hover .info, .rectangle2:hover .info, .rectangle3:hover .info, .rectangle4:hover .info {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out, visibility 0s linear 0s;
-}
-  
-
-                            /*CAREER*/
+/*CAREER*/
 .availcar {
     width: 100%;
     height: 100%;
@@ -539,40 +451,6 @@ button:hover {
     border: none;
     transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out;
     pointer-events: none;
-}
-
-
-
-
-.availcar[open] {
-    animation: fadeIn 0.5s ease-in forwards;
-    pointer-events: auto;
-}
-
-.availcar.fade-out {
-    animation: fadeOut 0.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
-    to {
-        opacity: 1;
-        backdrop-filter: blur(10px);
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        backdrop-filter: blur(10px);
-    }
-    to {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
 }
 
 .carclose {
@@ -605,18 +483,11 @@ button:hover {
     gap: 20px;
 }
 
-
+/*CONTENT OF CAREER*/
 .cars1, .cars2, .cars3 {
     width: 15%;
     height: 65%;
 }
-
-.availcard img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 
 .cars1, .cars2, .cars3{
     position: relative;
@@ -630,28 +501,15 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.5s;
 }
-
   
 .cars1, .cars2, .cars3 {
     position: relative;
-  }
+}
   
 .cars1:hover, .cars2:hover, .cars3:hover{
     transform: scale(1.02);
     background-color: #cde4ff;
-  }
-  
-.infos {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 10px;
-    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
-  }
+}
   
 .cars1:hover .infos, .cars2:hover .infos, .cars13:hover .infos{
     visibility: visible;
@@ -659,6 +517,150 @@ button:hover {
     transition: opacity 0.3s ease-in-out, visibility 0s linear 0s;
 }
 
+/*CONTENT OF LOCATION*/
+.rectangle,  .rectangle2, .rectangle3,.rectangle4 {
+    width: 45%;
+    height: 42.5%;
+    overflow: hidden;
+
+}
+
+.rectangle, .rectangle2, .rectangle3, .rectangle4{
+    position: relative;
+    background-color: #d9ecff;
+    padding: 24px;
+    color: #333;
+    border-radius: 0 25px 0 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.5s;
+    overflow: hidden;
+}
+
+.rectangle, .rectangle2, .rectangle3, .rectangle4 {
+    position: relative;
+}
+  
+.rectangle:hover, .rectangle2:hover, .rectangle3:hover, .rectangle4:hover {
+    transform: scale(1.02);
+    background-color: #cde4ff;
+}
+  
+.rectangle:hover .info, .rectangle2:hover .info, .rectangle3:hover .info, .rectangle4:hover .info {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0s;
+}
+
+/*WHEN CLICKED WILL OPEN AND CLOSE*/
+.availcar[open] {
+    animation: loadin 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    pointer-events: auto;
+}
+
+.availcar.fade-out {
+    animation: loadout 0.5s ease-out forwards;
+}
+
+.availLoc[open] {
+    animation: loadin 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    pointer-events: auto;
+}
+
+.availLoc.fade-out {
+    animation: loadout 0.5s ease-out forwards;
+}
+
+/*ANIMATION FOR LOC AND CAREER*/
+
+@keyframes loadin {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+        backdrop-filter: blur(0px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-10px);
+        backdrop-filter: blur(2px);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translateY(5px);
+        backdrop-filter: blur(6px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(10px);
+    }
+}
+
+@keyframes loadout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/*IMAGE RESIZING*/
+.availcard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.availog img {
+    width: 100%;
+    height: 100%; 
+}
+
+/*INFORMATION VISIBILITY*/
+.info {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 94.5%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px;
+    box-sizing: borer-box;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+    border-radius: 0 25px 0 25px;
+}
+
+.showninfo{
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    bottom: 10px;
+    width: 50%;
+    left: 10px;
+    background-color: #d9ecff;
+    font-size: 1000;
+    color: black;
+    padding: 10px;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+    border-radius: 0 25px 0 25px;
+}
+
+.showninfo:hover{
+    opacity: 0;
+    visibility: hidden;
+}
 
 /* BACKGROUND */
 .background {
