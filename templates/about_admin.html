@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <title>Main Page</title>
-    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='admin_home.css')}}"/><!-- CSS FILE -->
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='aboutus.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
-
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js')}}"></script> <!-- JS FILE -->
   </head>
 
 <body>
@@ -13,10 +13,9 @@
 <!-- DASHBOARD -->
 <header>    
     <nav>
-        <ul class="dash">
-            <li><a href="/admin/about" class="nav" data-target="about">About</a></li>
+        <ul class="dash"> 
+            <li><a href="/admin/home" class="nav" data-target="about">Return</a></li>
             <li><a href="/profile/admin" class="nav" data-target="profile">Profile</a></li>
-            
         </ul>
     </nav>  
 
@@ -26,15 +25,38 @@
     
 </header>
 
-<!-- MANU TABLE -->
-<section class="menu">
-    <div class="Menu-tab">
-        <a href="/admin/home" class="list">HOME</a>
-        <a href="/admin/dashboard" class="list">ADMISSION</a>
-        <a href="/users" class="list">LIST</a>
-        <a href="/admin/grades" class="list">GRADE</a>
+
+<section class ="aboutContainer">
+  <div class="imagecontains">
+    <img src="{{ url_for('static', filename='about/akino.jpg') }}" class="aqipic">
+      <div class="info"> Gabriel Stephen Aquino
     </div>
+  </div>
+
+
+  <img src="{{ url_for('static', filename='uploads/LOGO.png') }}" class="logos">
+  <div class = "rectangularanim"></div>
+    <div class="motto">
+      <h1>"Empowering Minds, Shaping Futures."</h1>
+      <h2>To emphasizes the idea of nurturing students' potential and guiding them toward success. Let me know if you'd like any adjustments or a different approach!</h2>
+    </div>
+
+
+  <div class="imagecontains">
+    <img src="{{ url_for('static', filename='about/arida.jpg') }}" class="aripic">
+    <div class="info"> Eugene Gaud Arida
+    </div>
+  </div>
+  
+
+
 </section>
+
+<div class="contactbox">
+
+</div>
+
+
 
 <!-- BACKGROUND -->
 <div class="background"></div>
@@ -69,6 +91,7 @@
     </g>
   </svg>
 </div>      
+
 
 </body>
 </html>

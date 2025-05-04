@@ -133,6 +133,8 @@ def login():
             # Redirect
             if user.is_admin:
                 return redirect(url_for('admin_home'))
+            elif user.is_teacher:
+                return redirect(url_for('teacher_dashboard'))
             else:
                 return redirect(url_for('main'))
             
@@ -625,6 +627,21 @@ def abouts():
     print("Rendering about.html") 
     return render_template('about.html', user=user)
 
+@app.route('/admin/about')
+def admin_about():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+    
+    is_admin = db.session.get(User, session['user_id'])
+    if not is_admin or not is_admin.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+    
+    print("Rendering about.html")
+    return render_template('about_admin.html', user=is_admin)
+    
+
 @app.route('/teacher/dashboard')
 def teacher_dashboard():
     if 'user_id' not in session:
@@ -765,6 +782,21 @@ def teacher_profile():
         return redirect(url_for('teacher_profile'))
 
     return render_template('teacher_profile.html', user=user)
+
+@app.route('/teacher/about')
+def teacher_about():
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+    
+    is_teacher = db.session.get(User, session['user_id'])
+    if not is_teacher or not is_teacher.is_teacher:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+    
+    print("Rendering about.html")
+    return render_template('teacher_about.html', user=is_teacher)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
