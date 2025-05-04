@@ -133,6 +133,8 @@ def login():
             # Redirect
             if user.is_admin:
                 return redirect(url_for('admin_home'))
+            elif user.is_teacher:
+                return redirect(url_for('teacher_dashboard'))
             else:
                 return redirect(url_for('main'))
             
