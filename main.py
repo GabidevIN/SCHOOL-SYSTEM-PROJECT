@@ -150,13 +150,7 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-        confirm_password = request.form.get('confirm_password')
 
-        print(f"Password: {password}, Confirm Password: {confirm_password}")  # Debugging
-
-        if password != confirm_password:
-            flash('Passwords do not match!', 'danger')
-            return render_template('register.html')  # Ensure this is correct
 
 
         # Check if username or email already exists

@@ -374,7 +374,7 @@ button:hover {
     width: 100%; 
     font-weight: 700;
     padding: 15px; 
-    margin-top: 6.35rem;
+    margin-top: 10.5rem;
     background: linear-gradient(90deg, #8bbbe0,#4d677c );
     text-align: center;
     color: white;
@@ -407,7 +407,6 @@ button:hover {
     transition: opacity 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out;
     pointer-events: none;
     overflow: hidden;
-
 }
 
 .availclose {
