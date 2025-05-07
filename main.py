@@ -152,10 +152,6 @@ def register():
         password = request.form.get('password')
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 27e95c266b92383fd627a4f517d9b290b69ac4d7
         # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
