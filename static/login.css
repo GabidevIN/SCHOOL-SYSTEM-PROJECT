@@ -509,12 +509,6 @@ button:hover {
     transform: scale(1.02);
     background-color: #cde4ff;
 }
-  
-.cars1:hover .infos, .cars2:hover .infos, .cars13:hover .infos{
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out, visibility 0s linear 0s;
-}
 
 /*CONTENT OF LOCATION*/
 .rectangle,  .rectangle2, .rectangle3,.rectangle4 {
@@ -647,6 +641,22 @@ button:hover {
     position: absolute;
     bottom: 10px;
     width: 50%;
+    left: 10px;
+    background-color: #d9ecff;
+    font-size: 1000;
+    color: black;
+    padding: 10px;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+    border-radius: 0 25px 0 25px;
+}
+
+.showninfos{
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    bottom: 10px;
+    width: 80%;
+    height: 7.5%;
     left: 10px;
     background-color: #d9ecff;
     font-size: 1000;
