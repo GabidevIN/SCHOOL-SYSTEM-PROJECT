@@ -311,7 +311,11 @@ a[data-target="about"]:hover {
     opacity: 1;
 }
 
-.contactbox{
+.contactbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    align-items: center;    
     height: 70%;
     width: 5vw;
     position: fixed;
@@ -324,9 +328,8 @@ a[data-target="about"]:hover {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
     animation: contacts 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     animation-delay: 2s;
-
     animation-fill-mode: both;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 @keyframes contacts {
@@ -358,6 +361,46 @@ a[data-target="about"]:hover {
         opacity: 1;
 
     }
+}
+
+.icon,
+.iconent {
+    width: 52px;
+    height: 52px;
+    margin: 12px 0;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.iconent{
+    z-index: 3;
+}
+
+.icon {
+    animation: iconentrans 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 3.5s;
+    animation-fill-mode: both;
+    z-index: 1;
+}
+
+
+@keyframes iconentrans {
+    0% {
+        height: 0;
+        margin: -25px 0;
+        opacity: 0;
+    }
+    100% {
+        height: 52px;
+        margin: 12px 0;
+        opacity: 1;
+    }
+}
+
+.icon:hover,
+.iconent:hover {
+    transform: scale(1.25);
 }
 
 

@@ -155,7 +155,7 @@ header {
     align-items: center;
     width: 35%;
     height: 65%;
-    background: linear-gradient(90deg, #8bbbe0, #c6dafd);
+    background: linear-gradient(145deg, #4d6a7d, #7faedc);
     border-radius: 25px 0 25px 0 ;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 2;
@@ -179,8 +179,8 @@ header {
     padding: 15px;
     font-size: 1rem;
     line-height: 1.5;
-    color: #1f2937;
-    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    color: white;
+    background: linear-gradient(145deg, #79a6c4, #7faedc);
     border-radius: 25px;
     border: black 1px solid;
     margin-top: -11.5px;
@@ -190,15 +190,17 @@ header {
 .complete h1 {
     margin-bottom: 25px;
     font-size: 1.8rem;
-    color: #0f172a;
+    color: white;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .complete h2 {
     margin-bottom: 25px;
-    font-size: 1.8rem;
-    color: #0f172a;
+    font-size: 1.25rem;
+    color: white;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .button {
@@ -210,16 +212,13 @@ header {
     text-align: center;    
     text-decoration: none;
     font-size: 16px;
-    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    background: linear-gradient(145deg, #79a6c4, #7faedc);
     border: black 1px solid;
-    color: black;
+    color: white;
     border-radius: 25px;
     cursor: pointer;
     transition: all 1s ease-in-out;
     width: 45%;
-    animation: ret-entrance 1s ease-out forwards;
-    animation-delay: .5s;
-    animation-fill-mode: both;
 }
 
 .button:hover {
@@ -227,14 +226,17 @@ header {
 }
 
 .return {
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 25px;
+    letter-spacing: 3.2px;
     position: absolute;
     top: 13.5%;
     width: 10%;
     left: 37.5%;
     transform: translate(-50%, -50%);
     display: inline-block;
-    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
-    color: black;
+    background: linear-gradient(145deg, #79a6c4, #7faedc);
+    color: white;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 0 20px 0 20px;
