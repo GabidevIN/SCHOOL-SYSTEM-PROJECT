@@ -13,8 +13,7 @@
 <header>    
     <nav>
         <ul class="dash">
-            <li><a href="#" class="nav" data-target="about">About</a></li>
-            <li><a href="#" class="nav" data-target="contact">Contact</a></li>
+            <li><a href="/admin/about" class="nav" data-target="about">About</a></li>
             <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
             
         </ul>
@@ -28,6 +27,7 @@
 
 <!-- MANU TABLE -->
 <section class="menu">
+    <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
     <div class="Menu-tab">
         <a href="/admin/home" class="list">HOME</a>
         <a href="/admin/dashboard" class="list">ADMISSION</a>
@@ -62,7 +62,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.full_name }}</td>
                     <td>{{ user.address }}</td>
-                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.contact_number }}</td>
                     <td>{{ user.courses }}</td>
                     <td>{{ user.supporting_document }}</td>
                 </tr>

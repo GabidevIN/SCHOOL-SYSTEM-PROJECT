@@ -44,7 +44,6 @@ header {
 
 .nav {
     text-decoration: none;
-    color: black;
     font-size: 1.15rem;
     padding: 8px 25px;
     transition: 0.3s ease-in-out;
@@ -53,7 +52,12 @@ header {
     margin: 25px;
     background-color: #b3e0f7;
     border: white 1px solid;
+    color: rgba(0, 0, 0, 0.3);
     border-radius: 25px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .nav:hover {
@@ -102,13 +106,28 @@ header {
     justify-content: center;  
     align-items: center; 
     gap: 1rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 5px;
 }
 
-.home, .admission, .list, .calendar, .grade {
+.logos {
+    width: 100%;
+    height: auto;
+    max-width: 550px;
+    margin-bottom: 3rem;
+    position: relative;
+    bottom: 7.5rem;
+    right: 75px;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1200;
+    pointer-events: none;
+}
+
+.home, .admission, .list, .grade {
     width: 17.5rem;
     height: 2.75rem;
-    color: black;
+    color: rgba(0, 0, 0, 0.3);
     background-color: #b3e0f7;
     text-align: center;
     text-decoration: none;
@@ -119,7 +138,6 @@ header {
     margin: 10px;
     transition: all 0.4s ease-in-out;
     border: 1px solid white;
-
 }
 
 .home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
@@ -208,6 +226,7 @@ header {
 }
 
 
+
 /* TESTING */
 body {
     opacity: 0;
@@ -241,4 +260,85 @@ body.loaded {
 
 header, .Menu-tab {
     transition: opacity 0.5s ease-in-out;
+}
+
+/* CALENDAR BAR */
+.calendars-tab {
+    position: fixed;
+    width: 35rem; 
+    height: 37.5%; 
+    background: linear-gradient(145deg, #4d677c ,#8bbbe0, #c6dafd);
+    z-index: 3;
+    top: 36.25%;
+    left:81%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+    border-radius: 25px 0 25px 0;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column; 
+    justify-content: center;  
+    align-items: center; 
+    gap: .5rem;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    z-index: 1200;
+}
+
+/* CALENDAR */
+#calendarss {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    z-index: 1200;
+
+}
+
+.calendarss-header {
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(90deg, #b3e0f7, #c6dafd);
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px 0 0 0;
+    border: 1px solid black;
+    z-index: 1200;
+
+}
+
+.calendarss-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: linear-gradient(145deg, #f1f5f9,#dbeafe,#c0d9f9 );
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 0 0 25px 0;
+    z-index: 1200;
+
+
+}
+
+.calendarss-day {
+    padding: 22.5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    z-index: 1200;
+
+}
+
+.calendarss-day:hover {
+    background-color: #c0d9f9;
+    border-radius: 15px;
+    z-index: 1200;
+
+}
+
+
+.today {
+    background-color: #c0d9f9;
+    border-radius: 15px;
+    z-index: 1200;
+    border: 1px solid black;
 }

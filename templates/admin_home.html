@@ -5,6 +5,8 @@
     <title>Main Page</title>
     <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='admin_home.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js')}}"></script> <!-- JS FILE -->
+
 
   </head>
 
@@ -26,8 +28,16 @@
     
 </header>
 
+<!-- CALENDAR -->
+<section class="calendars">
+    <div class="calendars-tab">
+        <div id="calendarss" class="calendarss"></div>
+    <div>
+</section>
+
 <!-- MANU TABLE -->
 <section class="menu">
+    <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
     <div class="Menu-tab">
         <a href="/admin/home" class="list">HOME</a>
         <a href="/admin/dashboard" class="list">ADMISSION</a>
