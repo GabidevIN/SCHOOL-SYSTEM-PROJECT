@@ -53,6 +53,7 @@
                     <th>Phone Number</th>
                     <th>Courses</th>
                     <th>Supporting Document</th>
+                    <th>Role</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,14 +66,6 @@
                     <td>{{ user.contact_number }}</td>
                     <td>{{ user.courses }}</td>
                     <td>{{ user.supporting_document }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
                     <td>
                         {% if user.is_teacher %}
                             Teacher
@@ -90,6 +83,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            
         </table>
     </div>
 </section>
