@@ -44,7 +44,6 @@ header {
 
 .nav {
     text-decoration: none;
-    color: black;
     font-size: 1.15rem;
     padding: 8px 25px;
     transition: 0.3s ease-in-out;
@@ -54,6 +53,11 @@ header {
     background-color: #b3e0f7;
     border: white 1px solid;
     border-radius: 25px;
+    color: rgba(0, 0, 0, 0.3);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .nav:hover {
@@ -102,13 +106,15 @@ header {
     justify-content: center;  
     align-items: center; 
     gap: 1rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 5px;
 }
 
-.home, .admission, .list, .calendar, .grade {
+.home, .admission, .list, .grade {
     width: 17.5rem;
     height: 2.75rem;
-    color: black;
+    color: rgba(0, 0, 0, 0.3);
     background-color: #b3e0f7;
     text-align: center;
     text-decoration: none;
@@ -119,7 +125,6 @@ header {
     margin: 10px;
     transition: all 0.4s ease-in-out;
     border: 1px solid white;
-
 }
 
 .home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {

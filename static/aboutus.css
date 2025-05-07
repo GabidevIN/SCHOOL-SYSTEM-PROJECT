@@ -49,6 +49,7 @@ a[data-target="about"]:hover {
     gap: 20px;
     justify-content: center;
     flex: 1;
+    
 }
 
 
@@ -66,7 +67,6 @@ a[data-target="about"]:hover {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: black;
     font-size: 1.15rem;
     padding: 8px 25px;
     transition: 0.3s ease-in-out;
@@ -76,6 +76,11 @@ a[data-target="about"]:hover {
     border-radius: 25px;
     width: fit-content;
     transform: translateX(-3.5rem);
+    color: rgba(0, 0, 0, 0.3);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .nav:hover {

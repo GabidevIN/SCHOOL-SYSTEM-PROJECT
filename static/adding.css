@@ -67,11 +67,15 @@ header {
 
 .nav {
     text-decoration: none;
-    color: black;
     font-size: 1.15rem;
     padding: 8px 12px;
     margin: 15px;
     transition: 0.3s ease-in-out;
+    color: rgba(0, 0, 0, 0.3);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .nav:hover {
@@ -97,36 +101,39 @@ header {
 /* MENU BAR */
 .Menu-tab {
     position: fixed;
-    width: 25rem; 
-    height: 85%; 
-    background: linear-gradient(145deg, #c0d9f9, #dbeafe, #f1f5f9);
-    z-index: 3;
-    top: 52.5%;
-    left: 12.5%;
-    border: 1px solid black;
-    transform: translate(-50%, -50%);
-    border-radius: 25px 0 25px 0;
+    width: 21rem; 
+    height: 100%; 
+    background: linear-gradient(145deg, #4d677c ,#8bbbe0, #c6dafd);
+    z-index: 1100;
+    top: 50%;
+    left: 0;
+    border-right: 1px solid white;
+    transform: translateY(-50%);
     display: flex;
     padding: 2rem;
     flex-direction: column; 
-    justify-content: top;  
+    justify-content: center;  
     align-items: center; 
     gap: 1rem;
-    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 5px;
 }
 
-.home, .admission, .list, .calendar, .grade {
+.home, .admission, .list, .grade {
     width: 17.5rem;
-    color: black;
-    background-color: white;
+    height: 2.75rem;
+    color: rgba(0, 0, 0, 0.3);
+    background-color: #b3e0f7;
     text-align: center;
     text-decoration: none;
-    line-height: 2.5rem;
-    border: 1px solid black;
-    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 0 15px 0 15px;
     margin: 10px;
     transition: all 0.4s ease-in-out;
+    border: 1px solid white;
 }
 
 .home:hover, .admission:hover, .list:hover, .calendar:hover, .grade:hover {
