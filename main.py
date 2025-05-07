@@ -146,10 +146,6 @@ def register():
         password = request.form.get('password')
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 27e95c266b92383fd627a4f517d9b290b69ac4d7
         # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
@@ -210,12 +206,20 @@ def profile():
         user.address = request.form.get('address')
         user.contact_number = request.form.get('contact_number')
 
-        if 'file' in request.files:
-            file = request.files['file']
-            if file and allowed_file(file.filename): 
+        if 'profile_picture' in request.files:
+            file = request.files['profile_picture']
+            if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                user.profile_picture = filename 
+                user.profile_picture = filename
+
+        # Handle supporting document upload
+        if 'supporting_document' in request.files:
+            file = request.files['supporting_document']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.supporting_document = filename
 
         db.session.commit()
         flash('Profile updated successfully!', 'success')
@@ -247,12 +251,21 @@ def profile_admin():
         if contact_number:
             user.contact_number = contact_number
 
-        if 'file' in request.files:
-            file = request.files['file']
-            if file.filename != '':
+        if 'profile_picture' in request.files:
+            file = request.files['profile_picture']
+            if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 user.profile_picture = filename
+
+        # Handle supporting document upload
+        if 'supporting_document' in request.files:
+            file = request.files['supporting_document']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.supporting_document = filename
+                
         db.session.commit()
         flash('Profile updated successfully!', 'success')
         return redirect(url_for('profile_admin'))
@@ -767,12 +780,20 @@ def teacher_profile():
             user.contact_number = contact_number
 
         # Handle file upload for profile picture
-        if 'file' in request.files:
-            file = request.files['file']
-            if file.filename != '':
+        if 'profile_picture' in request.files:
+            file = request.files['profile_picture']
+            if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 user.profile_picture = filename
+
+        # Handle supporting document upload
+        if 'supporting_document' in request.files:
+            file = request.files['supporting_document']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user.supporting_document = filename
 
         db.session.commit()
         flash('Profile updated successfully!', 'success')
@@ -793,6 +814,28 @@ def teacher_about():
     
     print("Rendering about.html")
     return render_template('teacher_about.html', user=is_teacher)
+
+@app.route('/admin/promote/<int:user_id>', methods=['POST'])
+def promote_to_teacher(user_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    admin_user = db.session.get(User, session['user_id'])
+    if not admin_user or not admin_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, user_id)
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('admin_dashboard'))
+
+    # Promote the user to a teacher
+    user.is_teacher = True
+    db.session.commit()
+    flash(f'{user.username} has been promoted to Teacher!', 'success')
+    return redirect(url_for('admin_dashboard'))
 
 
 

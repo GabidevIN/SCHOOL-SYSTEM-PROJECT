@@ -68,6 +68,28 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.is_teacher %}
+                            Teacher
+                        {% else %}
+                            Student
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not user.is_teacher %}
+                        <form method="POST" action="{{ url_for('promote_to_teacher', user_id=user.id) }}">
+                            <button type="submit" class="btn btn-promote">Promote to Teacher</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 </section>

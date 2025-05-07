@@ -34,6 +34,7 @@
 <div class="profile-container">
     <h1 class ="profileh1">Profile Information</h1>
 
+
     <div class="profile-picture">
             <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="150">
             <title>Upload Profile Picture</title>
@@ -42,6 +43,8 @@
         <!-- PROFILE PICTURE -->
         <body>
             <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="profile_picture" accept="image/*" class="file-input">
+                <button type="submit" class="upload-btn">Upload</button>
             </form>
         </div>
 

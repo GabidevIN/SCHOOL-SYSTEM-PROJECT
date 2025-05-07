@@ -17,7 +17,7 @@
     <nav>
         <ul class="dash">
             <li><a href="{{ url_for('about') }}" class="nav" data-target="about">About</a></li>
-            <li><a href="/main" class="nav" data-target="profile">Return</a></li>
+            <li><a href="/admin/home" class="nav" data-target="profile">Return</a></li>
             
             
         </ul>
@@ -42,6 +42,8 @@
         <!-- PROFILE PICTURE -->
         <body>
             <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="profile_picture" accept="image/*" class="file-input">
+                <button type="submit" class="upload-btn">Upload</button>
             </form>
         </div>
 
@@ -49,7 +51,7 @@
     <div class="profile-details">
         <p><strong>Username:</strong> {{ user.username }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Role:</strong> Student</p>
+        <p><strong>Role:</strong> Admin</p>
     </div>
 
         <!-- CHANGING NAME ETC -->
