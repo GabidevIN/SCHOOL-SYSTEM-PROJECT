@@ -111,6 +111,19 @@ header {
     letter-spacing: 5px;
 }
 
+.logos {
+    width: 100%;
+    height: auto;
+    max-width: 550px;
+    margin-bottom: 3rem;
+    position: relative;
+    bottom: 7.5rem;
+    right: 75px;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1200;
+    pointer-events: none;
+}
+
 .home, .admission, .list, .grade {
     width: 17.5rem;
     height: 2.75rem;

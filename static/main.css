@@ -129,11 +129,11 @@ header {
 }
 
 .logos {
-    width: 100%; /* Make it responsive within parent */
+    width: 100%;
     height: auto;
     max-width: 300px;
     margin-bottom: 2rem;
-    position: relative; /* Changed from sticky */
+    position: relative;
     top: 0;
     left: 50px;
     transition: transform 0.3s ease-in-out;
