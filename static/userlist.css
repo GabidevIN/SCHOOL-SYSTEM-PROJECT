@@ -200,6 +200,22 @@ header {
     }
 }
 
+.viewing-doc{
+    text-decoration: none;
+    background: linear-gradient(320deg, #4d677c, #8bbbe0, #c6dafd);
+    border: 1px solid #000000;
+    border-radius: 25px;
+    padding: 2px 4px;
+    font-size: small;
+    color: white;
+    transition: transform .5s ease-in-out;
+    display: inline-block;
+}
+
+.viewing-doc:hover {
+    transform: scale(1.05);
+}
+
 .search-bar {
     width: 100%;
     padding: 12px;

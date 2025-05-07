@@ -66,7 +66,13 @@
                     <td>{{ user.address }}</td>
                     <td>{{ user.contact_number }}</td>
                     <td>{{ user.courses }}</td>
-                    <td>{{ user.supporting_document }}</td>
+                    <td>
+                        {% if user.supporting_document %}
+                            <a href="{{ url_for('static', filename='uploads/' + user.supporting_document) }}" target="_blank" class="viewing-doc">View Document</a>
+                        {% else %}
+                            No Document
+                        {% endif %}
+                    </td>
                     <td>
                         {% if user.is_teacher %}
                             Teacher
