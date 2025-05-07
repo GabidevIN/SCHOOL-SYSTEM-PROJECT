@@ -17,7 +17,7 @@
     <nav>
         <ul class="dash">
             <li><a href="{{ url_for('about') }}" class="nav" data-target="about">About</a></li>
-            <li><a href="/admin/home" class="nav" data-target="profile">RETURN</a></li>
+            <li><a href="/admin/home" class="nav" data-target="profile">Return</a></li>
             
             
         </ul>
@@ -41,11 +41,7 @@
 
         <!-- PROFILE PICTURE -->
         <body>
-            <h1>Upload Profile Picture</h1>
             <form method="POST" enctype="multipart/form-data">
-                <label for="file">Choose a picture:</label>
-                <input type="file" name="file" id="file" required>
-                <button type="submit">Upload</button>
             </form>
         </div>
 
@@ -53,7 +49,7 @@
     <div class="profile-details">
         <p><strong>Username:</strong> {{ user.username }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Role:</strong> {% if user.is_admin %} Admin {% else %} Student {% endif %}</p>
+        <p><strong>Role:</strong> Admin</p>
     </div>
 
         <!-- CHANGING NAME ETC -->
@@ -80,12 +76,13 @@
 
                     <!-- INPUT SUPPORT DOCUMENTS -->
                     <div class="form-group">
-                        <label for="file" class="form-label">Supporting Document:</label>
-                        <input type="file" id="file" name="file" class="file-input">
-
+                        <label for="supporting_document" class="form-label">Supporting Document:</label>
                         {% if user.supporting_document %}
-                            <p class="file-info">Current Document: {{ user.supporting_document }}</p>
+                            <a href="{{ url_for('static', filename='uploads/' + user.supporting_document) }}" target="_blank" class="viewing-doc">View Document</a>
+                        {% else %}
+                            <p>No Supporting Document Uploaded</p>
                         {% endif %}
+                    
 
                     <!-- UPLOAD PROFILE -->
                     </div>

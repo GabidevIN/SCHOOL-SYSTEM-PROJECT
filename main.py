@@ -12,9 +12,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -82,22 +82,16 @@ class Grade(db.Model): #pota wala pa to
 
     def __repr__(self):
         return f'<Grade {self.subject} - {self.grade}>'
-    
+with app.app_context():
+    db.create_all()
 
-    
-UPLOAD_FOLDER = 'static/uploads'  # Folder
+UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-with app.app_context():
-    db.create_all()
-    
 
 @app.route('/')
 def index():
@@ -150,12 +144,6 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 27e95c266b92383fd627a4f517d9b290b69ac4d7
         # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
@@ -212,17 +200,16 @@ def profile():
         return redirect(url_for('main'))
 
     if request.method == 'POST':
-
         user.full_name = request.form.get('full_name')
         user.address = request.form.get('address')
         user.contact_number = request.form.get('contact_number')
 
         if 'file' in request.files:
             file = request.files['file']
-            if file and allowed_file(file.filename):
+            if file and allowed_file(file.filename): 
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                user.supporting_document = filename
+                user.profile_picture = filename 
 
         db.session.commit()
         flash('Profile updated successfully!', 'success')
@@ -232,34 +219,40 @@ def profile():
 
 @app.route('/profile/admin', methods=['GET', 'POST'])
 def profile_admin():
+    # Check if the user is logged in
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
         return redirect(url_for('login'))
 
     user = db.session.get(User, session['user_id'])
-    if not user:
+    if not user or not user.is_admin: 
         flash('User not found!', 'danger')
         return redirect(url_for('main'))
 
     if request.method == 'POST':
-        # Update user information
-        user.full_name = request.form.get('full_name')
-        user.address = request.form.get('address')
-        user.contact_number = request.form.get('contact_number')
+        full_name = request.form.get('full_name')
+        address = request.form.get('address')
+        contact_number = request.form.get('contact_number')
+        
+        if full_name:
+            user.full_name = full_name
+        if address:
+            user.address = address
+        if contact_number:
+            user.contact_number = contact_number
 
-        # Handle file upload for supporting document
         if 'file' in request.files:
             file = request.files['file']
-            if file and allowed_file(file.filename):
+            if file.filename != '':
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                user.supporting_document = filename
-
+                user.profile_picture = filename
         db.session.commit()
         flash('Profile updated successfully!', 'success')
-        return redirect(url_for('profile'))
-
+        return redirect(url_for('profile_admin'))
     return render_template('profileinfo_admin.html', user=user)
+
+
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -470,6 +463,7 @@ def upload_picture():
             return redirect(url_for('main'))
 
     return render_template('upload_picture.html', user=user)
+
 
 @app.route('/about')
 def about():
@@ -793,6 +787,7 @@ def teacher_about():
     
     print("Rendering about.html")
     return render_template('teacher_about.html', user=is_teacher)
+
 
 
 if __name__ == '__main__':
