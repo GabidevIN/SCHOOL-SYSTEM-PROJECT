@@ -8,6 +8,7 @@
 - List of student 0.2v
 - grade of student 0.2v
 - Better Registration 0.1v
+- About us 0.1v
 
 **UPDATES**
 - QoL 0.1v - FULL UPDATE(RENEWED)
