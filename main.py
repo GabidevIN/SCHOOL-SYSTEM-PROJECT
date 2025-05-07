@@ -30,7 +30,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     is_admin = db.Column(db.Boolean, default=False) 
-    profile_picture = db.Column(db.String(120), default='default.jpg') 
+    profile_picture = db.Column(db.String(120), default=False) 
     full_name = db.Column(db.String(120), nullable=True) 
     address = db.Column(db.String(255), nullable=True)
     contact_number = db.Column(db.String(15), nullable=True) 
@@ -152,7 +152,10 @@ def register():
         password = request.form.get('password')
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 27e95c266b92383fd627a4f517d9b290b69ac4d7
         # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()

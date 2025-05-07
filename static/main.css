@@ -150,9 +150,8 @@ header {
 .note-tab {
     position: fixed;
     width: 40rem; 
-    height: 75%; 
+    height: auto; 
     background: linear-gradient(90deg, #4d677c ,#8bbbe0, #c6dafd);
-    z-index: 3;
     top: 55%;
     left:42.5%;
     border: 1px solid black;
@@ -167,6 +166,21 @@ header {
     box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.7);
     z-index: 1104;
 }
+
+textarea.form-input {
+    width: 100%; 
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    resize: vertical; 
+    background-color: white;
+    color: black;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
 
 /* CALENDAR BAR */
 .calendars-tab {
