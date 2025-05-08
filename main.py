@@ -736,7 +736,7 @@ def teacher_add_grades(student_id):
         flash('Grades added/updated successfully!', 'success')
         return redirect(url_for('teacher_grades'))
 
-    return render_template('add_grades.html', student=student, subjects=SUBJECTS)
+    return render_template('add_grades_teacher.html', student=student, subjects=SUBJECTS)
 
 @app.route('/teacher/view-grades', methods=['GET'])
 def teacher_view_grades():

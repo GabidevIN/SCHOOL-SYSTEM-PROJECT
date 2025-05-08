@@ -1,97 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Information</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}"> <!-- Optional CSS -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='profile.css')}}"/><!-- CSS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js')}}"></script> <!-- JS FILE -->
+  </head>
 
-</head>
 <body>
 
-<!-- DASH  -->
+<!-- DASHBOARD -->
 <header>    
-    <div href="#" class="logo" data-target="home">
-            <img src="static/uploads/LOGO.png" class="logos">
-    </div>
     <nav>
         <ul class="dash">
-            <li><a href="{{ url_for('about') }}" class="nav" data-target="about">About</a></li>
-            <li><a href="/teacher/dashboard" class="nav" data-target="profile">Return</a></li>
-            
-            
+            <li><a href="/teacher/dashboard" class="nav" data-target="about">Return</a></li>
+            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
         </ul>
     </nav>  
     <form action="{{ url_for('logout') }}" method="post" class="logout-form">
         <button type="submit" class="btn btn-logout">Logout</button>
     </form>
+    
 </header>
 
-<!-- BG -->
-<div class="background"></div>
-
 <!-- PROFILE -->
-<div class="profile-container">
-    <h1 class ="profileh1">Profile Information</h1>
-
-    <div class="profile-picture">
-            <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="150">
-            <title>Upload Profile Picture</title>
+<section class= "profile-holder">
+  <div class="profile-container">
+  <img src="{{ url_for('static', filename='uploads/LOGO.png') }}" class="logos">
+  <h1 class ="profileh1">Profile Information</h1>
+  <!-- PROFILE-PICTURE HOLDER -->
+    <section class="pictureholder">
+      <div class="profile-picture">
+        <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) }}" alt="Profile Picture" width="250" height="250">
+        <title>Upload Profile Picture</title>
         </head>
-
         <!-- PROFILE PICTURE -->
         <body>
-            <h1>Upload Profile Picture</h1>
-            <form method="POST" enctype="multipart/form-data">
-                <label for="file">Choose a picture:</label>
-                <input type="file" name="file" id="file" required>
-                <button type="submit">Upload</button>
+          <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="profile_picture" accept="image/*" class="file-input">
+            <button type="submit" class="upload-btn">Upload</button> 
             </form>
-        </div>
+        </body>
+      </div>
+    </section>  
 
-    <!-- PROFILE DETAILS -->
+        <!-- PROFILE DETAILS -->
     <div class="profile-details">
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Role:</strong> Teacher</p>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Role:</strong> Teacher</p>
     </div>
-
         <!-- CHANGING NAME ETC -->
-        <div class="profile-actions">
-            <form method="POST" enctype="multipart/form-data">
-
-                <form method="POST" class="profile-form-container">
-                    <div class="form-group">
-                        <label for="full_name" class="form-label">Full Name:</label>
-                        <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" class="form-input">
-                    </div>
-                    <!-- INPUT ADDRESS -->
-
-                    <div class="form-group">
-                        <label for="address" class="form-label">Address:</label>
-                        <input type="text" id="address" name="address" value="{{ user.address }}" class="form-input">
-                    </div>
-
-                    <!-- INPUT CONTACT NUMBER -->
-                    <div class="form-group">
-                        <label for="contact_number" class="form-label">Contact Number:</label>
-                        <input type="text" id="contact_number" name="contact_number" value="{{ user.contact_number }}" class="form-input">
-                    </div>
-
-                    <!-- INPUT SUPPORT DOCUMENTS -->
-                    <div class="form-group">
-                        <label for="file" class="form-label">Supporting Document:</label>
-                        <input type="file" id="file" name="file" class="file-input">
-
-                        {% if user.supporting_document %}
-                            <p class="file-info">Current Document: {{ user.supporting_document }}</p>
-                        {% endif %}
-
-                    <!-- UPLOAD PROFILE -->
-                    </div>
-                    <button type="submit" class="submit-btn">Update Profile</button>
-                </form>
-        </div>
+    <div class="profile-actions">
+      <form method="POST" enctype="multipart/form-data">
+        <form method="POST" class="profile-form-container">
+          <div class="form-group">
+            <label for="full_name" class="form-label">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" class="form-input">
+          </div>
+        <!-- INPUT ADDRESS -->
+          <div class="form-group">
+            <label for="address" class="form-label">Address:</label>
+            <input type="text" id="address" name="address" value="{{ user.address }}" class="form-input">
+          </div>
+        <!-- INPUT CONTACT NUMBER -->
+          <div class="form-group">
+            <label for="contact_number" class="form-label">Contact Number:</label>
+            <input type="text" id="contact_number" name="contact_number" value="{{ user.contact_number }}" class="form-input">
+          </div>
+        <!-- INPUT SUPPORT DOCUMENTS -->
+          <div class="supportdocu">
+            <label for="supporting_document" class="form-label">Supporting Document:</label>
+            {% if user.supporting_document %}
+              <a href="{{ url_for('static', filename='uploads/' + user.supporting_document) }}" target="_blank" class="viewing-doc">View Document</a>
+            {% else %}
+              <p>No Supporting Document Uploaded</p>
+            {% endif %}
+          </div>
+        <!-- UPLOAD PROFILE -->
+            <button type="submit" class="submit-btn">Update Profile</button>
+          </form>
+        </form>
+      </div>
     </div>
+</section>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<!-- WAVING CONTENT -->
+<div class="wave-content">
+
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+
+    <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="#77CAE8" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="#68A9C0" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+        <use xlink:href="#gentle-wave" x="48" y="2" fill="#648F9F" />
+    </g>
+  </svg>
+</div>      
+
+<!-- WAVING LAYERED -->
+<div class="wave-layered">
+
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+
+    <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+    </g>
+  </svg>
+</div>      
+
+
 </body>
 </html>
