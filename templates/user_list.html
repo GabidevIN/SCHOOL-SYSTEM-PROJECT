@@ -54,6 +54,7 @@
                     <th>Courses</th>
                     <th>Supporting Document</th>
                     <th>Role</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +83,7 @@
                     <td>
                         {% if not user.is_teacher %}
                         <form method="POST" action="{{ url_for('promote_to_teacher', user_id=user.id) }}">
-                            <button type="submit" class="btn btn-promote">Promote to Teacher</button>
+                            <button type="submit" class="btn-promote">Promote to Teacher</button>
                         </form>
                         {% endif %}
                     </td>
