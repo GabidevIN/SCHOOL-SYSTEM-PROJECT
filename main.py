@@ -734,7 +734,7 @@ def teacher_add_grades(student_id):
         return redirect(url_for('teacher_grades'))
 
     return render_template('add_grades.html', student=student, subjects=SUBJECTS)
-#teacher view grades for the students
+
 @app.route('/teacher/view-grades', methods=['GET'])
 def teacher_view_grades():
     if 'user_id' not in session:
