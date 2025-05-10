@@ -7,14 +7,14 @@ from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 
 
-
+#Flask app initialization
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -24,6 +24,7 @@ try:
 except Exception as e:
     print(f"Error connecting to the database: {e}")
 
+#class for User
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -40,8 +41,8 @@ class User(db.Model):
     is_new = db.Column(db.Boolean, default=True) 
     approved = db.Column(db.Boolean, default=False) 
     
-    is_teacher = db.Column(db.Boolean, default=False)   #new
-    note = db.Column(db.String(255), nullable=True)  # New
+    is_teacher = db.Column(db.Boolean, default=False)  
+    note = db.Column(db.String(255), nullable=True)  
     
     
     
@@ -51,7 +52,7 @@ class User(db.Model):
 
 with app.app_context():
     db.create_all()
-
+#class for RegistrationRequest for the extra registration
 class RegistrationRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -71,8 +72,8 @@ class RegistrationRequest(db.Model):
 
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
-
-class Grade(db.Model): #pota wala pa to
+#class for the grades for students
+class Grade(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     subject = db.Column(db.String(80), nullable=False)
@@ -84,7 +85,7 @@ class Grade(db.Model): #pota wala pa to
         return f'<Grade {self.subject} - {self.grade}>'
 with app.app_context():
     db.create_all()
-
+#upload folder for the profile picture and supporting document
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -92,7 +93,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+#set routes for default
 @app.route('/')
 def index():
     return render_template('login.html')
@@ -170,7 +171,7 @@ def register():
             return redirect(url_for('login', source='failed'))
 
     return render_template('register.html')
-
+#route for the main page
 @app.route('/main', methods=['GET', 'POST'])
 def main():
     if 'user_id' not in session:
@@ -191,7 +192,7 @@ def main():
             flash('Note saved successfully!', 'success')
 
     return render_template('main.html', user=user)
-
+#route for the profile page
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if 'user_id' not in session:
@@ -228,7 +229,7 @@ def profile():
         return redirect(url_for('profile'))
 
     return render_template('profileinfo.html', user=user)
-
+#route for the admin profile page
 @app.route('/profile/admin', methods=['GET', 'POST'])
 def profile_admin():
     # Check if the user is logged in
@@ -273,8 +274,7 @@ def profile_admin():
         return redirect(url_for('profile_admin'))
     return render_template('profileinfo_admin.html', user=user)
 
-
-
+#route for the admin dashboard
 @app.route('/admin/dashboard')
 def admin_dashboard():
     if 'user_id' not in session:
@@ -291,7 +291,7 @@ def admin_dashboard():
     completed_registrations = RegistrationRequest.query.filter_by(approved=True).all()
 
     return render_template('admin_dashboard.html', registration_requests=registration_requests, completed_registrations=completed_registrations)
-
+#route for the admin home page
 @app.route('/admin/home')
 def admin_home():
     if 'user_id' not in session:
@@ -305,7 +305,7 @@ def admin_home():
 
     users = User.query.all()
     return render_template('admin_home.html', users=users) 
-
+#route for the all logout
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
@@ -347,7 +347,7 @@ def approve_registration(request_id):
 
     return redirect(url_for('admin_dashboard'))
 
-
+#for admin that decline the registration
 @app.route('/admin/decline/<int:request_id>', methods=['POST'])
 def decline_registration(request_id):
     if 'user_id' not in session:
@@ -369,8 +369,7 @@ def decline_registration(request_id):
 
     return redirect(url_for('admin_dashboard'))
 
-
-#list ng mga bulgago 
+#list of all users for admin  
 @app.route('/users')
 def list_users():
     if 'user_id' not in session:
@@ -385,8 +384,7 @@ def list_users():
     users = User.query.all()
     return render_template('user_list.html', users=users)
 
-
-
+#route for the extra registration page from the login page
 @app.route('/extra-registration', methods=['GET', 'POST'])
 def extra_registration():
     if 'user_id' not in session:
@@ -409,7 +407,7 @@ def extra_registration():
         selected_course = request.form.get('course')  
         flash(f'You selected: {selected_course}', 'success')
 
-        # File upload
+        # File upload 
         if 'file' not in request.files:
             flash('No file part!', 'danger')
             return redirect(request.url)
@@ -437,7 +435,7 @@ def extra_registration():
 
     courses = ['BSCPE', 'BSIE', 'BSEE']
     return render_template('ex_reg.html', registration_request=registration_request, courses=courses)
-
+#for the student that have pending registration
 @app.route('/ex_register')
 def ex_register():
     if 'user_id' not in session:
@@ -453,7 +451,7 @@ def ex_register():
 
 
     return render_template('register_complete.html', extra_details=extra_details, last_user=last_user)
-
+#upload the profile picture for the user
 @app.route('/upload-picture', methods=['GET', 'POST'])
 def upload_picture():
     if 'user_id' not in session:
@@ -485,7 +483,7 @@ def upload_picture():
 
     return render_template('upload_picture.html', user=user)
 
-
+#for the page of about
 @app.route('/about')
 def about():
     if 'user_id' not in session:
@@ -499,15 +497,13 @@ def about():
 
     return render_template('about.html', user=user) 
 
-#grades na to
 
-SUBJECTS = [
-    "Physics 1",
-    "Chemistry",
-    "CAD",
-    "Physical Education 1"
-]
 
+
+#grades system for the students
+#list of subjects
+SUBJECTS = ["Physics 1","Chemistry","CAD","Physical Education 1"]
+#grades for the admin to show
 @app.route('/admin/grades', methods=['GET'])
 def admin_grades():
     if 'user_id' not in session:
@@ -541,7 +537,7 @@ def admin_grades_for_student(student_id):
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('admin_grades.html', student=student, grades=grades)
-
+#admin add grades for the students
 @app.route('/admin/add-grades/<int:student_id>', methods=['GET', 'POST'])
 def add_grades(student_id):
     if 'user_id' not in session:
@@ -579,7 +575,7 @@ def add_grades(student_id):
         return redirect(url_for('admin_grades'))
 
     return render_template('add_grades.html', student=student, subjects=SUBJECTS)
-
+#admin view grades for the students
 @app.route('/admin/view-grades', methods=['GET'])
 def admin_view_grades():
     if 'user_id' not in session:
@@ -594,7 +590,7 @@ def admin_view_grades():
     grades = Grade.query.all()
 
     return render_template('admin_view_grades.html', students=students_with_grades, grades=grades)
-
+#student show their grades
 @app.route('/student/grades', methods=['GET'])
 def student_grades():
     if 'user_id' not in session:
@@ -609,7 +605,7 @@ def student_grades():
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('student_grades.html', student=student, grades=grades)
-
+#student show their subjects
 @app.route('/student/sub', methods=['GET'])
 def student_subjects():
     if 'user_id' not in session:
@@ -624,7 +620,7 @@ def student_subjects():
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('student_subjects.html', student=student, grades=grades)
-
+#extra about page for the student
 @app.route('/student/about')
 def abouts():
     if 'user_id' not in session:
@@ -638,7 +634,7 @@ def abouts():
 
     print("Rendering about.html") 
     return render_template('about.html', user=user)
-
+#extra about page for the admin
 @app.route('/admin/about')
 def admin_about():
     if 'user_id' not in session:
@@ -653,7 +649,8 @@ def admin_about():
     print("Rendering about.html")
     return render_template('about_admin.html', user=is_admin)
     
-
+#Teacher
+#teaacher dashboard for the teacher
 @app.route('/teacher/dashboard')
 def teacher_dashboard():
     if 'user_id' not in session:
@@ -667,7 +664,7 @@ def teacher_dashboard():
 
     students = User.query.all()  # Fetch all students
     return render_template('teacher_dashboard.html', students=students)
-
+#teacher grades for the students
 @app.route('/teacher/grades', methods=['GET'])
 def teacher_grades():
     if 'user_id' not in session:
@@ -681,7 +678,7 @@ def teacher_grades():
 
     students = User.query.all()
     return render_template('teacher_grades.html', students=students)
-
+#teacher grades for the students
 @app.route('/teacher/grades/<int:student_id>', methods=['GET'])
 def teacher_grades_for_student(student_id):
     if 'user_id' not in session:
@@ -701,7 +698,7 @@ def teacher_grades_for_student(student_id):
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('teacher_grades.html', student=student, grades=grades)
-
+#teacher add grades for the students
 @app.route('/teacher/add-grades/<int:student_id>', methods=['GET', 'POST'])
 def teacher_add_grades(student_id):
     if 'user_id' not in session:
@@ -738,7 +735,7 @@ def teacher_add_grades(student_id):
         flash('Grades added/updated successfully!', 'success')
         return redirect(url_for('teacher_grades'))
 
-    return render_template('add_grades_teacher.html', student=student, subjects=SUBJECTS)
+    return render_template('add_grades.html', student=student, subjects=SUBJECTS)
 
 @app.route('/teacher/view-grades', methods=['GET'])
 def teacher_view_grades():
@@ -755,7 +752,7 @@ def teacher_view_grades():
     grades = Grade.query.all()
 
     return render_template('teacher_view_grades.html', students=students_with_grades, grades=grades)
-
+#teacher view grades for the students
 @app.route('/teacher/profile', methods=['GET', 'POST'])
 def teacher_profile():
     if 'user_id' not in session:
@@ -802,7 +799,7 @@ def teacher_profile():
         return redirect(url_for('teacher_profile'))
 
     return render_template('teacher_profile.html', user=user)
-
+#route for the teacher about page
 @app.route('/teacher/about')
 def teacher_about():
     if 'user_id' not in session:
@@ -816,7 +813,7 @@ def teacher_about():
     
     print("Rendering about.html")
     return render_template('teacher_about.html', user=is_teacher)
-
+#route from admin to promote a user to teacher
 @app.route('/admin/promote/<int:user_id>', methods=['POST'])
 def promote_to_teacher(user_id):
     if 'user_id' not in session:
