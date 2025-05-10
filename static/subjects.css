@@ -213,12 +213,17 @@ header {
   .grade-table thead {
     background-color: #f7fafc;
     color: black;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
   
   .grade-table th, .grade-table td {
     padding: 14px 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    
   }
   
   .grade-table tr:hover {

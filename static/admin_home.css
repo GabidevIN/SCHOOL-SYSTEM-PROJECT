@@ -304,7 +304,10 @@ header, .Menu-tab {
     border-radius: 25px 0 0 0;
     border: 1px solid black;
     z-index: 1200;
-
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .calendarss-days {
