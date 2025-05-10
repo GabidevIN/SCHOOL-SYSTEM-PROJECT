@@ -36,11 +36,11 @@ class User(db.Model):
     address = db.Column(db.String(255), nullable=True)
     contact_number = db.Column(db.String(15), nullable=True) 
     courses = db.Column(db.String(120), nullable=True) 
-    
+    section = db.Column(db.String(120), nullable=True)
+    year = db.Column(db.String(120), nullable=True)
     supporting_document = db.Column(db.String(120), nullable=True) 
     is_new = db.Column(db.Boolean, default=True) 
     approved = db.Column(db.Boolean, default=False) 
-    
     is_teacher = db.Column(db.Boolean, default=False)  
     note = db.Column(db.String(255), nullable=True)  
     
@@ -383,6 +383,66 @@ def list_users():
 
     users = User.query.all()
     return render_template('user_list.html', users=users)
+
+@app.route('/admin/update-user/<int:user_id>', methods=['POST'])
+def update_user(user_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login', source='failed'))
+
+    admin_user = db.session.get(User, session['user_id'])
+    if not admin_user or not admin_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login', source='failed'))
+
+    user = db.session.get(User, user_id)
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('list_users'))
+
+    # INPUT IN THE OPTIONS
+    new_year = request.form.get('year')
+    new_section = request.form.get('section')
+
+    # UPDATE THE YEAR
+    if new_year:
+        user.year = new_year
+        flash(f'{user.username}\'s year has been updated to {new_year}!', 'success')
+
+    # UPDATE SECTION
+    if new_section:
+        user.section = new_section
+        flash(f'{user.username}\'s section has been updated to {new_section}!', 'success')
+
+    # SAVE CHANGES (SAVE BOTTON BOI)
+    db.session.commit()
+
+    return redirect(url_for('list_users'))
+
+#route from admin to promote a user to teacher // PROMOTE TEACHER TO NOH??
+@app.route('/admin/promote/<int:user_id>', methods=['POST'])
+def promote_to_teacher(user_id):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login', source='failed'))
+
+    admin_user = db.session.get(User, session['user_id'])
+    if not admin_user or not admin_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login', source='failed'))
+
+    user = db.session.get(User, user_id)
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('admin_dashboard'))
+
+    # Promote the user to a teacher
+    user.is_teacher = True
+    db.session.commit()
+    flash(f'{user.username} has been promoted to Teacher!', 'success')
+    return redirect(url_for('admin_dashboard'))
+
+
 
 #route for the extra registration page from the login page
 @app.route('/extra-registration', methods=['GET', 'POST'])
@@ -813,30 +873,6 @@ def teacher_about():
     
     print("Rendering about.html")
     return render_template('teacher_about.html', user=is_teacher)
-#route from admin to promote a user to teacher
-@app.route('/admin/promote/<int:user_id>', methods=['POST'])
-def promote_to_teacher(user_id):
-    if 'user_id' not in session:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('login', source='failed'))
-
-    admin_user = db.session.get(User, session['user_id'])
-    if not admin_user or not admin_user.is_admin:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('login', source='failed'))
-
-    user = db.session.get(User, user_id)
-    if not user:
-        flash('User not found!', 'danger')
-        return redirect(url_for('admin_dashboard'))
-
-    # Promote the user to a teacher
-    user.is_teacher = True
-    db.session.commit()
-    flash(f'{user.username} has been promoted to Teacher!', 'success')
-    return redirect(url_for('admin_dashboard'))
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

@@ -244,7 +244,7 @@ header {
 }
 
 .listed-container{
-    width: 100%;
+    width: 1350px;
     height: 100%;
     background-color: white;
     scale: 1rem;
@@ -252,10 +252,11 @@ header {
     justify-content: flex-start;
     align-items: center; 
     border-radius: 0 25px 0 25px; 
+    overflow-x: auto;
 }
 
 .listed-table{
-    width: 100%;
+    max-width: 2000px;
     border-collapse: collapse;
     text-align: center;
     border: 1px solid black;
@@ -264,40 +265,38 @@ header {
 .information-table{
     padding: 10px;
     margin-right: 10px;
-    
 }
 
 .information-table tr{
     border: 1px solid #000000;
-    
-    
 }
 
 th, td {
+    width: 17.5rem;
     border: 1px solid #000000;
     background-color: #dbeafe;
     padding: 10px;
     font-size: 18px;
     text-transform: uppercase;
     overflow-x: auto;
-    white-space: nowrap;
-    max-width: 150px;
+    max-width: 2500px;
+    
 }
 
-td::-webkit-scrollbar {
-    height: 6px;
+.listed-container::-webkit-scrollbar ,td::-webkit-scrollbar {
+    height: 15px;
 }
 
-td::-webkit-scrollbar-track {
-    background: #f0f0f0;
+.listed-container::-webkit-scrollbar-track ,td::-webkit-scrollbar-track {
+    background: #4d677c;
     border-radius: 10px;
 }
 
-td::-webkit-scrollbar-thumb {
-    background-color: #888;
+.listed-container::-webkit-scrollbar-thumb, td::-webkit-scrollbar-thumb {
+    background-color: #c6dafd;
     border-radius: 10px;
 }
-td::-webkit-scrollbar-thumb:hover {
+.listed-container::-webkit-scrollbar-thumb:hover ,td::-webkit-scrollbar-thumb:hover {
     background-color: #555;
 }
 

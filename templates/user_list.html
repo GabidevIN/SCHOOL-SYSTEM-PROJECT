@@ -39,33 +39,40 @@
 
 <!-- LIST OF STUDENTS -->
 <section class="listed">
-        <!-- Search Bar -->
-        <input type="text" id="searchBar" onkeyup="searchTable()" placeholder="Search for students..." class="search-bar">
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" onkeyup="searchTable()" placeholder="Search for students..." class="search-bar">
     <div class="listed-container">
         
         <table class="listed-table">
             <thead class="information-table">
                 <tr>
                     <th>Username</th>
-                    <th>Email</th>
                     <th>Full Name</th>
-                    <th>Address</th>
-                    <th>Phone Number</th>
                     <th>Courses</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>                    
                     <th>Supporting Document</th>
                     <th>Role</th>
-                    <th>Action</th>
+                    <th>PROMOTION</th>
+                    <th>year</th>
+
+                    <th>SECTION</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                 <tr>
                     <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
                     <td>{{ user.full_name }}</td>
+                    <td>{{ user.courses }}</td>
+
+                    <td>{{ user.email }}</td>
                     <td>{{ user.address }}</td>
                     <td>{{ user.contact_number }}</td>
-                    <td>{{ user.courses }}</td>
+
+                    <!-- view support doccuments -->
                     <td>
                         {% if user.supporting_document %}
                             <a href="{{ url_for('static', filename='uploads/' + user.supporting_document) }}" target="_blank" class="viewing-doc">View Document</a>
@@ -73,6 +80,7 @@
                             No Document
                         {% endif %}
                     </td>
+                    <!-- student status -->
                     <td>
                         {% if user.is_teacher %}
                             Teacher
@@ -80,6 +88,7 @@
                             Student
                         {% endif %}
                     </td>
+                    <!-- promote to teacher -->
                     <td>
                         {% if not user.is_teacher %}
                         <form method="POST" action="{{ url_for('promote_to_teacher', user_id=user.id) }}">
@@ -87,6 +96,41 @@
                         </form>
                         {% endif %}
                     </td>
+                   <form method="POST" action="{{ url_for('update_user', user_id=user.id) }}">
+
+                    <!-- Update User Year -->
+
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <td>
+                        <select name="year" class="btn-promote">
+                            <option value="1styr" {% if user.year == "1styr" %}selected{% endif %}>1ST YEAR</option>
+                            <option value="2ndyr" {% if user.year == "2ndyr" %}selected{% endif %}>2ND YEAR</option>
+                        </select>
+                    </td>
+
+                    <!-- Update Section -->
+                    <td>
+                        <select name="section" class="btn-promote">
+                            {% if user.courses == 'BSEE' %}
+                                <!-- IF COURSE IS EE -->
+                                <option value="BSEE 1-A" {% if user.section == "BSEE 1-A" %}selected{% endif %}>BSEE 1-A</option>
+                                <option value="BSEE 2-A" {% if user.section == "BSEE 2-A" %}selected{% endif %}>BSEE 2-A</option>
+                            {% elif user.courses == 'BSIE' %}
+                                <!-- IF COURSE IS IE -->
+                                <option value="BSIE 1-A" {% if user.section == "BSIE 1-A" %}selected{% endif %}>BSIE 1-A</option>
+                                <option value="BSIE 2-A" {% if user.section == "BSIE 2-A" %}selected{% endif %}>BSIE 2-A</option>
+                            {% else %}
+                                <!-- ELSE CPE -->
+                                <option value="BSCPE 1-A" {% if user.section == "BSCpE 1-A" %}selected{% endif %}>BSCPE 1-A</option>
+                                <option value="BSCPE 2-A" {% if user.section == "BSCpE 2-A" %}selected{% endif %}>BSCPE 2-A</option>
+                            {% endif %}
+                        </select>
+                    </td>
+
+                    <!-- Submit Button for Updating Year and Section -->
+                    <td><button type="submit" class="btn-promote">Update</button></td>
+                </form>
+
                 </tr>
                 {% endfor %}
             </tbody>
