@@ -22,14 +22,14 @@ header {
     border-bottom: 1px solid white;
 }
 
-a[data-target="about"] {
+a[data-target="profile"] {
     background-color: #7AE2CF;
     color: black; 
     transform: all 2s ease-in-out;   
     font-weight: bold;
 }
 
-a[data-target="about"]:hover {
+a[data-target="profile"]:hover {
     background-color: #db835f;
     color: black;    
 }
@@ -76,6 +76,10 @@ a[data-target="about"]:hover {
     border-radius: 25px;
     width: fit-content;
     transform: translateX(-3.5rem);
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .nav:hover {
@@ -365,7 +369,7 @@ a[data-target="about"]:hover {
     width: 100%;
     max-width: 600px;
     text-decoration: none;
-    margin: 2px 0 5px -7.5px; /* ⬅ moved to the left */
+    margin: 2px 0 5px -7.5px;
     padding: 15px 15px;
     background: linear-gradient(145deg, #4d677c, #8bbbe0, #c6dafd);
     border: 1px solid #000000;

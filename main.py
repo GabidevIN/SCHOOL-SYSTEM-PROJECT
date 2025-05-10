@@ -311,7 +311,7 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     flash('You have been logged out.', 'success')
-    return redirect(url_for('login', source='failed'))
+    return redirect(url_for('login'))
 
 @app.route('/admin/approve/<int:request_id>', methods=['POST'])
 def approve_registration(request_id):
