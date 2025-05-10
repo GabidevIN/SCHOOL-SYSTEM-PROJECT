@@ -97,8 +97,9 @@ def allowed_file(filename):
 def index():
     return render_template('login.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/login', defaults={'source': 'normal'}, methods=['GET', 'POST'])
+@app.route('/login/<source>', methods=['GET', 'POST'])
+def login(source):
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -114,7 +115,6 @@ def login():
             session['user_id'] = registration_request.id 
             return redirect(url_for('extra_registration'))
 
-        # Check
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
             session['username'] = user.username
@@ -124,7 +124,6 @@ def login():
             print(f"Session user_id: {session['user_id']}")
             print(f"Session username: {session['username']}")
 
-            # Redirect
             if user.is_admin:
                 return redirect(url_for('admin_home'))
             elif user.is_teacher:
@@ -134,9 +133,13 @@ def login():
             
         flash('Invalid username or password!', 'danger')
         print("REDIRECTION ERROR")
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
-    return render_template('login.html')
+    # Choose appropriate template based on source
+    if source == 'success': template = 'login3.html' 
+    elif source == 'normal': template = 'login.html'
+    else: template = 'login2.html'
+    return render_template(template)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -145,14 +148,13 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
 
-
         # Check if username or email already exists
         user_exists = User.query.filter_by(username=username).first()
         email_exists = User.query.filter_by(email=email).first()
 
         if user_exists or email_exists:
             flash('Username or email already exists!', 'danger')
-            return redirect(url_for('register'))
+            return redirect(url_for('login', source='failed'))
 
         # Hash the password and save the registration request
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -162,10 +164,10 @@ def register():
             db.session.add(registration_request)
             db.session.commit()
             flash('Registration request submitted! Please wait for approval.', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('login', source='success'))
         except Exception as e:
             flash('An error occurred. Please try again.', 'danger')
-            return redirect(url_for('register'))
+            return redirect(url_for('login', source='failed'))
 
     return render_template('register.html')
 
@@ -173,12 +175,12 @@ def register():
 def main():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user:
         flash('User not found!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     if request.method == 'POST':
         # Save the note
@@ -194,12 +196,12 @@ def main():
 def profile():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user:
         flash('User not found!', 'danger')
-        return redirect(url_for('main'))
+        return redirect(url_for('login', source='failed'))
 
     if request.method == 'POST':
         user.full_name = request.form.get('full_name')
@@ -232,7 +234,7 @@ def profile_admin():
     # Check if the user is logged in
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user or not user.is_admin: 
@@ -277,12 +279,12 @@ def profile_admin():
 def admin_dashboard():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user or not user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     # Fetch pending and completed registration requests
     registration_requests = RegistrationRequest.query.filter_by(approved=True).all()
@@ -294,12 +296,12 @@ def admin_dashboard():
 def admin_home():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     users = User.query.all()
     return render_template('admin_home.html', users=users) 
@@ -309,18 +311,18 @@ def logout():
     session.pop('user_id', None)
     session.pop('username', None)
     flash('You have been logged out.', 'success')
-    return redirect(url_for('login'))
+    return redirect(url_for('login', source='failed'))
 
 @app.route('/admin/approve/<int:request_id>', methods=['POST'])
 def approve_registration(request_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     registration_request = RegistrationRequest.query.get(request_id)
     if registration_request:
@@ -350,12 +352,12 @@ def approve_registration(request_id):
 def decline_registration(request_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     registration_request = db.session.get(RegistrationRequest, request_id)
     if registration_request:
@@ -373,12 +375,12 @@ def decline_registration(request_id):
 def list_users():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     users = User.query.all()
     return render_template('user_list.html', users=users)
@@ -389,7 +391,7 @@ def list_users():
 def extra_registration():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     registration_request = RegistrationRequest.query.filter_by(id=session['user_id']).first()
     if not registration_request:
@@ -440,7 +442,7 @@ def extra_registration():
 def ex_register():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     # Fetch the registration request
     extra_details = RegistrationRequest.query.filter_by(id=session['user_id']).first()
@@ -456,7 +458,7 @@ def ex_register():
 def upload_picture():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user:
@@ -488,12 +490,12 @@ def upload_picture():
 def about():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user:
         flash('User not found!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     return render_template('about.html', user=user) 
 
@@ -510,12 +512,12 @@ SUBJECTS = [
 def admin_grades():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     students = User.query.all()
     return render_template('admin_grades.html', students=students)
@@ -524,12 +526,12 @@ def admin_grades():
 def admin_grades_for_student(student_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     student = User.query.get(student_id)
     if not student:
@@ -544,12 +546,12 @@ def admin_grades_for_student(student_id):
 def add_grades(student_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     student = User.query.get(student_id)
     if not student:
@@ -582,12 +584,12 @@ def add_grades(student_id):
 def admin_view_grades():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
     students_with_grades = db.session.query(User).join(Grade).distinct().all()
     grades = Grade.query.all()
 
@@ -597,12 +599,12 @@ def admin_view_grades():
 def student_grades():
     if 'user_id' not in session:
         flash('Access denied! Please log in.', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     student = db.session.get(User, session['user_id'])
     if not student:
         flash('Student not found!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
@@ -612,12 +614,12 @@ def student_grades():
 def student_subjects():
     if 'user_id' not in session:
         flash('Access denied! Please log in.', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     student = db.session.get(User, session['user_id'])
     if not student:
         flash('Student not found!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
@@ -627,12 +629,12 @@ def student_subjects():
 def abouts():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user:
         flash('User not found!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     print("Rendering about.html") 
     return render_template('about.html', user=user)
@@ -641,12 +643,12 @@ def abouts():
 def admin_about():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
     
     is_admin = db.session.get(User, session['user_id'])
     if not is_admin or not is_admin.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
     
     print("Rendering about.html")
     return render_template('about_admin.html', user=is_admin)
@@ -656,12 +658,12 @@ def admin_about():
 def teacher_dashboard():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user or not user.is_teacher:  # Check for teacher role
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     students = User.query.all()  # Fetch all students
     return render_template('teacher_dashboard.html', students=students)
@@ -670,12 +672,12 @@ def teacher_dashboard():
 def teacher_grades():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_teacher:  # Check for teacher role
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     students = User.query.all()
     return render_template('teacher_grades.html', students=students)
@@ -684,12 +686,12 @@ def teacher_grades():
 def teacher_grades_for_student(student_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_teacher:  # Check for teacher role
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     student = User.query.get(student_id)
     if not student:
@@ -704,12 +706,12 @@ def teacher_grades_for_student(student_id):
 def teacher_add_grades(student_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_teacher:  # Check for teacher role
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     student = User.query.get(student_id)
     if not student:
@@ -742,12 +744,12 @@ def teacher_add_grades(student_id):
 def teacher_view_grades():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     current_user = db.session.get(User, session['user_id'])
     if not current_user or not current_user.is_teacher:  # Check for teacher role
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     students_with_grades = db.session.query(User).join(Grade).distinct().all()
     grades = Grade.query.all()
@@ -758,12 +760,12 @@ def teacher_view_grades():
 def teacher_profile():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, session['user_id'])
     if not user or not user.is_teacher:  # Ensure the user is a teacher
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     if request.method == 'POST':
         # Handle profile updates
@@ -805,12 +807,12 @@ def teacher_profile():
 def teacher_about():
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
     
     is_teacher = db.session.get(User, session['user_id'])
     if not is_teacher or not is_teacher.is_teacher:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
     
     print("Rendering about.html")
     return render_template('teacher_about.html', user=is_teacher)
@@ -819,12 +821,12 @@ def teacher_about():
 def promote_to_teacher(user_id):
     if 'user_id' not in session:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     admin_user = db.session.get(User, session['user_id'])
     if not admin_user or not admin_user.is_admin:
         flash('Access denied!', 'danger')
-        return redirect(url_for('login'))
+        return redirect(url_for('login', source='failed'))
 
     user = db.session.get(User, user_id)
     if not user:

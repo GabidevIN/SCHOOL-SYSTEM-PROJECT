@@ -27,26 +27,11 @@ body {
     border: #184657 2px solid;
     border-radius: 25px;
     box-shadow: 0 0 5rem 1rem rgba(0, 0, 0, 0.5);
-    animation: image-entrance 2s ease-in-out forwards;
-    animation-delay: 5.5s;
+    animation: image-entrance 3s ease-in-out forwards;
+    animation-delay: 7.5s;
     animation-fill-mode: both;
     transition: opacity 1s ease-in-out;
     filter: blur(15px);
-}
-
-@keyframes image-entrance {
-    0% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0.5;
-
-    }
-
-    100% {
-        opacity: 1;
-    }
 }
 
 .INTRO-LOGO {
@@ -57,44 +42,50 @@ body {
     left: 50%;
     z-index: 101;
     transform: translate(-50%, -50%);
-    animation: LOGO-entrance 5s ease-in-out forwards;
+    animation: LOGO-entrance 6s ease-in-out forwards;
     animation-delay: 1s;
     animation-fill-mode: both;
 }
 
-@keyframes LOGO-entrance {
+.failed-statement {
+    position: absolute; 
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22.5rem;
+    height: 1.75rem;
+    opacity: 1;
+    border-radius: 0 25px 0 25px;
+    background: linear-gradient(90deg,#1d3f58);
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: white;
+    text-align: center; 
+    overflow: visible;    
+    z-index: 10500;
+    padding: 1rem;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: error-entrance 3s ease-in-out forwards;
+    animation-fill-mode: both;
+}
+
+@keyframes error-entrance {
     0% {
         opacity: 0;
-        top: 100%;
-        transform: translate(-50%, -60%) scale(0.2);
     }
 
-    30% {
+    50% {
         opacity: 1;
-        top: 55%;
-        transform: translate(-50%, -60%) scale(1.25);
-    }
-
-    60% {
-        top: 52%;
-        transform: translate(-50%, -60%) scale(0.95);
-    }
-
-    80% {
-        top: 51%;
-        transform: translate(-50%, -58%) scale(1.02);
     }
 
     100% {
         opacity: 0;
-        top: 50%;
-        transform: translate(-50%, -55%) scale(1.05);
     }
 }
 
-
-
-/* LOGIN/REGISTER */
 
 /* LOGIN-CONTAINER*/
 .login-container {
@@ -104,13 +95,13 @@ body {
     transform: translate(-50%, -50%);
     width: 62.5rem; 
     height: 47.5rem; 
-    opacity: 0;
+    opacity: 1;
     background: transparent; 
     text-align: center; 
     overflow: visible;    
     z-index: 10000;
-    animation: login-entrance 2s ease-in-out;
-    animation-delay: 5s;
+    animation: login-entrance 3s ease-in-out;
+    animation-delay: 6s;
     animation-fill-mode: both;
 }
 
@@ -121,7 +112,7 @@ body {
     height: 35.5rem; 
     top: 50%;
     left: 50%;
-    opacity: 0;
+    opacity: 1;
     transform: translate(-50%, -55%);
     background: linear-gradient(90deg, #2c475d, #4d677c ,#8bbbe0, #c6dafd);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
@@ -130,50 +121,9 @@ body {
     z-index: 1432;
     border-radius: 0 35px 0 35px ;
     transition: transform 1s ease-in-out, box-shadow 0.4s ease-in-out;
-    animation: overlay-entrance 2s ease-in-out;
-    animation-delay: 5s;
+    animation: overlay-entrance 3s ease-in-out;
+    animation-delay: 6s;
     animation-fill-mode: both;
-}
-
-@keyframes overlay-entrance {
-    0% {
-        opacity: 0;
-        top: 100%;
-        transform: translate(-50%, -55%) scale(0.8);
-    }
-
-    50% {
-        opacity: 0.2;
-        top: 55%;
-        transform: translate(-50%, -55%) scale(.75);
-    }
-
-    100% {
-        opacity: 1;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -55%) scale(1);
-    }
-}
-
-@keyframes login-entrance {
-    0% {
-        opacity: 0;
-        top: 100%;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-
-    50% {
-        opacity: 0.2;
-        top: 55%;
-        transform: translate(-50%, -50%) scale(.75);
-    }
-
-    100% {
-        opacity: 1;
-        top: 50%;
-        transform: translate(-50%, -50%) scale(1);
-    }
 }
 
 .LogoC {
@@ -200,7 +150,7 @@ body {
     font-weight: bold;
     font-size: 25px;
     animation: text-entrance 2s ease-in-out forwards;
-    animation-delay: 6.5s;
+    animation-delay: 8.5s;
     animation-fill-mode: both;
 }
 
@@ -208,20 +158,9 @@ body {
     font-style: italic;
     font-size: 17.5px;
     animation: text-entrance 2s ease-in-out forwards;
-    animation-delay: 6.5s;
+    animation-delay: 8.5s;
     animation-fill-mode: both;
 }
-
-@keyframes text-entrance {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 
 /* Hover effect */
 .overlay-background:hover {
@@ -679,20 +618,7 @@ button:hover {
     width: 100vw; 
     height: 100vh; 
     z-index: 1;
-    animation: background-change 7s ease-in-out forwards;
-}
-@keyframes background-change {
-    0% {
-        background: #b3e0f7;
-    }
-
-    50% {
-        background: white; 
-    }
-
-    100% {
-        background: #b3e0f7; 
-    }
+    background-color: #b3e0f7;
 }
 
 /*WAVING EFFECTS */
@@ -709,19 +635,6 @@ button:hover {
     animation-delay: 2s;
     animation-fill-mode: both;
 }
-
-@keyframes move-entrance {
-    0% {
-        transform: translate3d(0, 10rem, 0);
-    }
-    50% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
 /*WAVE ANIMATION*/
 .parallax > use {
     animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;

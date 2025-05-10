@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='login2.css')}}"/><!-- CSS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='login.js')}}"></script> <!-- JS FILE -->
+
+  </head>
+
+<body>
+
+<!--LOGIN/REGISTER CONTAINER-->
+<section class="login-container">
+  <!--LOGIN/REGISTER CONTAINER-->
+  <input type="checkbox" id="toggle">     
+    <div class="forms">
+      <!-- Login Form -->
+      <div class="login">
+          <form method="POST" action="{{ url_for('login') }}">
+            <h3 class="TITLE">LOGIN</h3>
+            <div class="form-group">
+              <label for="email-log" class = "email-cs">Email Address</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
+            </div>
+
+            <div class="form-group">
+              <label for="password-log" class = "password-cs">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"/>
+            </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            <!-- Toggle to Register -->
+            <label for="toggle" class ="switch" >No account?</label>
+          </form>
+
+            <!-- Available location -->
+            <button class="location" onclick="openDialog('popup-location')">Available Location</button>
+            <dialog class="availLoc" id="popup-location">
+              <button class="availclose" onclick="closeDialog('popup-location')">Close</button>
+              <div class="availog">
+                <!-- Rectangle Items -->
+              <div class="rectangle">
+                <img src="{{ url_for('static', filename='schools/1.png') }}">
+                <div class="showninfo">BPU - Romania Academica Branch</div>
+                <div class="info">Juliano 45 Sector 1, București 010012 Romania</div>
+              </div>
+              <div class="rectangle2">
+                <img src="{{ url_for('static', filename='schools/2.png') }}">
+                <div class="showninfo">BPU - Academic In London Branch</div>
+                <div class="info">ShankIt South Kensington London SW7 3PW United Kingdom</div>
+              </div>
+              <div class="rectangle3">
+                <img src="{{ url_for('static', filename='schools/3.png') }}">
+                <div class="showninfo">BPU - America Branch</div>
+                <div class="info">WashingMachine Suite 500 New York, NY 10028 United States</div>
+              </div>
+              <div class="rectangle4">
+                <img src="{{ url_for('static', filename='schools/4.png') }}">
+                <div class="showninfo">BPU - Academic In London Branch</div>
+                <div class="info">kanto Court, Bloomsbury London WC1E 7HR United Kingdom</div>
+              </div>
+            </dialog>
+      </div>
+          <div class="register">
+            <form method="POST" action="{{ url_for('register') }}">
+                <h3 class="TITLE">ENROLL</h3>
+
+                <div class="form-register">
+                    <label for="username-reg" class = "username-reg-cs">Username</label>
+                    <input type="text" id="username" name="username" required  placeholder="Enter Username">
+                </div>
+
+                <div class="form-register">
+                    <label for="email-reg" class ="email-reg-cs">Email</label>
+                    <input type="email" id="email" name="email" required  placeholder="Enter Email">
+                </div>
+
+                <div class="form-register">
+                    <label for="password-reg" class ="password-reg-cs">Password</label>
+                    <input type="password" id="password" name="password" required  placeholder="Enter Password">
+                </div>
+          
+              <button type="submit" class="btn btn-primary-reg">Enroll</button>
+          
+              <!-- Toggle back to Login -->
+              <label for="toggle" class="switch">Already have an account?</label>
+          </form>
+
+            <!-- Available Career -->
+            <button class="career" onclick="careerDialog('popup-career')">Available Career</button>
+            <dialog class="availcar" id="popup-career">
+            <button class="carclose" onclick="carexitDialog('popup-career')">Close</button>
+            <section class="carreer-sec">
+                <div class="availcard">
+                  <div class="cars1">
+                    <img src="{{ url_for('static', filename='course/2.png') }}">
+                    <div class="showninfos">Computer Engineering</div>
+                  </div>
+                  <div class="cars2">
+                    <img src="{{ url_for('static', filename='course/1.png') }}">
+                    <div class="showninfos">Electronic Enginerring</div>
+                  </div>
+                  <div class="cars3">
+                    <img src="{{ url_for('static', filename='course/3.png') }}">
+                    <div class="showninfos">Electronic And Communication Engineering</div>
+                  </div>
+                </div>
+            </section>
+            </dialog>
+
+        </div>
+    </div>
+</div>
+</section>
+
+<!--BACKGROUND AND LOGO FOR MISSION VISSION-->
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+
+<div class="overlay-background">
+  <img src="{{ url_for('static', filename='uploads/LOGO.png') }}" class="LogoC">
+    <div class="vissions"> 
+    <h1 class="tit">Mission:<br></h1>
+    <h2 class="h2mis">"To empower students with knowledge, creativity, and strong moral values, fostering a lifelong passion for learning in a dynamic and inclusive environment."<br><br></h2>
+    <h1 class="tit">Vision:<br></h1>
+    <h2 class="h2mis">"To be a leading institution that nurtures future leaders, innovators, and compassionate individuals who contribute positively to society and the world."</h2>
+    </h1>
+  </div>       
+</div>
+
+<!-- WAVING CONTENT -->
+</div>
+  <div class="wave-content">
+
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+      </defs>
+
+      <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="#77CAE8" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="#68A9C0" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+          <use xlink:href="#gentle-wave" x="48" y="2" fill="#648F9F" />
+      </g>
+    </svg>
+</div>      
+
+<div class= "background-img-container">
+  <img src="{{ url_for('static', filename='background/bg1.jpeg') }}" class="background-img">
+
+
+</div>
+
+</body>
+</html>
