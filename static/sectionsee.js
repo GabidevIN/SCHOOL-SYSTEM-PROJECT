@@ -1,5 +1,5 @@
 function filterStudents() {
-    var filter = document.getElementById("bscpeFilter").value.toUpperCase();
+    var filter = document.getElementById("bseeFilter").value.toUpperCase();
     var table = document.getElementById("studentTable");
     var rows = table.getElementsByTagName("tr");
 

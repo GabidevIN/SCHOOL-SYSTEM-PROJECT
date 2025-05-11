@@ -5,7 +5,8 @@
     <title>Main Page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='userlist.css') }}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js') }}"></script> <!-- JS FILE -->
-    <script type="text/javascript" src="{{ url_for('static', filename='sections.js') }}"></script> <!-- JS//SEARCHING FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='sections.js') }}"></script> <!-- JS//SORTING FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='searching.js') }}"></script> <!-- JS//SEARCHING FILE -->
   </head>
   <body>
 
@@ -36,53 +37,51 @@
         </div>
     </section>
 
-    <!-- LIST OF STUDENTS -->
+    <!-- LIST OF STUDENT IN SECTIONS -->
     <section class="listed">
+
         <!-- Search Bar -->
         <input type="text" id="searchBar" onkeyup="searchTable()" placeholder="Search for students..." class="search-bar">
-        <div class="listed-container">
-            
-            <table class="listed-table">
-                <!-- HEADER  -->
-                <thead class="information-table">
-                    <tr>
-                        <th>Username</th>
-                        <th>SECTION</th>
-                    </tr>
-                </thead>
 
-                    <!-- LAMAN NI HEADER  -->
-                    <form method="POST" action="{{ url_for('promote_all_students') }}">
-                        <button type="submit" class="btn btn-primary">Promote All Students</button>
+        <!-- HEADER + TABLE CONTAINER -->
+        <section class="section-row">
+            <!-- PROMOTING SYSTEM -->
+            <form method="POST" action="{{ url_for('promote_all_students') }}">
+                <button type="submit" class="promote_btn">Promote Selected Students</button>
+                <select name="new_level" id="new-level" class="promote_btn">
+                    <option value="BSCPE 1-A">BSCPE 1-A</option>
+                    <option value="BSCPE 1-B">BSCPE 1-B</option>
+                    <option value="BSCPE 2-A">BSCPE 2-A</option>
+                    <option value="BSCPE 2-B">BSCPE 2-B</option>
+                </select>
 
-                    <!-- PROMOTING SYSTEM  -->
-                    <label for="new_level">Select New Level:</label>
-                        <select name="new_level" id="new-level">
-                            <option value="BSCPE 1-A">BSCPE 1-A</option>
-                            <option value="BSCPE 1-B">BSCPE 1-B</option>
-                            <option value="BSCPE 2-A">BSCPE 2-A</option>                            
-                            <option value="BSCPE 2-B">BSCPE 2-B</option>
-                        </select>
-                    </form>
+                <!-- FILTERING SYSTEM -->
+                <select id="bscpeFilter" onchange="filterStudents()" class="promote_btn">
+                    <option value="">Select a section</option>
+                    <option value="BSCPE 1-A">BSCPE 1-A</option>
+                    <option value="BSCPE 1-B">BSCPE 1-B</option>
+                    <option value="BSCPE 2-A">BSCPE 2-A</option>
+                    <option value="BSCPE 2-B">BSCPE 2-B</option>
+                </select>
 
-                    <label for="bscpeFilter">Filter by BSCPE Section:</label>
-                    <select id="bscpeFilter" onchange="filterStudents()">
-                        <option value=""> Select A section</option>
-                        <option value="BSCPE 1-A">BSCPE 1-A</option>
-                        <option value="BSCPE 1-B">BSCPE 1-B</option>
-                        <option value="BSCPE 2-A">BSCPE 1-A</option>
-                        <option value="BSCPE 2-B">BSCPE 2-A</option>
-                    </select>
+                <!-- SECTION NAVIGATION -->
+                <a href="/admin/sections/EE" class="promote_btn">Electrical Engineer</a>
+                <a href="/admin/sections/IE" class="promote_btn">Industrial Engineer</a>
 
-                    <div>
-                        <a href="/admin/sections/EE">Electrical Engineer</a>
-                        <a href="/admin/sections/IE">Industrial Engineer</a>
-                    </div>
-                    <!-- SYSTEM FOR CALLING STUDENTS FROM DB   -->
+                <!-- STUDENT TABLE -->
+                <table class="listed-table">
+                    <thead class="information-table">
+                        <tr>
+                            <th>Select</th>
+                            <th>Username</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
                     <tbody id="studentTable">
                         {% for user in users %}
                             {% if user.section and user.section[:5].upper() == 'BSCPE' %}
                                 <tr>
+                                    <td><input type="checkbox" name="selected_students" value="{{ user.id }}"></td>
                                     <td>{{ user.username }}</td>
                                     <td class="section">{{ user.section }}</td>
                                 </tr>
@@ -90,8 +89,13 @@
                         {% endfor %}
                     </tbody>
                 </table>
-          </div>
+            </form>
+        </section>
+
     </section>
+
+
+
     <!-- BACKGROUND -->
     <div class="background"></div>
 

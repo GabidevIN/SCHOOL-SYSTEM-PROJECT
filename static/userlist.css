@@ -246,7 +246,7 @@ header {
 .listed-container{
     width: 1350px;
     height: 100%;
-    background-color: white;
+    background: linear-gradient(90deg, #4d677c ,#8bbbe0, #c6dafd);
     scale: 1rem;
     flex-direction: column;
     justify-content: flex-start;
@@ -260,11 +260,14 @@ header {
     border-collapse: collapse;
     text-align: center;
     border: 1px solid black;
+    max-height: 200px; /* adjust as needed */
 }
 
 .information-table{
     padding: 10px;
     margin-right: 10px;
+    max-height: 200px; /* adjust as needed */
+    overflow-y: auto;  /* adds vertical scroll */
 }
 
 .information-table tr{
@@ -315,7 +318,7 @@ th {
 
 .listed-table tbody {
     display: block;
-    max-height: 590px;
+    max-height: 555px;
     overflow-y: auto;
     width: 100%;
     -ms-overflow-style: none;
@@ -334,6 +337,40 @@ th {
     z-index: 10;
 
 }
+
+/*PROMOTING DESIGN*/
+.promote_btn{
+    background: linear-gradient(90deg, #8bbbe0, #c6dafd);
+    padding: 12px 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: white 1px solid;
+    text-decoration: none;
+    color: #000000;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    pointer-events: auto;
+}
+
+.section-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+    background: linear-gradient(90deg, #4d677c, #8bbbe0, #c6dafd);
+    text-align: center;
+    border-radius: 0 25px 0 25px;
+}
+
+.section-row > * {
+    margin: 0 auto;
+}
+
 
 /* WAVING EFFECTS */
 .wave-content {

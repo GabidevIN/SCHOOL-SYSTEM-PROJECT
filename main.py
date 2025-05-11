@@ -373,25 +373,33 @@ def decline_registration(request_id):
 
 
 # Route to handle the promotion of students
+from sqlalchemy import or_
+
 @app.route('/promote_all_students', methods=['POST'])
 def promote_all_students():
-    # Get the new level selected from the form
     new_level = request.form.get('new_level')
+    selected_students_ids = request.form.getlist('selected_students')  # Get the selected student IDs
 
-    if new_level:
-        # Fetch all users whose section starts with 'BSCPE'
-        users_to_promote = User.query.filter(User.section.like('BSCPE%')).all()
+    if new_level and selected_students_ids:
+        # Get the selected students by their IDs
+        users_to_promote = User.query.filter(User.id.in_(selected_students_ids)).all()
 
-        # Update the section for each user to the new level
         for user in users_to_promote:
             user.section = new_level
-            db.session.commit()
 
-        flash(f'All students have been promoted to {new_level}!', 'success')
+        db.session.commit()
+
+        flash(f'Selected students have been promoted to {new_level}!', 'success')
     else:
-        flash('No level selected!', 'danger')
+        flash('No level or students selected!', 'danger')
 
     return redirect(url_for('admin_sections'))
+
+
+
+
+
+
 
 # Route to render the ADMIN sections page with users
 @app.route('/admin/sections')
@@ -454,7 +462,7 @@ def list_users():
         return redirect(url_for('login', source='failed'))
 
     users = User.query.all()
-    return render_template('admin/user_list.html', users=users)
+    return render_template('adminFile/user_list.html', users=users)
 
 @app.route('/admin/update-user/<int:user_id>', methods=['POST'])
 def update_user(user_id):
