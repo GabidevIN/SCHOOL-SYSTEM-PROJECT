@@ -191,7 +191,7 @@ def main():
             db.session.commit()
             flash('Note saved successfully!', 'success')
 
-    return render_template('main.html', user=user)
+    return render_template('studentFile/main.html', user=user)
 #route for the profile page
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -228,7 +228,7 @@ def profile():
         flash('Profile updated successfully!', 'success')
         return redirect(url_for('profile'))
 
-    return render_template('profileinfo.html', user=user)
+    return render_template('studentFile/profileinfo.html', user=user)
 #route for the admin profile page
 @app.route('/profile/admin', methods=['GET', 'POST'])
 def profile_admin():
@@ -272,7 +272,7 @@ def profile_admin():
         db.session.commit()
         flash('Profile updated successfully!', 'success')
         return redirect(url_for('profile_admin'))
-    return render_template('profileinfo_admin.html', user=user)
+    return render_template('adminFile/profileinfo_admin.html', user=user)
 
 #route for the admin dashboard
 @app.route('/admin/dashboard')
@@ -290,7 +290,7 @@ def admin_dashboard():
     registration_requests = RegistrationRequest.query.filter_by(approved=True).all()
     completed_registrations = RegistrationRequest.query.filter_by(approved=True).all()
 
-    return render_template('admin_dashboard.html', registration_requests=registration_requests, completed_registrations=completed_registrations)
+    return render_template('adminFile/admin_dashboard.html', registration_requests=registration_requests, completed_registrations=completed_registrations)
 #route for the admin home page
 @app.route('/admin/home')
 def admin_home():
@@ -304,7 +304,9 @@ def admin_home():
         return redirect(url_for('login', source='failed'))
 
     users = User.query.all()
-    return render_template('admin_home.html', users=users) 
+    return render_template('adminFile/admin_home.html', users=users) 
+
+
 #route for the all logout
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -369,6 +371,76 @@ def decline_registration(request_id):
 
     return redirect(url_for('admin_dashboard'))
 
+
+# Route to handle the promotion of students
+@app.route('/promote_all_students', methods=['POST'])
+def promote_all_students():
+    # Get the new level selected from the form
+    new_level = request.form.get('new_level')
+
+    if new_level:
+        # Fetch all users whose section starts with 'BSCPE'
+        users_to_promote = User.query.filter(User.section.like('BSCPE%')).all()
+
+        # Update the section for each user to the new level
+        for user in users_to_promote:
+            user.section = new_level
+            db.session.commit()
+
+        flash(f'All students have been promoted to {new_level}!', 'success')
+    else:
+        flash('No level selected!', 'danger')
+
+    return redirect(url_for('admin_sections'))
+
+# Route to render the ADMIN sections page with users
+@app.route('/admin/sections')
+@app.route('/admin/sections/<section>')
+def admin_sections(section=None):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_admin:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    users = User.query.all()
+
+    if section == 'EE':
+        template = 'adminFile/admin_section_EE.html'
+    elif section == 'IE':
+        template = 'adminFile/admin_section_IE.html'
+    else:
+        template = 'adminFile/admin_section.html'
+
+    return render_template(template, users=users)
+
+# Route to render the TEACHER sections page with users
+@app.route('/teacher/sections')
+@app.route('/teacher/sections/<section>')
+def teacher_sections(section=None):
+    if 'user_id' not in session:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    current_user = db.session.get(User, session['user_id'])
+    if not current_user or not current_user.is_teacher:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('login'))
+
+    users = User.query.all()
+
+    if section == 'EE':
+        template = 'teacherFile/teacher_section_EE.html'
+    elif section == 'IE':
+        template = 'teacherFile/teacher_section_IE.html'
+    else:
+        template = 'teacherFile/teacher_section.html'
+
+    return render_template(template, users=users)
+
 #list of all users for admin  
 @app.route('/users')
 def list_users():
@@ -382,7 +454,7 @@ def list_users():
         return redirect(url_for('login', source='failed'))
 
     users = User.query.all()
-    return render_template('user_list.html', users=users)
+    return render_template('admin/user_list.html', users=users)
 
 @app.route('/admin/update-user/<int:user_id>', methods=['POST'])
 def update_user(user_id):
@@ -543,22 +615,6 @@ def upload_picture():
 
     return render_template('upload_picture.html', user=user)
 
-#for the page of about
-@app.route('/about')
-def about():
-    if 'user_id' not in session:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('login', source='failed'))
-
-    user = db.session.get(User, session['user_id'])
-    if not user:
-        flash('User not found!', 'danger')
-        return redirect(url_for('login', source='failed'))
-
-    return render_template('about.html', user=user) 
-
-
-
 
 #grades system for the students
 #list of subjects
@@ -576,7 +632,7 @@ def admin_grades():
         return redirect(url_for('login', source='failed'))
 
     students = User.query.all()
-    return render_template('admin_grades.html', students=students)
+    return render_template('adminFile/admin_grades.html', students=students)
 
 @app.route('/admin/grades/<int:student_id>', methods=['GET'])
 def admin_grades_for_student(student_id):
@@ -649,7 +705,7 @@ def admin_view_grades():
     students_with_grades = db.session.query(User).join(Grade).distinct().all()
     grades = Grade.query.all()
 
-    return render_template('admin_view_grades.html', students=students_with_grades, grades=grades)
+    return render_template('adminFile/admin_view_grades.html', students=students_with_grades, grades=grades)
 #student show their grades
 @app.route('/student/grades', methods=['GET'])
 def student_grades():
@@ -664,7 +720,7 @@ def student_grades():
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
-    return render_template('student_grades.html', student=student, grades=grades)
+    return render_template('studentFile/student_grades.html', student=student, grades=grades)
 #student show their subjects
 @app.route('/student/sub', methods=['GET'])
 def student_subjects():
@@ -679,7 +735,7 @@ def student_subjects():
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
-    return render_template('student_subjects.html', student=student, grades=grades)
+    return render_template('studentFile/student_subjects.html', student=student, grades=grades)
 #extra about page for the student
 @app.route('/student/about')
 def abouts():
@@ -693,7 +749,8 @@ def abouts():
         return redirect(url_for('login', source='failed'))
 
     print("Rendering about.html") 
-    return render_template('about.html', user=user)
+    return render_template('studentFile/about.html', user=user)
+
 #extra about page for the admin
 @app.route('/admin/about')
 def admin_about():
@@ -707,7 +764,7 @@ def admin_about():
         return redirect(url_for('login', source='failed'))
     
     print("Rendering about.html")
-    return render_template('about_admin.html', user=is_admin)
+    return render_template('adminFile/about_admin.html', user=is_admin)
     
 #Teacher
 #teaacher dashboard for the teacher
@@ -723,7 +780,7 @@ def teacher_dashboard():
         return redirect(url_for('login', source='failed'))
 
     students = User.query.all()  # Fetch all students
-    return render_template('teacher_dashboard.html', students=students)
+    return render_template('teacherFile/teacher_dashboard.html', students=students)
 #teacher grades for the students
 @app.route('/teacher/grades', methods=['GET'])
 def teacher_grades():
@@ -737,7 +794,9 @@ def teacher_grades():
         return redirect(url_for('login', source='failed'))
 
     students = User.query.all()
-    return render_template('teacher_grades.html', students=students)
+    return render_template('teacherFile/teacher_grades.html', students=students)
+
+
 #teacher grades for the students
 @app.route('/teacher/grades/<int:student_id>', methods=['GET'])
 def teacher_grades_for_student(student_id):
@@ -757,7 +816,7 @@ def teacher_grades_for_student(student_id):
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
-    return render_template('teacher_grades.html', student=student, grades=grades)
+    return render_template('teacherFile/teacher_grades.html', student=student, grades=grades)
 #teacher add grades for the students
 @app.route('/teacher/add-grades/<int:student_id>', methods=['GET', 'POST'])
 def teacher_add_grades(student_id):
@@ -795,7 +854,7 @@ def teacher_add_grades(student_id):
         flash('Grades added/updated successfully!', 'success')
         return redirect(url_for('teacher_grades'))
 
-    return render_template('add_grades.html', student=student, subjects=SUBJECTS)
+    return render_template('teacherFile/add_grades_teacher.html', student=student, subjects=SUBJECTS)
 
 @app.route('/teacher/view-grades', methods=['GET'])
 def teacher_view_grades():
@@ -858,7 +917,8 @@ def teacher_profile():
         flash('Profile updated successfully!', 'success')
         return redirect(url_for('teacher_profile'))
 
-    return render_template('teacher_profile.html', user=user)
+    return render_template('teacherFile/teacher_profile.html', user=user)
+
 #route for the teacher about page
 @app.route('/teacher/about')
 def teacher_about():
@@ -872,7 +932,7 @@ def teacher_about():
         return redirect(url_for('login', source='failed'))
     
     print("Rendering about.html")
-    return render_template('teacher_about.html', user=is_teacher)
+    return render_template('teacherFile/teacher_about.html', user=is_teacher)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

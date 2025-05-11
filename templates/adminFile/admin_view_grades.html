@@ -25,14 +25,16 @@
 <div class="background"></div>
 
 <!-- MANU TABLE -->
-<section class="menu">
-    <div class="Menu-tab">
-        <a href="/admin/home" class="list">HOME</a>
-        <a href="/admin/dashboard" class="list">ADMISSION</a>
-        <a href="/users" class="list">LIST</a>
-        <a href="/admin/grades" class="list">GRADE</a>
-    </div>
-</section>
+    <section class="menu">
+        <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
+        <div class="Menu-tab">
+            <a href="/admin/home" class="list">HOME</a>
+            <a href="/admin/dashboard" class="list">ADMISSION</a>
+            <a href="/users" class="list">LIST</a>
+            <a href="/admin/grades" class="list">GRADE</a>
+            <a href="/admin/sections" class="list">SECTIONS</a>
+        </div>
+    </section>
 
 <h1>All Students' Grades</h1>
     {% if students %}

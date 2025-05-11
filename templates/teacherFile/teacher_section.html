@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='userlist.css') }}"/><!-- CSS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='effects.js') }}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='sections.js') }}"></script> <!-- JS//SEARCHING FILE -->
+  </head>
+  <body>
+
+    <!-- DASHBOARD -->
+    <header>    
+        <nav>
+            <ul class="dash">
+                <li><a href="/teacher/about" class="nav" data-target="about">About</a></li>
+                <li><a href="/teacher/profile" class="nav" data-target="profile">Profile</a></li>
+                
+            </ul>
+        </nav>  
+
+        <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+            <button type="submit" class="btn btn-logout">Logout</button>
+        </form>
+        
+    </header>
+
+    <!-- MANU TABLE -->
+    <section class="menu">
+        <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
+        <div class="Menu-tab">
+            <a href="/teacher/dashboard" class="list">HOME</a>
+            <a href="/teacher/sections" class="list">SECTIONS</a>
+            <a href="/teacher/grades" class="list">GRADE</a>
+        </div>
+    </section>
+
+    <!-- LIST OF STUDENTS -->
+    <section class="listed">
+        <!-- Search Bar -->
+        <input type="text" id="searchBar" onkeyup="searchTable()" placeholder="Search for students..." class="search-bar">
+        <div class="listed-container">
+            
+            <table class="listed-table">
+                <!-- HEADER  -->
+                <thead class="information-table">
+                    <tr>
+                        <th>Username</th>
+                        <th>SECTION</th>
+                    </tr>
+                </thead>
+
+                    <!-- LAMAN NI HEADER  -->
+                        <!-- FILTERING SYSTEM -->
+                        <select id="bscpeFilter" onchange="filterStudents()">
+                            <option value=""> Select A section</option>
+                            <option value="BSCPE 1-A">BSCPE 1-A</option>
+                            <option value="BSCPE 1-B">BSCPE 1-B</option>
+                            <option value="BSCPE 2-A">BSCPE 1-A</option>
+                            <option value="BSCPE 2-B">BSCPE 2-B</option>
+                        </select>
+                        
+                        <div>
+                            <a href="/teacher/sections/EE">Electrical Engineer</a>
+                            <a href="/teacher/sections/IE">Industrial Engineer</a>
+                        </div>
+                    <!-- SYSTEM FOR CALLING STUDENTS FROM DB   -->
+                    <tbody id="studentTable">
+                        {% for user in users %}
+                            {% if user.section and user.section[:5].upper() == 'BSCPE' %}
+                                <tr>
+                                    <td>{{ user.username }}</td>
+                                    <td class="section">{{ user.section }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+          </div>
+    </section>
+    
+    <!-- BACKGROUND -->
+    <div class="background"></div>
+
+    <!-- WAVING CONTENT -->
+    <div class="wave-content">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="#77CAE8" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="#68A9C0" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+                <use xlink:href="#gentle-wave" x="48" y="2" fill="#648F9F" />
+            </g>
+        </svg>
+    </div>      
+
+    <!-- WAVING LAYERED -->
+    <div class="wave-layered">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
+            </g>
+        </svg>
+    </div>      
+
+  </body>
+</html>

@@ -16,8 +16,9 @@
 <header>    
     <nav>
         <ul class="dash">
-            <li><a href="/teacher/about" class="nav" data-target="about">About</a></li>
-            <li><a href="/teacher/profile" class="nav" data-target="profile">Profile</a></li>
+            <li><a href="/admin/about" class="nav" data-target="about">About</a></li>
+            <li><a href="/profile/admin" class="nav" data-target="profile">Profile</a></li>
+            
         </ul>
     </nav>  
 
@@ -28,16 +29,16 @@
 </header>
 
 <!-- MANU TABLE -->
-<section class="menu">
-    <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
-    <div class="Menu-tab">
-        <a href="/teacher/dashboard" class="list">HOME</a>
-        <a href="/teacher/grades" class="list">GRADE</a>
-    </div>
-</section>
-
-
-
+    <section class="menu">
+        <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
+        <div class="Menu-tab">
+            <a href="/admin/home" class="list">HOME</a>
+            <a href="/admin/dashboard" class="list">ADMISSION</a>
+            <a href="/users" class="list">LIST</a>
+            <a href="/admin/grades" class="list">GRADE</a>
+            <a href="/admin/sections" class="list">SECTIONS</a>
+        </div>
+    </section>
 
 <!--VIEW GRADE-->
 <section class = "addgrade">

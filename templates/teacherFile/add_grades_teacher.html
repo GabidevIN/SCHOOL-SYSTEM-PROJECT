@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>Main Page</title>
-    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='admin_home.css')}}"/><!-- CSS FILE -->
+    <link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='ADDING_grades.css')}}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js')}}"></script> <!-- JS FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='searching3.js')}}"></script> <!-- JS FILE -->
+
 
   </head>
 
@@ -16,22 +18,45 @@
         <ul class="dash">
             <li><a href="/teacher/about" class="nav" data-target="about">About</a></li>
             <li><a href="/teacher/profile" class="nav" data-target="profile">Profile</a></li>
-            
         </ul>
     </nav>  
 
     <form action="{{ url_for('logout') }}" method="post" class="logout-form">
         <button type="submit" class="btn btn-logout">Logout</button>
     </form>
-    
 </header>
 
-<!-- MANU TABLE -->
+<!-- MENU TABLE -->
 <section class="menu">
     <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
     <div class="Menu-tab">
         <a href="/teacher/dashboard" class="list">HOME</a>
+        <a href="/teacher/sections" class="list">SECTIONS</a>
         <a href="/teacher/grades" class="list">GRADE</a>
+    </div>
+</section>
+
+
+
+<!--VIEW GRADE-->
+<section class = "addgrade">
+    <div class = "add-container">
+        <h1>Add Grades for {{ student.full_name }}</h1>
+        <form method="POST" class="grade-form">
+            <label for="semester">Semester:</label>
+            <select name="semester" id="semester" class="SEMESTER">
+                <option value="1">1</option>
+            </select>
+
+            {% for subject in subjects %}
+            <div class="input-group">
+                <label for="{{ subject }}">{{ subject }}</label>
+                <input type="number" min="1" max="5" step=".25" name="{{ subject }}" id="{{ subject }}" placeholder="Enter grade">
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-changes">Submit Grades</button>
+        </form>
     </div>
 </section>
 
@@ -68,6 +93,7 @@
     </g>
   </svg>
 </div>      
+
 
 </body>
 </html>
