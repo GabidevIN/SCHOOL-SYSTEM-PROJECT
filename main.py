@@ -682,7 +682,7 @@ def add_grades(student_id):
     if not student:
         flash('Student not found!', 'danger')
         return redirect(url_for('admin_grades'))
-
+    
     if request.method == 'POST':
         for subject in SUBJECTS:
             grade_value = request.form.get(subject)

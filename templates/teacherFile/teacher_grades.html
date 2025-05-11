@@ -80,7 +80,7 @@
             <thead>
                 <tr>
                     <th>Student Name</th>
-                    <th>Course</th>
+                    <th>section</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -88,7 +88,7 @@
                 {% for student in students %}
                 <tr>
                     <td>{{ student.full_name }}</td>
-                    <td>{{ student.courses }}</td>
+                    <td>{{ student.section }}</td>
                     <td>
                         <a href="{{ url_for('teacher_grades_for_student', student_id=student.id) }}" class="botton-view">View Grades</a>
                         <a href="{{ url_for('teacher_add_grades', student_id=student.id) }}" class="botton-view">Edit Grades</a>

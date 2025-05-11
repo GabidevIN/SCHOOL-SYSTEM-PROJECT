@@ -5,7 +5,9 @@
     <title>Main Page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='userlist.css') }}"/><!-- CSS FILE -->
     <script type="text/javascript" src="{{ url_for('static', filename='effects.js') }}"></script> <!-- JS FILE -->
-    <script type="text/javascript" src="{{ url_for('static', filename='sections.js') }}"></script> <!-- JS//SEARCHING FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='sectionsie.js') }}"></script> <!-- JS//SEARCHING FILE -->
+    <script type="text/javascript" src="{{ url_for('static', filename='searching.js') }}"></script> <!-- JS//SEARCHING FILE -->
+
   </head>
   <body>
 
@@ -15,17 +17,15 @@
             <ul class="dash">
                 <li><a href="/teacher/about" class="nav" data-target="about">About</a></li>
                 <li><a href="/teacher/profile" class="nav" data-target="profile">Profile</a></li>
-                
             </ul>
         </nav>  
 
         <form action="{{ url_for('logout') }}" method="post" class="logout-form">
             <button type="submit" class="btn btn-logout">Logout</button>
         </form>
-        
     </header>
 
-    <!-- MANU TABLE -->
+    <!-- MENU TABLE -->
     <section class="menu">
         <img src="{{ url_for('static', filename='background/admin_logo.png') }}" class="logos">
         <div class="Menu-tab">
@@ -35,48 +35,48 @@
         </div>
     </section>
 
+    <!-- LIST OF STUDENT IN SECTIONS -->
+    
     <!-- LIST OF STUDENTS -->
     <section class="listed">
         <!-- Search Bar -->
         <input type="text" id="searchBar" onkeyup="searchTable()" placeholder="Search for students..." class="search-bar">
-        <div class="listed-container">
-            
-            <table class="listed-table">
-                <!-- HEADER  -->
-                <thead class="information-table">
-                    <tr>
-                        <th>Username</th>
-                        <th>SECTION</th>
-                    </tr>
-                </thead>
+            <!-- LAMAN NI HEADER  -->            
+            <section class="section-row">
 
-                    <!-- LAMAN NI HEADER  -->
-                        <!-- FILTERING SYSTEM -->
-                        <select id="bsieFilter" onchange="filterStudents()">
-                            <option value="">Select a section</option>
-                            <option value="BSIE 1-A">BSIE 1-A</option>
-                            <option value="BSIE 1-B">BSIE 1-B</option>
-                            <option value="BSIE 2-A">BSIE 2-A</option>
-                            <option value="BSIE 2-B">BSIE 2-B</option>
-                        </select>
+                <!-- FILTERING SYSTEM -->
+                <select id="bsieFilter" onchange="filterStudents()" class="promote_btn">
+                    <option value="">Select a section</option>
+                    <option value="BSIE 1-A">BSIE 1-A</option>
+                    <option value="BSIE 1-B">BSIE 1-B</option>
+                    <option value="BSIE 2-A">BSIE 2-A</option>
+                    <option value="BSIE 2-B">BSIE 2-B</option>
+                </select>
 
-                        <!-- SECTION NAVIGATION -->
-                        <div>
-                            <a href="/teacher/sections/EE">Electrical Engineer</a>
-                            <a href="/teacher/sections">Computer Engineer</a>
-                        </div>
-                    <!-- STUDENT TABLE -->
+                <a href="/teacher/sections/EE" class="promote_btn">Electrical Engineer</a>
+                <a href="/teacher/sections" class="promote_btn">Computer Engineer</a>
+
+                <table class="listed-table">
+                    <thead class="information-table">
+                        <tr>
+                            <th>Select</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+
                     <tbody id="studentTable">
                         {% for user in users %}
                             {% if user.section and user.section[:4].upper() == 'BSIE' %}
                                 <tr>
-                                    <td>{{ user.username }}</td>
-                                    <td class="section">{{ user.section }}</td>
+                                <td>{{ user.username }}</td>
+                                <td class="section">{{ user.section }}</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
+                </form>
+            </section>
           </div>
     </section>
 
