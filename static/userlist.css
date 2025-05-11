@@ -347,12 +347,12 @@ th {
     border-radius: 6px;
     border: white 1px solid;
     text-decoration: none;
-    color: #000000;
     font-family: "Arial Black", Gadget, sans-serif;
     font-size: 15px;
     letter-spacing: 2px;
     text-transform: uppercase;
     pointer-events: auto;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .section-row {
