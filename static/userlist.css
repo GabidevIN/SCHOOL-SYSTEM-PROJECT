@@ -354,6 +354,22 @@ th {
     pointer-events: auto;
     color: rgba(0, 0, 0, 0.6);
 }
+.checkbox-cell {
+  text-align: center;
+  padding: 10px;
+}
+
+.checkbox-cell input[type="checkbox"] {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  accent-color: #ffffff;
+  transition: transform 0.5s ease;
+}
+
+.checkbox-cell input[type="checkbox"]:hover {
+  transform: scale(1.1);
+}
 
 .section-row {
     display: flex;

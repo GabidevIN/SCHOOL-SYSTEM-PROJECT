@@ -47,7 +47,7 @@
         <section class="section-row">
             <!-- PROMOTING SYSTEM -->
             <form method="POST" action="{{ url_for('promote_all_students') }}">
-                <button type="submit" class="promote_btn">Promote Selected Students</button>
+                <button type="submit" class="promote_btn">Promote Students</button>
                 <select name="new_level" id="new-level" class="promote_btn">
                     <option value="BSCPE 1-A">BSCPE 1-A</option>
                     <option value="BSCPE 1-B">BSCPE 1-B</option>
@@ -81,7 +81,9 @@
                         {% for user in users %}
                             {% if user.section and user.section[:5].upper() == 'BSCPE' %}
                                 <tr>
-                                    <td><input type="checkbox" name="selected_students" value="{{ user.id }}"></td>
+                                    <td class="checkbox-cell">
+                                    <input type="checkbox" name="selected_students" value="{{ user.id }}">
+                                    </td>
                                     <td>{{ user.username }}</td>
                                     <td class="section">{{ user.section }}</td>
                                 </tr>

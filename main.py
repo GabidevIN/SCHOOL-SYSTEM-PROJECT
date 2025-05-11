@@ -703,7 +703,7 @@ def add_grades(student_id):
         flash('Grades added/updated successfully!', 'success')
         return redirect(url_for('admin_grades'))
 
-    return render_template('add_grades.html', student=student, subjects=SUBJECTS)
+    return render_template('adminFile/add_grades.html', student=student, subjects=SUBJECTS)
 
 
 #admin view grades for the students
@@ -948,7 +948,7 @@ def teacher_profile():
         return redirect(url_for('teacher_profile'))
 
     return render_template('teacherFile/teacher_profile.html', user=user)
-
+    
 
 #route for the teacher about page
 @app.route('/teacher/about')
