@@ -627,6 +627,8 @@ def upload_picture():
 #grades system for the students
 #list of subjects
 SUBJECTS = ["Physics 1","Chemistry","CAD","Physical Education 1"]
+
+
 #grades for the admin to show
 @app.route('/admin/grades', methods=['GET'])
 def admin_grades():
@@ -641,6 +643,7 @@ def admin_grades():
 
     students = User.query.all()
     return render_template('adminFile/admin_grades.html', students=students)
+
 
 @app.route('/admin/grades/<int:student_id>', methods=['GET'])
 def admin_grades_for_student(student_id):
@@ -660,7 +663,9 @@ def admin_grades_for_student(student_id):
 
     grades = Grade.query.filter_by(student_id=student.id).all()
 
-    return render_template('admin_grades.html', student=student, grades=grades)
+    return render_template('adminFile/admin_grades.html', student=student, grades=grades)
+
+
 #admin add grades for the students
 @app.route('/admin/add-grades/<int:student_id>', methods=['GET', 'POST'])
 def add_grades(student_id):
@@ -699,6 +704,8 @@ def add_grades(student_id):
         return redirect(url_for('admin_grades'))
 
     return render_template('add_grades.html', student=student, subjects=SUBJECTS)
+
+
 #admin view grades for the students
 @app.route('/admin/view-grades', methods=['GET'])
 def admin_view_grades():
@@ -714,6 +721,8 @@ def admin_view_grades():
     grades = Grade.query.all()
 
     return render_template('adminFile/admin_view_grades.html', students=students_with_grades, grades=grades)
+
+
 #student show their grades
 @app.route('/student/grades', methods=['GET'])
 def student_grades():
@@ -729,6 +738,8 @@ def student_grades():
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('studentFile/student_grades.html', student=student, grades=grades)
+
+
 #student show their subjects
 @app.route('/student/sub', methods=['GET'])
 def student_subjects():
@@ -744,6 +755,8 @@ def student_subjects():
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('studentFile/student_subjects.html', student=student, grades=grades)
+
+
 #extra about page for the student
 @app.route('/student/about')
 def abouts():
@@ -759,6 +772,7 @@ def abouts():
     print("Rendering about.html") 
     return render_template('studentFile/about.html', user=user)
 
+
 #extra about page for the admin
 @app.route('/admin/about')
 def admin_about():
@@ -773,6 +787,7 @@ def admin_about():
     
     print("Rendering about.html")
     return render_template('adminFile/about_admin.html', user=is_admin)
+
     
 #Teacher
 #teaacher dashboard for the teacher
@@ -789,6 +804,8 @@ def teacher_dashboard():
 
     students = User.query.all()  # Fetch all students
     return render_template('teacherFile/teacher_dashboard.html', students=students)
+
+
 #teacher grades for the students
 @app.route('/teacher/grades', methods=['GET'])
 def teacher_grades():
@@ -825,6 +842,8 @@ def teacher_grades_for_student(student_id):
     grades = Grade.query.filter_by(student_id=student.id).all()
 
     return render_template('teacherFile/teacher_grades.html', student=student, grades=grades)
+
+
 #teacher add grades for the students
 @app.route('/teacher/add-grades/<int:student_id>', methods=['GET', 'POST'])
 def teacher_add_grades(student_id):
@@ -864,6 +883,7 @@ def teacher_add_grades(student_id):
 
     return render_template('teacherFile/add_grades_teacher.html', student=student, subjects=SUBJECTS)
 
+
 @app.route('/teacher/view-grades', methods=['GET'])
 def teacher_view_grades():
     if 'user_id' not in session:
@@ -879,6 +899,8 @@ def teacher_view_grades():
     grades = Grade.query.all()
 
     return render_template('teacher_view_grades.html', students=students_with_grades, grades=grades)
+
+
 #teacher view grades for the students
 @app.route('/teacher/profile', methods=['GET', 'POST'])
 def teacher_profile():
@@ -926,6 +948,7 @@ def teacher_profile():
         return redirect(url_for('teacher_profile'))
 
     return render_template('teacherFile/teacher_profile.html', user=user)
+
 
 #route for the teacher about page
 @app.route('/teacher/about')
