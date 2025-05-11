@@ -81,8 +81,9 @@
                         {% for user in users %}
                             {% if user.section and user.section[:4].upper() == 'BSEE' %}
                                 <tr>
-                                    <td><input type="checkbox" name="selected_students" value="{{ user.id }}"></td>
-                                    <td>{{ user.username }}</td>
+                                    <td class="checkbox-cell">
+                                    <input type="checkbox" name="selected_students" value="{{ user.id }}">
+                                    </td>                                    <td>{{ user.username }}</td>
                                     <td class="section">{{ user.section }}</td>
                                 </tr>
                             {% endif %}
