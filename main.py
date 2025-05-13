@@ -6,15 +6,14 @@ from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 
-
 #Flask app initialization
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '131418'  
+app.config['MYSQL_PASSWORD'] = 'Qwerty123'  
 app.config['MYSQL_DB'] = 'school_system_project'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:131418@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Qwerty123@localhost/school_system_project'  # Update this line with the correct password // PASSWORD OF UR DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 try:
@@ -43,9 +42,6 @@ class User(db.Model):
     approved = db.Column(db.Boolean, default=False) 
     is_teacher = db.Column(db.Boolean, default=False)  
     note = db.Column(db.String(255), nullable=True)  
-    
-    
-    
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -68,7 +64,6 @@ class RegistrationRequest(db.Model):
     BSCPE = db.Column(db.String(80), nullable=False)
     BSIE = db.Column(db.String(80), nullable=False)
     BSEE = db.Column(db.String(80), nullable=False)
-     
 
     def __repr__(self):
         return f'<RegistrationRequest {self.username}>'
@@ -80,6 +75,7 @@ class Grade(db.Model):
     semester = db.Column(db.Integer, nullable=False)
     grade = db.Column(db.Float, nullable=False)
     student = db.relationship('User', backref=db.backref('grades', lazy=True))
+    dropped = db.Column(db.Boolean, default=False) 
 
     def __repr__(self):
         return f'<Grade {self.subject} - {self.grade}>'
@@ -752,11 +748,98 @@ def student_subjects():
         flash('Student not found!', 'danger')
         return redirect(url_for('login', source='failed'))
 
+    # Fetch all grades for the student
     grades = Grade.query.filter_by(student_id=student.id).all()
 
-    return render_template('studentFile/student_subjects.html', student=student, grades=grades)
+    # Create a dictionary to map subjects to their grades
+    grades_dict = {grade.subject: grade for grade in grades}
+
+    # Include all subjects, even if they don't have grades
+    subjects = []
+    for subject in SUBJECTS:
+        if subject in grades_dict:
+            subjects.append({
+                'name': subject,
+                'dropped': grades_dict[subject].dropped,
+                'id': grades_dict[subject].id
+            })
+        else:
+            # Add subjects without grades
+            subjects.append({
+                'name': subject,
+                'dropped': False,
+                'id': None
+            })
+
+    return render_template('studentFile/student_subjects.html', student=student, subjects=subjects)
 
 
+#student drop subject
+@app.route('/drop-subject/<int:grade_id>', methods=['POST'])
+def drop_subject(grade_id):
+    if 'user_id' not in session:
+        flash('Access denied! Please log in.', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('login'))
+
+    grade = db.session.get(Grade, grade_id)  # Updated to use Session.get()
+    if not grade:
+        flash('Subject not found!', 'danger')
+        return redirect(url_for('student_subjects'))
+
+    if user.id != grade.student_id:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('student_subjects'))
+
+    # Mark the subject as dropped
+    grade.dropped = True
+    db.session.commit()
+    flash(f'Subject "{grade.subject}" has been dropped successfully!', 'success')
+
+    # Redirect based on the user's role
+    if user.is_admin:
+        return redirect(url_for('admin_grades'))
+    else:
+        return redirect(url_for('student_subjects'))
+    
+    
+@app.route('/restore-subject/<int:grade_id>', methods=['POST'])
+def restore_subject(grade_id):
+    if 'user_id' not in session:
+        flash('Access denied! Please log in.', 'danger')
+        return redirect(url_for('login'))
+
+    user = db.session.get(User, session['user_id'])
+    if not user:
+        flash('User not found!', 'danger')
+        return redirect(url_for('login'))
+
+    grade = db.session.get(Grade, grade_id)
+    if not grade:
+        flash('Subject not found!', 'danger')
+        return redirect(url_for('student_subjects'))
+
+    # Check if the user is authorized to restore the subject
+    if not user.is_admin and user.id != grade.student_id:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('student_subjects'))
+
+    # Mark the subject as not dropped
+    grade.dropped = False
+    db.session.commit()
+    flash(f'Subject "{grade.subject}" has been restored successfully!', 'success')
+
+    # Redirect based on the user's role
+    if user.is_admin:
+        return redirect(url_for('admin_grades'))
+    else:
+        return redirect(url_for('student_subjects'))
+    
+    
 #extra about page for the student
 @app.route('/student/about')
 def abouts():

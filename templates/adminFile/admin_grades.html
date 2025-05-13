@@ -53,6 +53,7 @@
                         <th>Subject</th>
                         <th>Semester</th>
                         <th>Grade</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +62,16 @@
                         <td>{{ grade.subject }}</td>
                         <td>{{ grade.semester }}</td>
                         <td>{{ grade.grade }}</td>
+                        
+                        <td>
+                        {% if grade.dropped %}
+                            <form method="POST" action="{{ url_for('restore_subject', grade_id=grade.id) }}">
+                            <button type="submit" class="btn btn-restore">Restore</button>
+                            </form>
+                        {% else %}
+                            <span class="active-status">Active</span>
+                        {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

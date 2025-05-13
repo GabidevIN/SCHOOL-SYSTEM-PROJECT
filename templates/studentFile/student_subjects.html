@@ -52,25 +52,30 @@
           <tr>
             <th>Subject</th>
             <th>Semester</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
+          {% for subject in subjects %}
           <tr>
-            <td>Physics 1</td>
+            <td>{{ subject.name }}</td>
             <td>1st Semester</td>
+            <td>
+              {% if not subject.dropped %}
+                {% if subject.id %}
+                  <form method="POST" action="{{ url_for('drop_subject', grade_id=subject.id) }}">
+                    <button type="submit" class="btn btn-drop">Drop</button>
+                  </form>
+                {% else %}
+                  <span>No action available</span>
+                {% endif %}
+              {% else %}
+                <span class="dropped-status">Dropped</span>
+              {% endif %}
+            </td>
           </tr>
-          <tr>
-            <td>Chemistry</td>
-            <td>1st Semester</td>
-          </tr>
-          <tr>
-            <td>CAD</td>
-            <td>1st Semester</td>
-          </tr>
-          <tr>
-            <td>Physical Education 1</td>
-            <td>1st Semester</td>
-          </tr>
+          {% endfor %}
+        </tbody>
         </tbody>
       </table>
     </div>

@@ -57,6 +57,7 @@
                     <th>Subject</th>
                     <th>Semester</th>
                     <th>Grade</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +65,18 @@
                 <tr>
                     <td>{{ grade.subject }}</td>
                     <td>{{ grade.semester }}</td>
-                    <td>{{ grade.grade }}</td>
+                    <td>{{ grade.grade if not grade.dropped else 'N/A' }}</td>
+                    <td>
+                        {% if grade.dropped %}
+                            Dropped
+                        {% elif grade.grade <= 3 %}
+                            Passed
+                        {% elif grade.grade > 0 %}
+                            Failed
+                        {% elif grade.grade == 0 %}
+                            Not Graded
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

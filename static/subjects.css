@@ -88,6 +88,40 @@ header {
     transform: translate(50%, 50%) scale(1.1);
 }
 
+/* button drop */
+
+.btn-drop {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-drop:hover {
+    background-color: #e60000;
+}
+
+.btn-restore {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-restore:hover {
+    background-color: #45a049;
+}
+
+.dropped-status {
+    color: gray;
+    font-style: italic;
+}
 
 
 /* MENU BAR */
