@@ -888,6 +888,7 @@ def teacher_dashboard():
         return redirect(url_for('login', source='failed'))
 
     students = User.query.all()  # Fetch all students
+    
     return render_template('teacherFile/teacher_dashboard.html', students=students)
 
 
