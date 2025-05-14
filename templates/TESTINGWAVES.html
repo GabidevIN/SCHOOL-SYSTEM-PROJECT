@@ -10,55 +10,14 @@
 
 <body>
 
-<!-- DASHBOARD -->
-<header>    
-    <nav>
-        <ul class="dash">
-            <li><a href="/main" class="nav" data-target="about">Return</a></li>
-            <li><a href="/profile" class="nav" data-target="profile">Profile</a></li>
-        </ul>
-    </nav>  
-    <form action="{{ url_for('logout') }}" method="post" class="logout-form">
-        <button type="submit" class="btn btn-logout">Logout</button>
-    </form>
-    
-</header>
+<div class="text-entry">
+  <h1 class ="textanim1">Gabi</h1>
+  <h1 class ="textanim2">Dev</h1>
+</div>
 
 
+<h1 class ="background"></h1>
 
-<!-- BACKGROUND -->
-<div class="background"></div>
-
-<!-- WAVING CONTENT -->
-<div class="wave-content">
-
-  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-    <defs>
-        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-    </defs>
-
-    <g class="parallax">
-        <use xlink:href="#gentle-wave" x="48" y="0" fill="#77CAE8" />
-        <use xlink:href="#gentle-wave" x="48" y="3" fill="#68A9C0" />
-        <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
-        <use xlink:href="#gentle-wave" x="48" y="2" fill="#648F9F" />
-    </g>
-  </svg>
-</div>      
-
-<!-- WAVING LAYERED -->
-<div class="wave-layered">
-
-  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-    <defs>
-        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-    </defs>
-
-    <g class="parallax">
-        <use xlink:href="#gentle-wave" x="48" y="5" fill="#5E9DB4" />
-    </g>
-  </svg>
-</div>      
 
 
 </body>

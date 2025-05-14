@@ -107,10 +107,12 @@ def login(source):
         user = User.query.filter_by(email=email).first()
         print(f"User: {user}")
 
-        if registration_request and registration_request.is_new:
+        if registration_request and registration_request.is_new and check_password_hash(registration_request.password, password):
             print(f"Redirecting to extra registration for {registration_request.username}")
+            session['username'] = registration_request.username
             session['user_id'] = registration_request.id 
             return redirect(url_for('extra_registration'))
+        
 
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
