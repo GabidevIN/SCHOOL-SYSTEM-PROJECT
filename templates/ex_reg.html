@@ -31,7 +31,7 @@
 
             <div>
                 <label for="contact_number">Contact Number:</label>
-                <input class="inputs" type="tel" max="11" min="11" id="contact_number" name="contact_number" value="{{ registration_request.contact_number }}" required>
+                <input class="inputs" type="tel" id="contact_number" name="contact_number"value="{{ registration_request.contact_number }}"pattern="^\d{11}$" maxlength="11" minlength="11"required placeholder="Enter 11-digit number">
             </div>
 
                 <div class="mb-3">
